@@ -8,9 +8,9 @@ public class animation {
 	JFrame frame;
 	DrawPanel drawPanel;
 
-	private int oneX = 3;
+	private int oneX = 300;
 	private int oneY = 150;
-	private int speed= 3; // animation speed scale
+	private int speed= 1; // animation speed scale
 
 	boolean up = false;
 	boolean down = true;
@@ -77,7 +77,7 @@ public class animation {
 			if (right)
 				oneX += 1 * speed;
 			try {
-				Thread.sleep(10);
+				Thread.sleep(3);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
