@@ -40,12 +40,12 @@ public class GamePanel extends JPanel
 		g.setColor(Color.RED);
 		
 		//set font
-		Font myFont=new Font(Font.SANS_SERIF, Font.BOLD, 30);
+		Font myFont = new Font(Font.SANS_SERIF, Font.BOLD, 30);
 		g.setFont(myFont);
 		
 		//get rectangle bounds of text
-		FontMetrics metrics=g.getFontMetrics();
-		Rectangle2D strRect=metrics.getStringBounds("HELLO", g);
+		FontMetrics metrics = g.getFontMetrics();
+		Rectangle2D strRect = metrics.getStringBounds("HELLO", g);
 		
 		//calc center of the screen
 		int centerPanelX = WIDTH / 2;

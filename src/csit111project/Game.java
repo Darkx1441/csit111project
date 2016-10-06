@@ -16,5 +16,4 @@ public class Game
 		window.setVisible(true);
 		// System.out.println(window.getWidth()+" "+window.getHeight());
 	}
-
 }

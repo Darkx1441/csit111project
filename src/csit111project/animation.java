@@ -3,8 +3,8 @@ package csit111project;
 import javax.swing.*;
 import java.awt.*;
 
-public class animation {
-
+public class animation 
+{
 	JFrame frame;
 	DrawPanel drawPanel;
 
@@ -17,12 +17,13 @@ public class animation {
 	boolean left = false;
 	boolean right = true;
 
-	public static void main(String[] args) {
+	public static void main(String[] args) 
+	{
 		new animation().run();
-
 	}
 
-	private void run() {
+	private void run() 
+	{
 		frame = new JFrame("Animation");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -35,11 +36,12 @@ public class animation {
 		frame.setSize(1280, 720);
 		frame.setLocationRelativeTo(null); // centers the window
 		move();
-
 	}
 
-	class DrawPanel extends JPanel {
-		public void paintComponent(Graphics g) {
+	class DrawPanel extends JPanel 
+	{
+		public void paintComponent(Graphics g) 
+		{
 			g.setColor(Color.gray);
 			g.fillRect(0, 0, this.getWidth(), this.getHeight());
 
@@ -50,35 +52,60 @@ public class animation {
 		}
 	}
 
-	private void move() {
-		while (true) {
-			if (oneX >= 1280 - 50 - 3) {
+	private void move() 
+	{
+		while (true) 
+		{
+			if (oneX >= 1280 - 50 - 3) 
+			{
 				right = false;
 				left = true;
 			}
-			if (oneX <= 3) {
+			
+			if (oneX <= 3) 
+			{
 				right = true;
 				left = false;
 			}
-			if (oneY >= 720 - 100 - 6) {
+			
+			if (oneY >= 720 - 100 - 6) 
+			{
 				up = true;
 				down = false;
 			}
-			if (oneY <= 3) {
+			
+			if (oneY <= 3) 
+			{
 				up = false;
 				down = true;
 			}
+			
 			if (up)
+			{
 				oneY -= 1 * speed;
+			}
+			
 			if (down)
+			{
 				oneY += 1 * speed;
+			}
+			
 			if (left)
+			{
 				oneX -= 1 * speed;
+			}
+			
 			if (right)
+			{
 				oneX += 1 * speed;
-			try {
+			}
+			
+			try 
+			{
 				Thread.sleep(3);
-			} catch (Exception e) {
+			} 
+			catch (Exception e) 
+			{
 				e.printStackTrace();
 			}
 			frame.repaint();
