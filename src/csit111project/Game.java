@@ -11,9 +11,10 @@ public class Game
 		window.setContentPane(new GamePanel());
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setResizable(false);
+		window.setUndecorated(false); //on-off remove title, scroll bars etc
+		window.setVisible(true);
 		window.pack();
 		window.setLocationRelativeTo(null);
-		window.setVisible(true);
 		// System.out.println(window.getWidth()+" "+window.getHeight());
 	}
 }
