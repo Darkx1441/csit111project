@@ -19,7 +19,7 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-public class GamePanel extends JPanel implements ActionListener, KeyListener, MouseListener 
+public class GamePanel extends JPanel implements Runnable, 	ActionListener, KeyListener, MouseListener 
 {
 	//Default serial version ID
 	private static final long serialVersionUID = 1L;
@@ -29,10 +29,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	public static final int WIDTH = 800;
 	public static final int HEIGHT = 480;
 	
-	
+	private Thread thread;
+	private int FPS=60;
+	private long targetTime=1000/FPS;
 	
 	BufferedImage img;
-	boolean running;
+	boolean running=false;
 	private Timer timer;
 	private GameStateManager gsm;
 	
@@ -49,16 +51,48 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		gsm = new GameStateManager(GameStateManager.PLAYSTATE);
 		timer = new Timer(30, this); //game fps
 		timer.start();
-//		init();
+		start();
 	}
 
-//	private void init(){
-//		try{
-//			img= ImageIO.read(getClass().getResourceAsStream("/images/Splitlevel.png"));
-//		} catch (IOException e){
-//			e.printStackTrace();
-//			}
-//	}
+	
+	
+	private void start(){
+		running= true;
+		thread= new Thread(this);
+		thread.start();
+	}
+	
+	
+	public void run() {
+		long start, elapsed, wait;
+		while(running){
+			start=System.nanoTime();
+			
+			tick();
+			repaint();
+			elapsed=System.nanoTime()-start;
+			wait= targetTime-elapsed/1000000;
+			
+			if (wait<=0){
+				wait=5;
+			}
+			
+			try{
+				Thread.sleep(wait);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+				
+			
+			
+		}
+		
+		
+	}
+	
+	private void tick(){
+		System.out.println("Running");
+	}
 	
 	private void update(){
 		gsm.update();
@@ -72,14 +106,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		gsm.render(g2);
-		
-		
-		int centerPanelX = WIDTH / 2;
-		int centerPanelY = HEIGHT / 2;
-
-//		if (img!=null){
-//			g.drawImage(img, 0, 0, null);
-//		}
 
 	}
 	
@@ -93,16 +119,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent arg0) {
 		
 	}
 
@@ -126,10 +142,31 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		gsm.keyResealed(e, e.getKeyCode());
 	}
 
+
+
 	@Override
-	public void keyTyped(KeyEvent arg0) {
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
 		
 	}
+
+
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void keyTyped(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 
 
 }
