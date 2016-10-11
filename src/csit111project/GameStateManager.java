@@ -13,7 +13,7 @@ public class GameStateManager {
 	
 	public GameStateManager(int state){
 		states= new State[1];
-		states[0]=new Playstate(this);
+		states[0]=new MenuState(this);
 	}
 	
 	public void update(){

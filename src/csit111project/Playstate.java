@@ -2,7 +2,6 @@ package csit111project;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Window;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
