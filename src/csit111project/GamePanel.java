@@ -1,12 +1,8 @@
 package csit111project;
-
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
-import javax.swing.Timer;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -16,8 +12,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 
 public class GamePanel extends JPanel implements Runnable, 	ActionListener, KeyListener, MouseListener 
 {
@@ -32,10 +26,7 @@ public class GamePanel extends JPanel implements Runnable, 	ActionListener, KeyL
 	private Thread thread;
 	private int FPS=60;
 	private long targetTime=1000/FPS;
-	
-	BufferedImage img;
 	boolean running=false;
-	private Timer timer;
 	private GameStateManager gsm;
 	
 	public GamePanel()
@@ -49,8 +40,6 @@ public class GamePanel extends JPanel implements Runnable, 	ActionListener, KeyL
 		requestFocus();
 		
 		gsm = new GameStateManager(GameStateManager.PLAYSTATE);
-		timer = new Timer(30, this); //game fps
-		timer.start();
 		start();
 	}
 
