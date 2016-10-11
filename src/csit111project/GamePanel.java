@@ -25,14 +25,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	private static final long serialVersionUID = 1L;
 
 	//dimensions
-	//Frame will be x+6 y+29 bigger because it includes border
-	public static final int WIDTH = 800;
-	public static final int HEIGHT = 480;
+	//Frame will be x+6 y+29 bigger because it includes borde
 	
 	
 	
 	BufferedImage img;
-	boolean running;
 	private Timer timer;
 	private GameStateManager gsm;
 	
@@ -72,14 +69,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		gsm.render(g2);
-		
-		
-		int centerPanelX = WIDTH / 2;
-		int centerPanelY = HEIGHT / 2;
-
-//		if (img!=null){
-//			g.drawImage(img, 0, 0, null);
-//		}
 
 	}
 	
