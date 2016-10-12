@@ -15,6 +15,13 @@ public class Block extends Rectangle {
 	setBounds(x, y, w, h);	
 	}
 	
+	public double getX(){
+		return x;
+	}
+	public double getY(){
+		return y;
+	}
+	
 	public void update(){
 	}
 	
