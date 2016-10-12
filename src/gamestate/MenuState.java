@@ -10,13 +10,13 @@ import csit111project.GamePanel;
 
 public class MenuState extends State {
 
-	private String[] options = { "Play", "Options", "Quit" };  //LIST OF MENUS
+	private String[] options = { "Play", "Options", "Quit" }; // LIST OF MENUS
 	private int currentSelect = 0;
 
 	public MenuState(GameStateManager gsm) {
 		super(gsm);
 	}
-	
+
 	public void init() {
 	}
 
@@ -24,10 +24,10 @@ public class MenuState extends State {
 	}
 
 	public void render(Graphics2D g) {
-		
+
 		g.setColor(Color.WHITE);
 		g.drawString("MENUSTATE", 0, 10);
-		
+
 		/*
 		 * DRAW MENUS
 		 */
@@ -60,11 +60,14 @@ public class MenuState extends State {
 				currentSelect = 0;
 			}
 		}
-		
-		if (k == KeyEvent.VK_ESCAPE) {      //QUICK EXIT
+
+		/*
+		 * QUICK EXIT
+		 */
+		if (k == KeyEvent.VK_ESCAPE) {
 			System.exit(0);
 		}
-		
+
 		/*
 		 * SELECTING MENU
 		 */
@@ -82,7 +85,6 @@ public class MenuState extends State {
 
 	}
 
-
 	public void keyResealed(KeyEvent e, int k) {
 	}
 
@@ -91,6 +93,5 @@ public class MenuState extends State {
 
 	public void mouseReleased(MouseEvent e) {
 	}
-
 
 }

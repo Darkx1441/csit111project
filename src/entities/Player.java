@@ -43,11 +43,17 @@ public class Player{
 	}
 		
 	public void update(){
+		/*
+		 * Movement Mechanics (temporary)
+		 */
 		if(right)
 			x++;
 		if(left)
 			x--;
 		
+		/*
+		 * Jumping/Falling Mechanics
+		 */
 		if(jumping){
 			y-=currentJumpSpeed;
 			currentJumpSpeed-=.1;
