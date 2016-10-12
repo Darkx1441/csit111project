@@ -1,4 +1,4 @@
-package csit111project;
+package gamestate;
 
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
@@ -10,8 +10,10 @@ public abstract class State {
 	
 	public State(GameStateManager gsm){
 		this.gsm = gsm;
+		init();
 	}
 
+	public abstract void init();
 	public abstract void update();
 	public abstract void render(Graphics2D g);
 	public abstract void keyPressed(KeyEvent e, int k);

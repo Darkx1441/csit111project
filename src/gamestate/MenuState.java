@@ -1,4 +1,4 @@
-package csit111project;
+package gamestate;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -6,21 +6,31 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
+import csit111project.GamePanel;
+
 public class MenuState extends State {
 
-	private String[] options = { "Play", "Options", "Quit" };
+	private String[] options = { "Play", "Options", "Quit" };  //LIST OF MENUS
 	private int currentSelect = 0;
 
 	public MenuState(GameStateManager gsm) {
 		super(gsm);
 	}
+	
+	public void init() {
+	}
 
-	@Override
 	public void update() {
 	}
 
-	@Override
 	public void render(Graphics2D g) {
+		
+		g.setColor(Color.WHITE);
+		g.drawString("MENUSTATE", 0, 10);
+		
+		/*
+		 * DRAW MENUS
+		 */
 		for (int i = 0; i < options.length; i++) {
 			if (i == currentSelect) {
 				g.setColor(Color.GREEN);
@@ -33,8 +43,10 @@ public class MenuState extends State {
 
 	}
 
-	@Override
 	public void keyPressed(KeyEvent e, int k) {
+		/*
+		 * LISTING THROUGH MENUS
+		 */
 		if (k == KeyEvent.VK_S || k == KeyEvent.VK_DOWN) {
 			if (currentSelect < options.length - 1) {
 				currentSelect += 1;
@@ -48,12 +60,18 @@ public class MenuState extends State {
 				currentSelect = 0;
 			}
 		}
-		if (k == KeyEvent.VK_ESCAPE) {
+		
+		if (k == KeyEvent.VK_ESCAPE) {      //QUICK EXIT
 			System.exit(0);
 		}
+		
+		/*
+		 * SELECTING MENU
+		 */
 		if (k == KeyEvent.VK_ENTER || k == KeyEvent.VK_SPACE) {
 			if (currentSelect == 0) {
 				// play
+				gsm.states.push(new Level1(gsm));
 			} else if (currentSelect == 1) {
 				// options
 			} else if (currentSelect == 2) {
@@ -64,16 +82,15 @@ public class MenuState extends State {
 
 	}
 
-	@Override
+
 	public void keyResealed(KeyEvent e, int k) {
 	}
 
-	@Override
 	public void mousePressed(MouseEvent e) {
 	}
 
-	@Override
 	public void mouseReleased(MouseEvent e) {
 	}
+
 
 }
