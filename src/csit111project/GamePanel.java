@@ -24,6 +24,7 @@ public class GamePanel extends JPanel implements Runnable, ActionListener, KeyLi
 	// Frame will be x+6 y+29 bigger because it includes border
 	public static final int WIDTH = 800;
 	public static final int HEIGHT = 480;
+	FPSCounter fps= new FPSCounter();
 
 	private Thread thread;
 	private int FPS = 60;
@@ -48,6 +49,7 @@ public class GamePanel extends JPanel implements Runnable, ActionListener, KeyLi
 		running = true;
 		thread = new Thread(this);
 		thread.start();
+		fps.start();
 	}
 
 	private void update() {
@@ -58,18 +60,18 @@ public class GamePanel extends JPanel implements Runnable, ActionListener, KeyLi
 		long start, elapsed, wait;
 		while (running) {
 			start = System.nanoTime();
-
 			update();
 			repaint();
+			fps.interrupt();
 			elapsed = System.nanoTime() - start;
 			wait = targetTime - elapsed / 1000000;
 
 			if (wait <= 0) {
 				wait = 5;
 			}
-
 			try {
 				Thread.sleep(wait);
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -84,6 +86,7 @@ public class GamePanel extends JPanel implements Runnable, ActionListener, KeyLi
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		gsm.render(g2);
+		g2.drawString("FPS:" + (int)fps.fps(), 0, 43);
 
 	}
 
@@ -91,6 +94,7 @@ public class GamePanel extends JPanel implements Runnable, ActionListener, KeyLi
 	public void actionPerformed(ActionEvent arg0) {
 		update();
 		repaint();
+		
 	}
 
 	@Override

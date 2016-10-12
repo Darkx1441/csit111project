@@ -39,6 +39,7 @@ public class MenuState extends State {
 			}
 			g.setFont(new Font("Arial", Font.BOLD, 50));
 			g.drawString(options[i], GamePanel.WIDTH / 2, GamePanel.HEIGHT / 2 - 100 + i * 50);
+			g.setFont(new Font("Arial", Font.BOLD, 12));
 		}
 
 	}

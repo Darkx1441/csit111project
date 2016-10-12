@@ -24,7 +24,6 @@ public class Level1 extends State {
 	}
 
 	public void render(Graphics2D g) {
-
 		/*
 		 * DEBUG LINES
 		 */
@@ -35,7 +34,6 @@ public class Level1 extends State {
 		g.drawString("Level1 State", 0, 10);
 		g.drawString("POS: \t X= " + player.getX() + " Y= " + player.getY(), 0, 21);
 		g.drawString("\tJS " + player.getJumpSpeed() + " FS= " + player.getFallSpeed(), 0, 32);
-
 		player.render(g);
 	}
 
