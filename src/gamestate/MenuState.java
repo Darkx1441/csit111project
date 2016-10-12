@@ -52,13 +52,13 @@ public class MenuState extends State {
 			if (currentSelect < options.length - 1) {
 				currentSelect += 1;
 			} else {
-				currentSelect = options.length - 1;
+				currentSelect =0 ;
 			}
 		} else if (k == KeyEvent.VK_W || k == KeyEvent.VK_UP) {
 			if (currentSelect > 0) {
 				currentSelect -= 1;
 			} else {
-				currentSelect = 0;
+				currentSelect = options.length - 1;
 			}
 		}
 

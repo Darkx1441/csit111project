@@ -6,21 +6,32 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 import entities.Player;
+import objects.Block;
 
 public class Level1 extends State {
 
 	private Player player;
-
+	
+	private Block[] b;
 	public Level1(GameStateManager gsm) {
 		super(gsm);
 	}
 
 	public void init() {
 		player = new Player(50, 100);
+		b= new Block[3];
+		b[0]= new Block(100,350, 200, 100);
+		b[1]= new Block(200,200, 20, 20);
+		b[2]= new Block(240,400, 200, 100);
+		
 	}
 
 	public void update() {
-		player.update();
+		for (int i=0;i<b.length;i++){
+			b[i].update();
+		}
+		
+		player.update(b);
 	}
 
 	public void render(Graphics2D g) {
@@ -32,9 +43,13 @@ public class Level1 extends State {
 		g.drawLine(0, 240, 800, 240);
 		g.setColor(Color.WHITE);
 		g.drawString("Level1 State", 0, 10);
-		g.drawString("POS: \t X= " + player.getX() + " Y= " + player.getY(), 0, 21);
+		g.drawString("POS: \t X= " + (int)State.xOffset + " Y= " + (int)State.yOffset, 0, 21);
 		g.drawString("\tJS " + player.getJumpSpeed() + " FS= " + player.getFallSpeed(), 0, 32);
 		player.render(g);
+		
+		for(int i=0; i<b.length;i++){
+			b[i].draw(g);
+		}
 	}
 
 	public void keyPressed(KeyEvent e, int k) {

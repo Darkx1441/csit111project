@@ -2,21 +2,29 @@ package entities;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Point;
+
 import com.sun.glass.events.KeyEvent;
 
 import csit111project.GamePanel;
+import gamestate.State;
+import objects.Block;
+import physics.Collision;
 
 public class Player{
 
 
 	private boolean right=false,left=false,jumping=false, falling=false;
+	private boolean topCollision = false;
 	private double x,y;
 	private int width, height;
+	
+	private double moveSpeed= 5;
 	
 	private double maxJumpSpeed=5;
 	private double currentJumpSpeed=5;
 	
-	private double maxFallSpeed=2;
+	private double maxFallSpeed=5;
 	private double currentFallSpeed=0.1;
 	
 	public int getX(){
@@ -42,21 +50,60 @@ public class Player{
 		this.height=height;
 	}
 		
-	public void update(){
+	public void update(Block[] b){
+		
+		int iX = (int)x;
+		int iY = (int)y;
+		
+		for(int i = 0;i<b.length;i++){
+			//right
+			if(Collision.playerBlock(new Point(iX+width +(int)State.xOffset, iY+(int)State.yOffset+2), b[i]) ||
+					Collision.playerBlock(new Point (iX+width+(int)State.xOffset, iY+height+(int)State.yOffset-1), b[i])){
+				right=false;
+			}
+			
+			//left
+			if(Collision.playerBlock(new Point(iX +(int)State.xOffset-1, iY+(int)State.yOffset+2), b[i]) ||
+					Collision.playerBlock(new Point (iX+(int)State.xOffset-1, iY+height+(int)State.yOffset-1), b[i])){
+				left=false;
+			}
+			
+			//top
+			if(Collision.playerBlock(new Point(iX +(int)State.xOffset+1, iY+(int)State.yOffset), b[i]) ||
+					Collision.playerBlock(new Point (iX+(int)State.xOffset-1, iY+(int)State.yOffset), b[i])){
+				y=b[i].getY()-height-State.yOffset;
+				jumping=false;
+				falling=true;
+			}
+		
+			//bottom
+			if(Collision.playerBlock(new Point(iX +(int)State.xOffset+2, iY+height+(int)State.yOffset+1), b[i]) ||
+					Collision.playerBlock(new Point (iX+width+(int)State.xOffset-1, iY+(int)State.yOffset+1), b[i])){
+				falling=false;
+				topCollision = true;
+			}else{
+				if(!topCollision && !jumping)
+					falling=true;
+			}
+		}
+		
+		topCollision=false;
+		
 		/*
 		 * Movement Mechanics (temporary)
 		 */
 		if(right)
-			x++;
+			State.xOffset+=moveSpeed;
 		if(left)
-			x--;
+			State.xOffset-=moveSpeed;
 		
 		/*
 		 * Jumping/Falling Mechanics
 		 */
 		if(jumping){
-			y-=currentJumpSpeed;
+			State.yOffset-=currentJumpSpeed;
 			currentJumpSpeed-=.1;
+			falling=false;
 			
 			if(currentJumpSpeed<=0){
 				currentJumpSpeed=maxJumpSpeed;
@@ -66,7 +113,7 @@ public class Player{
 		}
 			
 		if(falling){
-			y+=currentFallSpeed;
+			State.yOffset+=currentFallSpeed;
 			if(currentFallSpeed<=maxFallSpeed){
 				currentFallSpeed+=0.1;
 			}
@@ -88,7 +135,7 @@ public class Player{
 			right=true;
 		if(k==KeyEvent.VK_A || k==KeyEvent.VK_LEFT) //go left pressed
 			left=true;
-		if(k==KeyEvent.VK_W || k==KeyEvent.VK_UP) //go left pressed
+		if((k==KeyEvent.VK_W || k==KeyEvent.VK_UP)&& !jumping && !falling) //go left pressed
 			jumping=true;
 	}
 	
