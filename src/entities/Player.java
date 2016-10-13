@@ -3,6 +3,13 @@ package entities;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 import com.sun.glass.events.KeyEvent;
 
@@ -13,11 +20,16 @@ import physics.Collision;
 
 public class Player {
 
+	BufferedImage RightI, LeftI, RightR, LeftR, RightJ, LeftJ;
 	private boolean right = false, left = false, jumping = false, falling = false;
 
 	private boolean topCollision = false;
 	private boolean rightCollision = false;
 	private boolean leftCollision = false;
+	private boolean FacingRight=true;
+	private boolean FacingLeft=false;
+	
+	private Image character;
 
 	private double x, y;
 	private int width, height;
@@ -30,6 +42,19 @@ public class Player {
 	private double maxFallSpeed = 5;
 	private double currentFallSpeed = 0.1;
 
+	public void init(){
+		try{
+			RightI = ImageIO.read(getClass().getResourceAsStream("/images/Charassets/actions/idle/right/Charidle01.png"));
+			LeftI = ImageIO.read(getClass().getResourceAsStream("/images/Charassets/actions/idle/left/CharidleL01.png"));
+			RightR = ImageIO.read(getClass().getResourceAsStream("/images/Charassets/actions/idle/right/Charidle02.png"));
+			LeftR = ImageIO.read(getClass().getResourceAsStream("/images/Charassets/actions/idle/left/CharidleL02.png"));
+			LeftJ = ImageIO.read(getClass().getResourceAsStream("/images/Charassets/actions/idle/left/CharidleL03.png"));
+			RightJ = ImageIO.read(getClass().getResourceAsStream("/images/Charassets/actions/idle/right/Charidle03.png"));
+			
+		}catch (IOException e){
+		}
+	}
+	
 	public int getX() {
 		return (int) x;
 	}
@@ -51,6 +76,8 @@ public class Player {
 		y = GamePanel.HEIGHT / 2;
 		this.width = width;
 		this.height = height;
+		init();
+		
 	}
 
 	public void update(Block[] b) {
@@ -117,6 +144,7 @@ public class Player {
 		 */
 		if (right)
 			State.xOffset += moveSpeed;
+			
 		if (left)
 			State.xOffset -= moveSpeed;
 
@@ -139,6 +167,8 @@ public class Player {
 			State.yOffset += currentFallSpeed;
 			if (currentFallSpeed <= maxFallSpeed) {
 				currentFallSpeed += 0.1;
+				
+				
 			}
 		}
 
@@ -148,25 +178,57 @@ public class Player {
 	}
 
 	public void render(Graphics2D g) {
-		// character graphics
-		g.setColor(Color.WHITE);
-		g.fillRect((int) x, (int) y, width, height);
+		//character graphics
+		//g.setColor(Color.WHITE);
+		if (FacingRight){
+			g.drawImage(RightI, (int) x, (int) y, null);
+		}if(FacingLeft){
+			g.drawImage(LeftI, (int) x, (int) y, null);
+		}if(right){
+			g.drawImage(RightR,(int) x,(int) y, null);
+		}if(left){
+			g.drawImage(LeftR,(int) x,(int) y, null);
+		}else{
+			//g.drawImage(RightI,(int) x,(int) y, null);
+		}
+		
+		g.drawRect((int) x, (int) y, width, height);
+		
 	}
 
 	public void keyPressed(int k) {
 		if (k == KeyEvent.VK_D || k == KeyEvent.VK_RIGHT) // go right pressed
 			right = true;
+			FacingRight = true;
+			FacingLeft = false;
+			//ImageIcon RunR = new ImageIcon("Charidle02.png");
+			//character = RunR.getImage();
+			
 		if (k == KeyEvent.VK_A || k == KeyEvent.VK_LEFT) // go left pressed
 			left = true;
+			FacingRight = false;
+			FacingLeft = true;
+			
+			
 		if ((k == KeyEvent.VK_W || k == KeyEvent.VK_UP) && !jumping && !falling)																		// pressed
 			jumping = true;
+			if (FacingRight = true){
+				
+			}else{
+				
+			}
+			
 	}
 
 	public void keyReleased(int k) {
 		if (k == KeyEvent.VK_D || k == KeyEvent.VK_RIGHT)// go right released
 			right = false;
+			FacingRight=true;
+			FacingLeft = false;
 		if (k == KeyEvent.VK_A || k == KeyEvent.VK_LEFT) // go left released
 			left = false;
+			FacingRight=false;
+			FacingLeft = true;
 	}
 
 }

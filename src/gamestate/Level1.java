@@ -42,7 +42,7 @@ public class Level1 extends State {
 		g.setColor(Color.RED);
 		g.drawLine(400, 0, 400, 800);
 		g.drawLine(0, 240, 800, 240);
-		g.setColor(Color.WHITE);
+		//g.setColor(Color.WHITE);
 		g.drawString("Level1 State", 0, 10);
 		g.drawString("POS: \t X= " + (int)State.xOffset + " Y= " + (int)State.yOffset, 0, 21);
 		g.drawString("\tJS " + player.getJumpSpeed() + " FS= " + player.getFallSpeed(), 0, 32);
