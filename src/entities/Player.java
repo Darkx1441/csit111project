@@ -28,6 +28,7 @@ public class Player {
 	private boolean leftCollision = false;
 	private boolean FacingRight=true;
 	private boolean FacingLeft=false;
+	//private int state; //0 is idle right, 1 is idle left ,2 is running right, 3 is running left
 	
 	private Image character;
 
@@ -197,38 +198,44 @@ public class Player {
 	}
 
 	public void keyPressed(int k) {
-		if (k == KeyEvent.VK_D || k == KeyEvent.VK_RIGHT) // go right pressed
+		if (k == KeyEvent.VK_D || k == KeyEvent.VK_RIGHT){ // go right pressed
 			right = true;
-			FacingRight = true;
+			//state = 2;
 			FacingLeft = false;
+			FacingRight = true;
 			//ImageIcon RunR = new ImageIcon("Charidle02.png");
 			//character = RunR.getImage();
+		}
 			
-		if (k == KeyEvent.VK_A || k == KeyEvent.VK_LEFT) // go left pressed
+		if (k == KeyEvent.VK_A || k == KeyEvent.VK_LEFT){ // go left pressed
 			left = true;
+			//state = 3;
 			FacingRight = false;
 			FacingLeft = true;
+		}
 			
-			
-		if ((k == KeyEvent.VK_W || k == KeyEvent.VK_UP) && !jumping && !falling)																		// pressed
+		if ((k == KeyEvent.VK_W || k == KeyEvent.VK_UP) && !jumping && !falling){																		// pressed
 			jumping = true;
-			if (FacingRight = true){
+			//if (FacingRight == true){
 				
-			}else{
+			//}else{
 				
-			}
-			
+			//}
+		}
 	}
 
 	public void keyReleased(int k) {
-		if (k == KeyEvent.VK_D || k == KeyEvent.VK_RIGHT)// go right released
+		if (k == KeyEvent.VK_D || k == KeyEvent.VK_RIGHT){// go right released
 			right = false;
+			//state = 0;
 			FacingRight=true;
 			FacingLeft = false;
-		if (k == KeyEvent.VK_A || k == KeyEvent.VK_LEFT) // go left released
+	}
+		if (k == KeyEvent.VK_A || k == KeyEvent.VK_LEFT){ // go left released
 			left = false;
+			//state = 1;
 			FacingRight=false;
 			FacingLeft = true;
 	}
-
+	}
 }
