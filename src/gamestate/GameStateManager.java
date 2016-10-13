@@ -46,5 +46,4 @@ public class GameStateManager
 	{
 		states.peek().mouseReleased(e);
 	}
-
 }

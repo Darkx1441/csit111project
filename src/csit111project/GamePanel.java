@@ -84,9 +84,7 @@ public class GamePanel extends JPanel implements Runnable, ActionListener, KeyLi
 			{
 				e.printStackTrace();
 			}
-
 		}
-
 	}
 
 	public void paintComponent(Graphics g) 
