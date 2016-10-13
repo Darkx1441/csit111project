@@ -67,7 +67,7 @@ public class Player {
 				rightCollision = true;
 				
 //			}else{
-//				if(!leftCollision && !right)
+//				if(!leftCollision && right)
 //					right=true;
 			}
 			

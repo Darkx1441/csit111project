@@ -32,13 +32,14 @@ public class MenuState extends State {
 		 * DRAW MENUS
 		 */
 		for (int i = 0; i < options.length; i++) {
+			g.setFont(new Font("Arial", Font.BOLD, 50));
 			if (i == currentSelect) {
 				g.setColor(Color.GREEN);
+				g.drawString(">", GamePanel.WIDTH/2-50-30, GamePanel.HEIGHT/2 + i * 50);
 			} else {
 				g.setColor(Color.WHITE);
 			}
-			g.setFont(new Font("Arial", Font.BOLD, 50));
-			g.drawString(options[i], GamePanel.WIDTH / 2, GamePanel.HEIGHT / 2 - 100 + i * 50);
+			g.drawString(options[i], GamePanel.WIDTH / 2-50, GamePanel.HEIGHT / 2 + i * 50);
 			g.setFont(new Font("Arial", Font.BOLD, 12));
 		}
 
