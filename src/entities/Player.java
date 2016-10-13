@@ -80,7 +80,6 @@ public class Player {
 			//top
 			if(Collision.playerBlock(new Point(iX +(int)State.xOffset+1, iY+(int)State.yOffset), b[i]) ||
 					Collision.playerBlock(new Point (iX+width+(int)State.xOffset-1, iY+(int)State.yOffset), b[i])){
-				y=b[i].getY()-height-State.yOffset;
 				jumping=false;
 				falling=true;
 			}
@@ -88,7 +87,7 @@ public class Player {
 			//bottom
 			if(Collision.playerBlock(new Point(iX +(int)State.xOffset+2, iY+height+(int)State.yOffset+1), b[i]) ||
 					Collision.playerBlock(new Point (iX+width+(int)State.xOffset-1, iY+height+(int)State.yOffset+1), b[i])){
-				y= b[i].getY()-height - State.yOffset;
+				State.yOffset= b[i].getY()-height - y;
 				falling=false;
 				topCollision = true;
 			}else{
@@ -96,7 +95,6 @@ public class Player {
 					falling=true;
 			}
 		}
-		
 		topCollision=false;
 		
 		/*
