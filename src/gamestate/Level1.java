@@ -23,9 +23,9 @@ public class Level1 extends State
 		player = new Player(50, 100);
 		b = new Block[4];
 		b[0] = new Block(100,350, 200, 100);
-		b[1] = new Block(250,210, 200, 10);
+		b[1] = new Block(200,270, 20, 20);
 		b[2] = new Block(240,400, 200, 100);
-		b[3] = new Block(150,300,20,20);
+		b[3] = new Block(200,300,20,20);
 	}
 
 	public void update() 
