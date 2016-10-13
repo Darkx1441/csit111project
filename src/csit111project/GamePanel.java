@@ -97,7 +97,6 @@ public class GamePanel extends JPanel implements Runnable, ActionListener, KeyLi
 		g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		gsm.render(g2);
 		g2.drawString("FPS:" + (int)fps.fps(), 0, 43);
-
 	}
 
 	@Override
@@ -137,7 +136,7 @@ public class GamePanel extends JPanel implements Runnable, ActionListener, KeyLi
 	@Override
 	public void keyReleased(KeyEvent e) 
 	{
-		gsm.keyResealed(e, e.getKeyCode());
+		gsm.keyReleased(e, e.getKeyCode());
 	}
 	@Override
 	public void keyTyped(KeyEvent arg0) {}

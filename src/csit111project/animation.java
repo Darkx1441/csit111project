@@ -7,7 +7,7 @@ public class animation
 {
 	JFrame frame;
 	DrawPanel drawPanel;
-
+	
 	private int oneX = 300;
 	private int oneY = 150;
 	private int speed= 1; 	// animation speed scale

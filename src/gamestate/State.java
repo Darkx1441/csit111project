@@ -23,7 +23,7 @@ public abstract class State
 	public abstract void update();
 	public abstract void render(Graphics2D g);
 	public abstract void keyPressed(KeyEvent e, int k);
-	public abstract void keyResealed(KeyEvent e, int k);
+	public abstract void keyReleased(KeyEvent e, int k);
 	public abstract void mousePressed(MouseEvent e);
 	public abstract void mouseReleased(MouseEvent e);
 }
