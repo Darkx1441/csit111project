@@ -4,9 +4,9 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
-public class Options extends State
+public class OptionsMenu extends State
 {
-	public Options(GameStateManager gsm) 
+	public OptionsMenu(GameStateManager gsm) 
 	{
 		super(gsm);
 	}
@@ -32,7 +32,10 @@ public class Options extends State
 	@Override
 	public void keyPressed(KeyEvent e, int k)
 	{
-		
+		if (k == KeyEvent.VK_ESCAPE) 
+		{
+			gsm.states.push(new MenuState(gsm));
+		}
 	}
 
 	@Override

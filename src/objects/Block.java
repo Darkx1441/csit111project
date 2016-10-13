@@ -10,8 +10,6 @@ public class Block extends Rectangle
 {
 	private static final long serialVersionUID = 1L;
 	
-	public static final int blockSize = 64;
-	
 	public Block(int x, int y, int w, int h)
 	{
 		setBounds(x, y, w, h);	

@@ -98,6 +98,7 @@ public class MenuState extends State {
 			else if (currentSelect == 1)
 			{
 				// options
+				gsm.states.push(new OptionsMenu(gsm));
 			} 
 			else if (currentSelect == 2)
 			{
