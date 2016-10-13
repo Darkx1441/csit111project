@@ -14,7 +14,11 @@ import physics.Collision;
 public class Player {
 
 	private boolean right = false, left = false, jumping = false, falling = false;
+	
 	private boolean topCollision = false;
+	private boolean rightCollision = false;
+	private boolean leftCollision = false;
+	
 	private double x, y;
 	private int width, height;
 
@@ -60,13 +64,23 @@ public class Player {
 			if(Collision.playerBlock(new Point(iX+width +(int)State.xOffset, iY+(int)State.yOffset+2), b[i]) 
 					|| Collision.playerBlock(new Point (iX+width+(int)State.xOffset, iY+height+(int)State.yOffset-1), b[i])){
 				right=false;
+				rightCollision = true;
 				
+//			}else{
+//				if(!leftCollision && !right)
+//					right=true;
 			}
 			
 			//left
 			if(Collision.playerBlock(new Point(iX +(int)State.xOffset-1, iY+(int)State.yOffset+2), b[i]) 
 					|| Collision.playerBlock(new Point (iX+(int)State.xOffset-1, iY+height+(int)State.yOffset-1), b[i])){
 				left=false;
+				leftCollision = true;
+//			}else{
+//				if(!rightCollision && !left)
+//					left=true;
+					
+			
 			}
 			
 			//top
@@ -89,6 +103,8 @@ public class Player {
 			}
 		}
 		topCollision=false;
+		rightCollision= false;
+		leftCollision= false;
 		
 		/*
 		 * Movement Mechanics (temporary)
