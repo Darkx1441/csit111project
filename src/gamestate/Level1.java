@@ -45,8 +45,11 @@ public class Level1 extends State {
 		g.drawString("Level1 State", 0, 10);
 		g.drawString("POS: \t X= " + (int)State.xOffset + " Y= " + (int)State.yOffset, 0, 21);
 		g.drawString("\tJS " + player.getJumpSpeed() + " FS= " + player.getFallSpeed(), 0, 32);
+		
+		//render player
 		player.render(g);
 		
+		//render blocks
 		for(int i=0; i<b.length;i++){
 			b[i].draw(g);
 		}

@@ -21,7 +21,7 @@ public class Player {
 	private double moveSpeed = 5;
 
 	private double maxJumpSpeed = 5;
-	private double currentJumpSpeed = 5;
+	private double currentJumpSpeed = maxJumpSpeed;
 
 	private double maxFallSpeed = 5;
 	private double currentFallSpeed = 0.1;
@@ -56,14 +56,6 @@ public class Player {
 		
 		for(int i = 0;i<b.length;i++){
 			
-//			if(((x+width)>=b[i].x &&
-//					x<=(b[i].width) &&
-//					(y+height)>=b[i].y &&
-//					y<=(b[i].y+b[i].height))){
-//				System.out.println("Collision!!!");
-//			}
-			
-			
 			//right
 			if(Collision.playerBlock(new Point(iX+width +(int)State.xOffset, iY+(int)State.yOffset+2), b[i]) 
 					|| Collision.playerBlock(new Point (iX+width+(int)State.xOffset, iY+height+(int)State.yOffset-1), b[i])){
@@ -81,6 +73,7 @@ public class Player {
 			if(Collision.playerBlock(new Point(iX +(int)State.xOffset+1, iY+(int)State.yOffset), b[i]) ||
 					Collision.playerBlock(new Point (iX+width+(int)State.xOffset-1, iY+(int)State.yOffset), b[i])){
 				jumping=false;
+				currentJumpSpeed=maxJumpSpeed;
 				falling=true;
 			}
 		
