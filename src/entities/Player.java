@@ -14,11 +14,11 @@ import physics.Collision;
 public class Player {
 
 	private boolean right = false, left = false, jumping = false, falling = false;
-	
+
 	private boolean topCollision = false;
 	private boolean rightCollision = false;
 	private boolean leftCollision = false;
-	
+
 	private double x, y;
 	private int width, height;
 
@@ -53,91 +53,97 @@ public class Player {
 		this.height = height;
 	}
 
-	public void update(Block[] b){
-		
-		int iX = (int)x;
-		int iY = (int)y;
-		
-		for(int i = 0;i<b.length;i++){
-			
-			//right
-			if(Collision.playerBlock(new Point(iX+width +(int)State.xOffset, iY+(int)State.yOffset+2), b[i]) 
-					|| Collision.playerBlock(new Point (iX+width+(int)State.xOffset, iY+height+(int)State.yOffset-1), b[i])){
-				right=false;
-				rightCollision = true;
-				
-//			}else{
-//				if(!leftCollision && right)
-//					right=true;
+	public void update(Block[] b) {
+
+		int iX = (int) x;
+		int iY = (int) y;
+
+		for (int i = 0; i < b.length; i++) {
+
+			// right
+			for (int j = 0; j <= height; j++) {
+				if (Collision.playerBlock(new Point(iX + width + (int) State.xOffset, iY + (int) State.yOffset + j - 1),
+						b[i])) {
+					right = false;
+					rightCollision = true;
+					// }else{
+					// if(!leftCollision && right)
+					// right=true;
+				}
 			}
-			
-			//left
-			if(Collision.playerBlock(new Point(iX +(int)State.xOffset-1, iY+(int)State.yOffset+2), b[i]) 
-					|| Collision.playerBlock(new Point (iX+(int)State.xOffset-1, iY+height+(int)State.yOffset-1), b[i])){
-				left=false;
-				leftCollision = true;
-//			}else{
-//				if(!rightCollision && !left)
-//					left=true;
-					
-			
+
+			// left
+
+			for (int j = 0; j < height; j++) {
+				if (Collision.playerBlock(new Point(iX + (int) State.xOffset - 1, iY + (int) State.yOffset + j),
+						b[i])) {
+					left = false;
+					leftCollision = true;
+					// }else{
+					// if(!rightCollision && !left)
+					// left=true;
+
+				}
 			}
-			
-			//top
-			if(Collision.playerBlock(new Point(iX +(int)State.xOffset+1, iY+(int)State.yOffset), b[i]) ||
-					Collision.playerBlock(new Point (iX+width+(int)State.xOffset-1, iY+(int)State.yOffset), b[i])){
-				jumping=false;
-				currentJumpSpeed=maxJumpSpeed;
-				falling=true;
+
+			// top
+			for (int j = 0; j < width; j++) {
+				if (Collision.playerBlock(new Point(iX + (int) State.xOffset + j, iY + (int) State.yOffset), b[i])) {
+					jumping = false;
+					currentJumpSpeed = maxJumpSpeed;
+					falling = true;
+				}
 			}
-		
-			//bottom
-			if(Collision.playerBlock(new Point(iX +(int)State.xOffset+2, iY+height+(int)State.yOffset+1), b[i]) ||
-					Collision.playerBlock(new Point (iX+width+(int)State.xOffset-1, iY+height+(int)State.yOffset+1), b[i])){
-				State.yOffset= b[i].getY()-height - y;
-				falling=false;
-				topCollision = true;
-			}else{
-				if(!topCollision && !jumping)
-					falling=true;
+
+			// bottom
+			for (int j = 0; j < width; j++) {
+				if (Collision.playerBlock(
+						new Point(iX + (int) State.xOffset + j, iY + height + (int) State.yOffset + 1), b[i])) {
+					State.yOffset = b[i].getY() - height - y;
+					falling = false;
+					topCollision = true;
+				} else {
+					if (!topCollision && !jumping)
+						falling = true;
+				}
 			}
 		}
-		topCollision=false;
-		rightCollision= false;
-		leftCollision= false;
-		
+		topCollision = false;
+		rightCollision = false;
+		leftCollision = false;
+
 		/*
 		 * Movement Mechanics (temporary)
 		 */
-		if(right)
-			State.xOffset+=moveSpeed;
-		if(left)
-			State.xOffset-=moveSpeed;
-		
+		if (right)
+			State.xOffset += moveSpeed;
+		if (left)
+			State.xOffset -= moveSpeed;
+
 		/*
 		 * Jumping/Falling Mechanics
 		 */
-		if(jumping){
-			State.yOffset-=currentJumpSpeed;
-			currentJumpSpeed-=.1;
-			falling=false;
-			
-			if(currentJumpSpeed<=0){
-				currentJumpSpeed=maxJumpSpeed;
-				jumping=false;
-				falling=true;
+		if (jumping) {
+			State.yOffset -= currentJumpSpeed;
+			currentJumpSpeed -= .1;
+			falling = false;
+
+			if (currentJumpSpeed <= 0) {
+				currentJumpSpeed = maxJumpSpeed;
+				jumping = false;
+				falling = true;
 			}
 		}
-			
-		if(falling){
-			State.yOffset+=currentFallSpeed;
-			if(currentFallSpeed<=maxFallSpeed){
-				currentFallSpeed+=0.1;
+
+		if (falling) {
+			State.yOffset += currentFallSpeed;
+			if (currentFallSpeed <= maxFallSpeed) {
+				currentFallSpeed += 0.1;
 			}
 		}
-		
-		if(!falling){
-			currentFallSpeed=.1;
+
+		if (!falling) {
+			currentFallSpeed = .1;
 		}
 	}
 
@@ -152,9 +158,7 @@ public class Player {
 			right = true;
 		if (k == KeyEvent.VK_A || k == KeyEvent.VK_LEFT) // go left pressed
 			left = true;
-		if ((k == KeyEvent.VK_W
-				|| k == KeyEvent.VK_UP) && !jumping && !falling) // go left
-																		// pressed
+		if ((k == KeyEvent.VK_W || k == KeyEvent.VK_UP) && !jumping && !falling)																		// pressed
 			jumping = true;
 	}
 
