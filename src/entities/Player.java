@@ -195,8 +195,12 @@ public class Player{
 			g.drawImage(RightR,(int) x,(int) y, null);
 		}if(left){
 			g.drawImage(LeftR,(int) x,(int) y, null);
-		}else{
-			//g.drawImage(RightI,(int) x,(int) y, null);
+		}if(jumping==true||falling==true){
+			if (FacingRight){
+				g.drawImage(RightJ,(int) x,(int) y, null);
+			}if(FacingLeft){
+				g.drawImage(LeftJ,(int) x,(int) y, null);
+			}
 		}
 		
 		g.drawRect((int) x, (int) y, width, height);
@@ -222,11 +226,6 @@ public class Player{
 			
 		if ((k == KeyEvent.VK_W || k == KeyEvent.VK_UP) && !jumping && !falling){																		// pressed
 			jumping = true;
-			//if (FacingRight == true){
-				
-			//}else{
-				
-			//}
 		}
 	}
 

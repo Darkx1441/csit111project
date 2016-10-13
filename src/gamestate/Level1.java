@@ -28,9 +28,15 @@ public class Level1 extends State
 		b[0] = new Block(100, 350, 200, 100);
 		b[1] = new Block(200, 270, 20, 20);
 		b[2] = new Block(240, 400, 200, 100);
+<<<<<<< HEAD
 		b[3] = new Block(200, 300,20,20);
 		b[4] = new Block(0, 450, 1500,20);
 		endGate= new EndGate(1450,400,50,50);
+=======
+		b[3] = new Block(200, 300, 20, 20);
+		b[4] = new Block(0, 450, 1500, 20);
+		endGate= new EndGate(1500, 450, 50, 50);
+>>>>>>> origin/master
 	}
 
 	public void update() 
