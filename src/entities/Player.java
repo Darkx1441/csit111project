@@ -1,15 +1,12 @@
 package entities;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 
 import com.sun.glass.events.KeyEvent;
 
@@ -25,14 +22,10 @@ public class Player{
 	private boolean right = false, left = false, jumping = false, falling = false;
 
 	private boolean topCollision = false;
-	private boolean rightCollision = false;
-	private boolean leftCollision = false;
 	private boolean FacingRight=true;
 	private boolean FacingLeft=false;
 	//private int state; //0 is idle right, 1 is idle left ,2 is running right, 3 is running left
 	
-	private Image character;
-
 	private double x, y;
 	private int width, height;
 
@@ -45,6 +38,10 @@ public class Player{
 	private double currentFallSpeed = 0.1;
 	public boolean win=false;
 
+	
+	/*
+	 * INITIALIZATION
+	 */
 	public void init(){
 		try{
 			RightI = ImageIO.read(getClass().getResourceAsStream("/images/Charassets/actions/idle/right/Charidle01.png"));
@@ -74,6 +71,9 @@ public class Player{
 		return (int) currentJumpSpeed;
 	}
 
+	/*
+	 * PLAYER METHOD
+	 */
 	public Player(int width, int height) {
 		x = GamePanel.WIDTH / 2;
 		y = GamePanel.HEIGHT / 2;
@@ -83,6 +83,9 @@ public class Player{
 		
 	}
 
+	/*
+	 * PLAYER UPDATE METHOD
+	 */
 	public void update(Block[] b, EndGate endGate) {
 
 		int iX = (int) x;
@@ -91,60 +94,74 @@ public class Player{
 		for (int i = 0; i < b.length; i++) {
 
 			// right
+				//BlockCollision
 			for (int j = 0; j <= height; j++) {
-				if (Collision.playerBlock(new Point(iX + width + (int) State.xOffset, iY + (int) State.yOffset + j - 1),
+				if (Collision.playerBlock(new Point(iX + width + (int) State.xOffset+2, iY + (int) State.yOffset + j - 1),
 						b[i])) {
 					right = false;
-					rightCollision = true;
 					// }else{
 					// if(!leftCollision && right)
 					// right=true;
 				}
-				
+				//EndGate Collision
 				if(Collision.playerGate(new Point(iX + width + (int) State.xOffset, iY + (int) State.yOffset + j - 1), endGate)){
 					win=true;
 				}
 			}
 
 			// left
-
+				//Block Collision
 			for (int j = 0; j < height; j++) {
-				if (Collision.playerBlock(new Point(iX + (int) State.xOffset - 1, iY + (int) State.yOffset + j),
-						b[i])) {
+				if (Collision.playerBlock(new Point(iX + (int) State.xOffset - 1, iY + (int) State.yOffset + j),b[i])) {
 					left = false;
-					leftCollision = true;
 					// }else{
 					// if(!rightCollision && !left)
 					// left=true;
 
 				}
+				//EndGate Collision
+				if (Collision.playerGate(new Point(iX + (int) State.xOffset - 1, iY + (int) State.yOffset + j),endGate)) {
+					win=true;
+
+				}
+				
 			}
 
 			// top
+				//Block Collision
 			for (int j = 0; j < width; j++) {
 				if (Collision.playerBlock(new Point(iX + (int) State.xOffset + j, iY + (int) State.yOffset), b[i])) {
 					jumping = false;
 					currentJumpSpeed = maxJumpSpeed;
 					falling = true;
 				}
+				//EndGateCollision
+				if (Collision.playerGate(new Point(iX + (int) State.xOffset + j, iY + (int) State.yOffset), endGate)) {
+					win=true;
+				}
 			}
 
 			// bottom
+				//Block Collision
 			for (int j = 0; j < width; j++) {
 				if (Collision.playerBlock(
 						new Point(iX + (int) State.xOffset + j, iY + height + (int) State.yOffset + 1), b[i])) {
-					State.yOffset = b[i].getY() - height - y;
+					State.yOffset = b[i].getY() - height-y;
 					falling = false;
 					topCollision = true;
 				} else {
 					if (!topCollision && !jumping)
 						falling = true;
 				}
+				
+				//EndGate Collision
+				if (Collision.playerGate(
+						new Point(iX + (int) State.xOffset + j, iY + height + (int) State.yOffset + 1), endGate)) {
+					win=true;
+				}
 			}
 		}
 		topCollision = false;
-		rightCollision = false;
-		leftCollision = false;
 
 		/*
 		 * Movement Mechanics (temporary)
@@ -184,6 +201,10 @@ public class Player{
 		}
 	}
 
+	
+	/*
+	 * PLAYER RENDER METHOD
+	 */
 	public void render(Graphics2D g) {
 		//character graphics
 		//g.setColor(Color.WHITE);
@@ -207,6 +228,10 @@ public class Player{
 		
 	}
 
+	
+	/*
+	 * KEY EVENTS
+	 */
 	public void keyPressed(int k) {
 		if (k == KeyEvent.VK_D || k == KeyEvent.VK_RIGHT){ // go right pressed
 			right = true;
@@ -224,7 +249,7 @@ public class Player{
 			FacingLeft = true;
 		}
 			
-		if ((k == KeyEvent.VK_W || k == KeyEvent.VK_UP) && !jumping && !falling){																		// pressed
+		if ((k == KeyEvent.VK_W || k == KeyEvent.VK_UP) && !jumping && !falling){ //jump pressed
 			jumping = true;
 		}
 	}
