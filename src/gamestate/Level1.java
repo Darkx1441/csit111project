@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import entities.Player;
 import objects.Block;
 import objects.EndGate;
+import physics.Collision;
 
 public class Level1 extends State
 {
@@ -22,14 +23,14 @@ public class Level1 extends State
 
 	public void init() 
 	{
-		player = new Player(50, 100);
+		player = new Player(64, 64);
 		b = new Block[5];
 		b[0] = new Block(100, 350, 200, 100);
 		b[1] = new Block(200, 270, 20, 20);
 		b[2] = new Block(240, 400, 200, 100);
 		b[3] = new Block(200, 300,20,20);
 		b[4] = new Block(0, 450, 1500,20);
-		endGate= new EndGate(1500,450,50,50);
+		endGate= new EndGate(1450,400,50,50);
 	}
 
 	public void update() 
@@ -39,7 +40,9 @@ public class Level1 extends State
 			b[i].update();
 		}
 		
-		player.update(b);
+		player.update(b,endGate);
+		
+		//if(Collision.playerBlock(p, b))
 	}
 
 	public void render(Graphics2D g)
@@ -62,6 +65,11 @@ public class Level1 extends State
 		for(int i = 0; i < b.length; i++)
 		{
 			b[i].draw(g);
+		}
+		endGate.render(g);
+		
+		if(player.win==true){
+			gsm.states.push(new MenuState(gsm));
 		}
 	}
 

@@ -16,9 +16,10 @@ import com.sun.glass.events.KeyEvent;
 import csit111project.GamePanel;
 import gamestate.State;
 import objects.Block;
+import objects.EndGate;
 import physics.Collision;
 
-public class Player {
+public class Player{
 
 	BufferedImage RightI, LeftI, RightR, LeftR, RightJ, LeftJ;
 	private boolean right = false, left = false, jumping = false, falling = false;
@@ -42,6 +43,7 @@ public class Player {
 
 	private double maxFallSpeed = 5;
 	private double currentFallSpeed = 0.1;
+	public boolean win=false;
 
 	public void init(){
 		try{
@@ -81,11 +83,11 @@ public class Player {
 		
 	}
 
-	public void update(Block[] b) {
+	public void update(Block[] b, EndGate endGate) {
 
 		int iX = (int) x;
 		int iY = (int) y;
-
+		
 		for (int i = 0; i < b.length; i++) {
 
 			// right
@@ -97,6 +99,10 @@ public class Player {
 					// }else{
 					// if(!leftCollision && right)
 					// right=true;
+				}
+				
+				if(Collision.playerGate(new Point(iX + width + (int) State.xOffset, iY + (int) State.yOffset + j - 1), endGate)){
+					win=true;
 				}
 			}
 
