@@ -57,6 +57,10 @@ public class Level1 extends State {
 
 	public void keyPressed(KeyEvent e, int k) {
 		player.keyPressed(k);
+		
+		if (k == KeyEvent.VK_ESCAPE) {
+			gsm.states.push(new MenuState(gsm));
+		}
 	}
 
 	public void keyResealed(KeyEvent e, int k) {
