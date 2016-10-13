@@ -10,7 +10,7 @@ public class animation
 
 	private int oneX = 300;
 	private int oneY = 150;
-	private int speed= 1; // animation speed scale
+	private int speed= 1; 	// animation speed scale
 
 	boolean up = false;
 	boolean down = true;
@@ -35,6 +35,7 @@ public class animation
 		frame.setResizable(false);
 		frame.setSize(1280, 720);
 		frame.setLocationRelativeTo(null); // centers the window
+		
 		move();
 	}
 
@@ -108,6 +109,7 @@ public class animation
 			{
 				e.printStackTrace();
 			}
+			
 			frame.repaint();
 		}
 	}

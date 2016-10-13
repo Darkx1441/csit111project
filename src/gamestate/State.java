@@ -4,16 +4,17 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
-public abstract class State {
-
+public abstract class State 
+{
 	protected GameStateManager gsm;
 	public static double xOffset, yOffset;
 	
-	public State(GameStateManager gsm){
+	public State(GameStateManager gsm)
+	{
 		this.gsm = gsm;
 		
-		xOffset=0;
-		yOffset=0;
+		xOffset = 0;
+		yOffset = 0;
 		
 		init();
 	}

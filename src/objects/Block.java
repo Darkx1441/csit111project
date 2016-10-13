@@ -6,27 +6,32 @@ import java.awt.Rectangle;
 
 import gamestate.State;
 
-public class Block extends Rectangle {
+public class Block extends Rectangle
+{
 	private static final long serialVersionUID = 1L;
 	
 	public static final int blockSize = 64;
 	
-	public Block(int x, int y, int w, int h){
-	setBounds(x, y, w, h);	
+	public Block(int x, int y, int w, int h)
+	{
+		setBounds(x, y, w, h);	
 	}
 	
-	public double getX(){
+	public double getX()
+	{
 		return x;
 	}
-	public double getY(){
+	
+	public double getY()
+	{
 		return y;
 	}
 	
-	public void update(){
-	}
+	public void update() {}
 	
-	public void draw(Graphics2D g){
+	public void draw(Graphics2D g)
+	{
 		g.setColor(Color.blue);
-			g.fillRect(x-(int)State.xOffset, y-(int)State.yOffset, width, height);
+		g.fillRect(x - (int) State.xOffset, y - (int) State.yOffset, width, height);
 	}
 }

@@ -16,15 +16,15 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class GamePanel extends JPanel implements Runnable, ActionListener, KeyListener, MouseListener {
-	// Default serial version ID
+public class GamePanel extends JPanel implements Runnable, ActionListener, KeyListener, MouseListener 
+{
 	private static final long serialVersionUID = 1L;
 
 	// dimensions
 	// Frame will be x+6 y+29 bigger because it includes border
 	public static final int WIDTH = 800;
 	public static final int HEIGHT = 480;
-	FPSCounter fps= new FPSCounter();
+	FPSCounter fps = new FPSCounter();
 
 	private Thread thread;
 	private int FPS = 60;
@@ -32,7 +32,8 @@ public class GamePanel extends JPanel implements Runnable, ActionListener, KeyLi
 	boolean running = false;
 	private GameStateManager gsm;
 
-	public GamePanel() {
+	public GamePanel() 
+	{
 		super();
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		addMouseListener(this);
@@ -45,20 +46,25 @@ public class GamePanel extends JPanel implements Runnable, ActionListener, KeyLi
 		start();
 	}
 
-	private void start() {
+	private void start() 
+	{
 		running = true;
 		thread = new Thread(this);
 		thread.start();
 		fps.start();
 	}
 
-	private void update() {
+	private void update() 
+	{
 		gsm.update();
 	}
 
-	public void run() {
+	public void run() 
+	{
 		long start, elapsed, wait;
-		while (running) {
+		
+		while (running) 
+		{
 			start = System.nanoTime();
 			update();
 			repaint();
@@ -66,13 +72,16 @@ public class GamePanel extends JPanel implements Runnable, ActionListener, KeyLi
 			elapsed = System.nanoTime() - start;
 			wait = targetTime - elapsed / 1000000;
 
-			if (wait <= 0) {
+			if (wait <= 0) 
+			{
 				wait = 5;
 			}
-			try {
+			try 
+			{
 				Thread.sleep(wait);
-				
-			} catch (Exception e) {
+			} 
+			catch (Exception e) 
+			{
 				e.printStackTrace();
 			}
 
@@ -80,7 +89,8 @@ public class GamePanel extends JPanel implements Runnable, ActionListener, KeyLi
 
 	}
 
-	public void paintComponent(Graphics g) {
+	public void paintComponent(Graphics g) 
+	{
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -91,53 +101,44 @@ public class GamePanel extends JPanel implements Runnable, ActionListener, KeyLi
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
+	public void actionPerformed(ActionEvent arg0)
+	{
 		update();
-		repaint();
-		
+		repaint();	
 	}
 
 	@Override
-	public void mouseClicked(MouseEvent arg0) {
-
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
+	public void mousePressed(MouseEvent e)
+	{
 		gsm.mousePressed(e);
 	}
 
 	@Override
-	public void mouseReleased(MouseEvent e) {
+	public void mouseReleased(MouseEvent e) 
+	{
 		gsm.mouseReleased(e);
 	}
+	
+	@Override
+	public void mouseClicked(MouseEvent arg0) {}
+	
+	@Override
+	public void mouseEntered(MouseEvent arg0) {}
 
 	@Override
-	public void keyPressed(KeyEvent e) {
+	public void mouseExited(MouseEvent arg0) {}
+
+	@Override
+	public void keyPressed(KeyEvent e) 
+	{
 		gsm.keyPressed(e, e.getKeyCode());
 	}
 
 	@Override
-	public void keyReleased(KeyEvent e) {
+	public void keyReleased(KeyEvent e) 
+	{
 		gsm.keyResealed(e, e.getKeyCode());
 	}
-
 	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
+	public void keyTyped(KeyEvent arg0) {}
 }

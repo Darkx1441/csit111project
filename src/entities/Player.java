@@ -11,8 +11,8 @@ import gamestate.State;
 import objects.Block;
 import physics.Collision;
 
-public class Player {
-
+public class Player 
+{
 	private boolean right = false, left = false, jumping = false, falling = false;
 
 	private boolean topCollision = false;
@@ -30,40 +30,47 @@ public class Player {
 	private double maxFallSpeed = 5;
 	private double currentFallSpeed = 0.1;
 
-	public int getX() {
+	public int getX() 
+	{
 		return (int) x;
 	}
 
-	public int getY() {
+	public int getY() 
+	{
 		return (int) y;
 	}
 
-	public int getFallSpeed() {
+	public int getFallSpeed() 
+	{
 		return (int) currentFallSpeed;
 	}
 
-	public int getJumpSpeed() {
+	public int getJumpSpeed() 
+	{
 		return (int) currentJumpSpeed;
 	}
 
-	public Player(int width, int height) {
+	public Player(int width, int height) 
+	{
 		x = GamePanel.WIDTH / 2;
 		y = GamePanel.HEIGHT / 2;
 		this.width = width;
 		this.height = height;
 	}
 
-	public void update(Block[] b) {
-
+	public void update(Block[] b) 
+	{
 		int iX = (int) x;
 		int iY = (int) y;
 
-		for (int i = 0; i < b.length; i++) {
-
+		for (int i = 0; i < b.length; i++) 
+		{
 			// right
-			for (int j = 0; j <= height; j++) {
+			for (int j = 0; j <= height; j++) 
+			{
 				if (Collision.playerBlock(new Point(iX + width + (int) State.xOffset, iY + (int) State.yOffset + j - 1),
-						b[i])) {
+						b[i])) 
+				{
 					right = false;
 					rightCollision = true;
 					// }else{
@@ -74,20 +81,22 @@ public class Player {
 
 			// left
 
-			for (int j = 0; j < height; j++) {
+			for (int j = 0; j < height; j++) 
+			{
 				if (Collision.playerBlock(new Point(iX + (int) State.xOffset - 1, iY + (int) State.yOffset + j),
-						b[i])) {
+						b[i])) 
+				{
 					left = false;
 					leftCollision = true;
 					// }else{
 					// if(!rightCollision && !left)
 					// left=true;
-
 				}
 			}
 
 			// top
-			for (int j = 0; j < width; j++) {
+			for (int j = 0; j < width; j++) 
+			{
 				if (Collision.playerBlock(new Point(iX + (int) State.xOffset + j, iY + (int) State.yOffset), b[i])) {
 					jumping = false;
 					currentJumpSpeed = maxJumpSpeed;
@@ -96,18 +105,23 @@ public class Player {
 			}
 
 			// bottom
-			for (int j = 0; j < width; j++) {
+			for (int j = 0; j < width; j++) 
+			{
 				if (Collision.playerBlock(
-						new Point(iX + (int) State.xOffset + j, iY + height + (int) State.yOffset + 1), b[i])) {
+						new Point(iX + (int) State.xOffset + j, iY + height + (int) State.yOffset + 1), b[i]))
+				{
 					State.yOffset = b[i].getY() - height - y;
 					falling = false;
 					topCollision = true;
-				} else {
+				} 
+				else 
+				{
 					if (!topCollision && !jumping)
 						falling = true;
 				}
 			}
 		}
+		
 		topCollision = false;
 		rightCollision = false;
 		leftCollision = false;
@@ -123,37 +137,44 @@ public class Player {
 		/*
 		 * Jumping/Falling Mechanics
 		 */
-		if (jumping) {
+		if (jumping) 
+		{
 			State.yOffset -= currentJumpSpeed;
 			currentJumpSpeed -= .1;
 			falling = false;
 
-			if (currentJumpSpeed <= 0) {
+			if (currentJumpSpeed <= 0) 
+			{
 				currentJumpSpeed = maxJumpSpeed;
 				jumping = false;
 				falling = true;
 			}
 		}
 
-		if (falling) {
+		if (falling) 
+		{
 			State.yOffset += currentFallSpeed;
-			if (currentFallSpeed <= maxFallSpeed) {
+			if (currentFallSpeed <= maxFallSpeed) 
+			{
 				currentFallSpeed += 0.1;
 			}
 		}
 
-		if (!falling) {
+		if (!falling) 
+		{
 			currentFallSpeed = .1;
 		}
 	}
 
-	public void render(Graphics2D g) {
+	public void render(Graphics2D g) 
+	{
 		// character graphics
 		g.setColor(Color.WHITE);
 		g.fillRect((int) x, (int) y, width, height);
 	}
 
-	public void keyPressed(int k) {
+	public void keyPressed(int k) 
+	{
 		if (k == KeyEvent.VK_D || k == KeyEvent.VK_RIGHT) // go right pressed
 			right = true;
 		if (k == KeyEvent.VK_A || k == KeyEvent.VK_LEFT) // go left pressed
@@ -162,7 +183,8 @@ public class Player {
 			jumping = true;
 	}
 
-	public void keyReleased(int k) {
+	public void keyReleased(int k) 
+	{
 		if (k == KeyEvent.VK_D || k == KeyEvent.VK_RIGHT)// go right released
 			right = false;
 		if (k == KeyEvent.VK_A || k == KeyEvent.VK_LEFT) // go left released

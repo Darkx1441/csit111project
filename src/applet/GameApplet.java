@@ -5,11 +5,13 @@ import java.awt.Container;
 import javax.swing.JApplet;
 import csit111project.GamePanel;
 
-public class GameApplet extends JApplet {
+public class GameApplet extends JApplet 
+{
 	private static final long serialVersionUID = 1L;
 	private GamePanel gamePanel;
 
-	public void init() {
+	public void init() 
+	{
 		Container pane = getContentPane();
 		pane.setLayout(new BorderLayout());
 		gamePanel = new GamePanel();
