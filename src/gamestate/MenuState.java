@@ -36,14 +36,14 @@ public class MenuState extends State {
 			if (i == currentSelect)
 			{
 				g.setColor(Color.GREEN);
-				g.drawString(">", GamePanel.WIDTH/2-50-30, GamePanel.HEIGHT/2 + i * 50);
+				g.drawString(">", GamePanel.WIDTH / 2 - 50 - 30, GamePanel.HEIGHT / 2 + i * 50);
 			} 
 			else 
 			{
 				g.setColor(Color.WHITE);
 			}
 			
-			g.drawString(options[i], GamePanel.WIDTH / 2-50, GamePanel.HEIGHT / 2 + i * 50);
+			g.drawString(options[i], GamePanel.WIDTH / 2 - 50, GamePanel.HEIGHT / 2 + i * 50);
 			g.setFont(new Font("Arial", Font.BOLD, 12));
 		}
 
@@ -62,7 +62,7 @@ public class MenuState extends State {
 			}
 			else 
 			{
-				currentSelect =0 ;
+				currentSelect = 0 ;
 			}
 		} 
 		else if (k == KeyEvent.VK_W || k == KeyEvent.VK_UP)
@@ -108,7 +108,7 @@ public class MenuState extends State {
 
 	}
 
-	public void keyResealed(KeyEvent e, int k) {}
+	public void keyReleased(KeyEvent e, int k) {}
 
 	public void mousePressed(MouseEvent e) {}
 

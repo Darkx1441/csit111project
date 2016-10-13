@@ -22,15 +22,15 @@ public class Level1 extends State
 	{
 		player = new Player(50, 100);
 		b = new Block[4];
-		b[0] = new Block(100,350, 200, 100);
-		b[1] = new Block(200,270, 20, 20);
-		b[2] = new Block(240,400, 200, 100);
-		b[3] = new Block(200,300,20,20);
+		b[0] = new Block(100, 350, 200, 100);
+		b[1] = new Block(200, 270, 20, 20);
+		b[2] = new Block(240, 400, 200, 100);
+		b[3] = new Block(200, 300,20,20);
 	}
 
 	public void update() 
 	{
-		for (int i=0;i<b.length;i++)
+		for (int i = 0; i < b.length; i++)
 		{
 			b[i].update();
 		}
@@ -51,11 +51,11 @@ public class Level1 extends State
 		g.drawString("POS: \t X= " + (int)State.xOffset + " Y= " + (int)State.yOffset, 0, 21);
 		g.drawString("\tJS " + player.getJumpSpeed() + " FS= " + player.getFallSpeed(), 0, 32);
 		
-		//render player
+		// render player
 		player.render(g);
 		
-		//render blocks
-		for(int i=0; i<b.length;i++)
+		// render blocks
+		for(int i = 0; i < b.length; i++)
 		{
 			b[i].draw(g);
 		}
@@ -71,7 +71,7 @@ public class Level1 extends State
 		}
 	}
 
-	public void keyResealed(KeyEvent e, int k)
+	public void keyReleased(KeyEvent e, int k)
 	{
 		player.keyReleased(k);
 	}

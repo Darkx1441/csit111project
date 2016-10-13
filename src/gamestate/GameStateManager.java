@@ -7,7 +7,6 @@ import java.util.Stack;
 
 public class GameStateManager 
 {
-
 	public static final int PLAYSTATE = 0;
 
 	public Stack<State> states;
@@ -33,9 +32,9 @@ public class GameStateManager
 		states.peek().keyPressed(e, k);
 	}
 
-	public void keyResealed(KeyEvent e, int k) 
+	public void keyReleased(KeyEvent e, int k) 
 	{
-		states.peek().keyResealed(e, k);
+		states.peek().keyReleased(e, k);
 	}
 
 	public void mousePressed(MouseEvent e) 
