@@ -10,10 +10,12 @@ public class Block extends Rectangle
 {
 	private static final long serialVersionUID = 1L;
 	public static final int blocksize = 32;
+	private int id;
 	
-	public Block(int x, int y)
+	public Block(int x, int y, int id)
 	{
 		setBounds(x, y, blocksize, blocksize);	
+		this.id= id;
 	}
 	
 	public void update() {}
@@ -21,6 +23,18 @@ public class Block extends Rectangle
 	public void render(Graphics2D g)
 	{
 		g.setColor(Color.blue);
-		g.fillRect(x - (int) State.xOffset, y - (int) State.yOffset, width, height);
+		if(id!=0){
+			g.fillRect(x - (int) State.xOffset, y - (int) State.yOffset, width, height);
+		}
+
 	}
+	
+	public void setID(int id){
+		this.id= id;
+	}
+	
+	public int getID(){
+		return id;
+	}
+	
 }
