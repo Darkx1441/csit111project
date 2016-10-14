@@ -8,7 +8,6 @@ import java.awt.event.MouseEvent;
 import entities.Player;
 import objects.Block;
 import objects.EndGate;
-import physics.Collision;
 
 public class Level1 extends State {
 	private Player player;
@@ -44,14 +43,17 @@ public class Level1 extends State {
 		/*
 		 * DEBUG LINES
 		 */
+		if(player.debugMonitor==true){
 		g.setColor(Color.RED);
 		g.drawLine(400, 0, 400, 800);
 		g.drawLine(0, 240, 800, 240);
-		// g.setColor(Color.WHITE);
+		
 		g.drawString("Level1 State", 0, 10);
 		g.drawString("POS: \t X= " + (int) State.xOffset + " Y= " + (int) State.yOffset, 0, 21);
 		g.drawString("\tJS " + player.getJumpSpeed() + " FS= " + player.getFallSpeed(), 0, 32);
-
+		
+		//g.drawString("FPS:" + , 0, 43);
+		}
 		// render player
 		player.render(g);
 

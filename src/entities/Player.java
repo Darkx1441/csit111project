@@ -2,7 +2,6 @@ package entities;
 
 import java.awt.Graphics2D;
 import java.awt.Point;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -37,6 +36,8 @@ public class Player{
 	private double maxFallSpeed = 5;
 	private double currentFallSpeed = 0.1;
 	public boolean win=false;
+	
+	public boolean debugMonitor=false;
 
 	
 	/*
@@ -207,7 +208,6 @@ public class Player{
 	 */
 	public void render(Graphics2D g) {
 		//character graphics
-		//g.setColor(Color.WHITE);
 		if (FacingRight){
 			g.drawImage(RightI, (int) x, (int) y, null);
 		}if(FacingLeft){
@@ -216,16 +216,14 @@ public class Player{
 			g.drawImage(RightR,(int) x,(int) y, null);
 		}if(left){
 			g.drawImage(LeftR,(int) x,(int) y, null);
-		}if(jumping==true||falling==true){
+		}if(jumping==true|falling==true){
 			if (FacingRight){
 				g.drawImage(RightJ,(int) x,(int) y, null);
 			}if(FacingLeft){
 				g.drawImage(LeftJ,(int) x,(int) y, null);
 			}
 		}
-		
-		g.drawRect((int) x, (int) y, width, height);
-		
+		//g.drawRect((int) x, (int) y, width, height);
 	}
 
 	
@@ -240,6 +238,10 @@ public class Player{
 			FacingRight = true;
 			//ImageIcon RunR = new ImageIcon("Charidle02.png");
 			//character = RunR.getImage();
+		}
+		
+		if (k== KeyEvent.VK_T){
+			debugMonitor=!debugMonitor;
 		}
 			
 		if (k == KeyEvent.VK_A || k == KeyEvent.VK_LEFT){ // go left pressed
