@@ -2,7 +2,6 @@ package entities;
 
 import java.awt.Graphics2D;
 import java.awt.Point;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -112,7 +111,7 @@ public class Player{
 			// left
 				//Block Collision
 			for (int j = 0; j < height; j++) {
-				if (Collision.playerBlock(new Point(iX + (int) State.xOffset - 1, iY + (int) State.yOffset + j),b[i])) {
+				if (Collision.playerBlock(new Point(iX + (int) State.xOffset+1, iY + (int) State.yOffset + j),b[i])) {
 					left = false;
 					// }else{
 					// if(!rightCollision && !left)
@@ -130,7 +129,7 @@ public class Player{
 			// top
 				//Block Collision
 			for (int j = 0; j < width; j++) {
-				if (Collision.playerBlock(new Point(iX + (int) State.xOffset + j, iY + (int) State.yOffset), b[i])) {
+				if (Collision.playerBlock(new Point(iX + (int) State.xOffset + j+2, iY + (int) State.yOffset), b[i])) {
 					jumping = false;
 					currentJumpSpeed = maxJumpSpeed;
 					falling = true;
@@ -143,9 +142,9 @@ public class Player{
 
 			// bottom
 				//Block Collision
-			for (int j = 0; j < width; j++) {
+			for (int j = 0; j < width-1; j++) {
 				if (Collision.playerBlock(
-						new Point(iX + (int) State.xOffset + j, iY + height + (int) State.yOffset + 1), b[i])) {
+						new Point(iX + (int) State.xOffset + j+2, iY + height + (int) State.yOffset + 1), b[i])) {
 					State.yOffset = b[i].getY() - height-y;
 					falling = false;
 					topCollision = true;

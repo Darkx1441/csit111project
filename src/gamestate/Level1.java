@@ -8,11 +8,10 @@ import java.awt.event.MouseEvent;
 import entities.Player;
 import objects.Block;
 import objects.EndGate;
-import physics.Collision;
 
 public class Level1 extends State {
 	private Player player;
-	private Block[] b;
+private Block[] b;
 	private EndGate endGate;
 
 	public Level1(GameStateManager gsm) {
@@ -22,11 +21,11 @@ public class Level1 extends State {
 	public void init() {
 		player = new Player(64, 64);
 		b = new Block[5];
-		b[0] = new Block(100, 350, 200, 100);
-		b[1] = new Block(200, 270, 20, 40);
-		b[2] = new Block(240, 400, 200, 100);
-		b[3] = new Block(200, 300, 30, 50);
-		b[4] = new Block(0, 450, 1500, 20);
+		b[0] = new Block(100+100, 350);
+		b[1] = new Block(200+100, 370);
+		b[2] = new Block(240+100, 400);
+		b[3] = new Block(0+100, 300);
+		b[4] = new Block(100, 450);
 		endGate = new EndGate(1450, 400, 50, 50);
 	}
 
@@ -36,8 +35,6 @@ public class Level1 extends State {
 		}
 
 		player.update(b, endGate);
-
-		// if(Collision.playerBlock(p, b))
 	}
 
 	public void render(Graphics2D g) {
@@ -57,7 +54,7 @@ public class Level1 extends State {
 
 		// render blocks
 		for (int i = 0; i < b.length; i++) {
-			b[i].draw(g);
+			b[i].render(g);
 		}
 
 		// render End Gate
