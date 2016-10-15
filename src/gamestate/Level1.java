@@ -5,14 +5,14 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
+import csit111project.GamePanel;
 import entities.Player;
 import mapping.Map;
-import objects.EndGate;
 
 public class Level1 extends State {
 	private Player player;
 	private Map map;
-	private EndGate endGate;
+
 
 	public Level1(GameStateManager gsm) {
 		super(gsm);
@@ -39,8 +39,8 @@ public class Level1 extends State {
 		 */
 		if(player.debugMonitor==true){
 		g.setColor(Color.RED);
-		g.drawLine(400, 0, 400, 800);
-		g.drawLine(0, 240, 800, 240);
+		g.drawLine(GamePanel.WIDTH/2, 0, GamePanel.WIDTH/2, GamePanel.HEIGHT);
+		g.drawLine(0, GamePanel.HEIGHT/2, GamePanel.WIDTH, GamePanel.HEIGHT/2);
 		g.drawString("Level1 State", 0, 10);
 		g.drawString("POS: \t X= " + (int) State.xOffset + " Y= " + (int) State.yOffset, 0, 21);
 		g.drawString("\tJS " + player.getJumpSpeed() + " FS= " + player.getFallSpeed(), 0, 32);
