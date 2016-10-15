@@ -21,7 +21,6 @@ public class Level1 extends State {
 	public void init() {
 		player = new Player(64, 64);
 		map = new Map("/maps/map1.map");
-		endGate = new EndGate(1450, 400, 50, 50);
 		
 		xOffset=-200;
 		yOffset=-400;
@@ -29,7 +28,7 @@ public class Level1 extends State {
 
 	public void update() {
 
-		player.update(map.getBlocks(),endGate);
+		player.update(map.getBlocks(),map.getEndGate());
 		}
 
 	
@@ -54,10 +53,6 @@ public class Level1 extends State {
 		//render map
 		map.render(g);
 
-
-
-		// render End Gate
-		endGate.render(g);
 		if (player.win == true) {
 			gsm.states.push(new MenuState(gsm));
 		}

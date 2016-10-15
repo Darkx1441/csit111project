@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import objects.Block;
+import objects.EndGate;
 
 public class Map {
 
@@ -14,6 +15,7 @@ public class Map {
 	private int width, height;
 	
 	private Block[][] blocks;
+	private EndGate[][] endGate;
 	
 	public Map(String loadpath){
 		path= loadpath;
@@ -25,6 +27,7 @@ public class Map {
 		for(int i =0;i<blocks.length;i++){
 			for(int j=0;j<blocks[0].length;j++){
 				blocks[i][j].render(g);
+				endGate[i][j].render(g);
 			}
 		}
 	}
@@ -38,12 +41,14 @@ public class Map {
 			height= Integer.parseInt(br.readLine());
 			
 			blocks= new Block[height][width];
+			endGate = new EndGate[height][width];
 			
 			for(int y=0;y<height;y++){
 				String line = br.readLine();
 				String[] tokens = line.split("\\s+");				
 				for(int x=0;x<width;x++){
 					blocks[y][x] = new Block(x*Block.blocksize, y*Block.blocksize, Integer.parseInt(tokens[x]));
+					endGate[y][x] = new EndGate(x*EndGate.blocksize, y*EndGate.blocksize, Integer.parseInt(tokens[x]));
 				}
 			}
 			
@@ -57,6 +62,9 @@ public class Map {
 	
 	public Block[][] getBlocks(){
 		return blocks;
+	}
+	public EndGate[][] getEndGate(){
+		return endGate;
 	}
 	
 }

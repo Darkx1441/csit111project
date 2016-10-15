@@ -23,8 +23,8 @@ public class Block extends Rectangle
 	public void render(Graphics2D g)
 	{
 		g.setColor(Color.blue);
-		if(id!=0){
-			g.fillRect(x - (int) State.xOffset, y - (int) State.yOffset, width, height);
+		if(id==1){
+			g.fillRect(x - (int) State.xOffset, y - (int) State.yOffset, blocksize, blocksize);
 		}
 
 	}

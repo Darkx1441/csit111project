@@ -8,9 +8,11 @@ import gamestate.State;
 
 public class EndGate extends Rectangle {
 	private static final long serialVersionUID = 1L;
-	
-	public EndGate(int px, int py, int width, int height){
-		setBounds(px, py, width, height);
+	public static final int blocksize = 32;
+	private int id;
+	public EndGate(int px, int py, int id){
+		setBounds(px, py, blocksize, blocksize);
+		this.id=id;
 	}
 	
 	public void update(){
@@ -19,7 +21,16 @@ public class EndGate extends Rectangle {
 	
 	public void render(Graphics2D g){
 		g.setColor(Color.yellow);
-		g.fillRect(x - (int) State.xOffset, y - (int) State.yOffset, width, height);
+		if(id==2){
+		g.fillRect(x - (int) State.xOffset, y - (int) State.yOffset, blocksize, blocksize);
+		}
+	}
+	public void setID(int id){
+		this.id= id;
+	}
+	
+	public int getID(){
+		return id;
 	}
 
 }

@@ -87,7 +87,7 @@ public class Player{
 	/*
 	 * PLAYER UPDATE METHOD
 	 */
-	public void update(Block[][] b, EndGate endGate) {
+	public void update(Block[][] b, EndGate[][] endGate) {
 
 		int iX = (int) x;
 		int iY = (int) y;
@@ -106,9 +106,9 @@ public class Player{
 							// right=true;
 						}
 						//EndGate Collision
-		//				if(Collision.playerGate(new Point(iX + width + (int) State.xOffset, iY + (int) State.yOffset + j - 1), endGate)){
-		//					win=true;
-		//				}
+						if(Collision.playerGate(new Point(iX + width + (int) State.xOffset, iY + (int) State.yOffset + k - 1), endGate[i][j])){
+							win=true;
+						}
 					}
 		
 					// left
@@ -122,10 +122,10 @@ public class Player{
 		
 						}
 						//EndGate Collision
-		//				if (Collision.playerGate(new Point(iX + (int) State.xOffset - 1, iY + (int) State.yOffset + j),endGate)) {
-		//					win=true;
-		//
-		//				}
+						if (Collision.playerGate(new Point(iX + (int) State.xOffset - 1, iY + (int) State.yOffset + k),endGate[i][j])) {
+							win=true;
+		
+						}
 						
 					}
 		
@@ -138,9 +138,9 @@ public class Player{
 							falling = true;
 						}
 						//EndGateCollision
-		//				if (Collision.playerGate(new Point(iX + (int) State.xOffset + j, iY + (int) State.yOffset), endGate)) {
-		//					win=true;
-		//				}
+						if (Collision.playerGate(new Point(iX + (int) State.xOffset + k, iY + (int) State.yOffset), endGate[i][j])) {
+							win=true;
+						}
 					}
 		
 					// bottom
@@ -158,10 +158,10 @@ public class Player{
 						}
 						
 						//EndGate Collision
-		//				if (Collision.playerGate(
-		//						new Point(iX + (int) State.xOffset + j, iY + height + (int) State.yOffset + 1), endGate)) {
-		//					win=true;
-		//				}
+						if (Collision.playerGate(
+								new Point(iX + (int) State.xOffset + k, iY + height + (int) State.yOffset + 1), endGate[i][j])) {
+							win=true;
+						}
 					}
 				}
 			}
