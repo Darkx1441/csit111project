@@ -7,7 +7,6 @@ import java.awt.event.MouseEvent;
 
 import entities.Player;
 import mapping.Map;
-import objects.Block;
 import objects.EndGate;
 
 public class Level1 extends State {
