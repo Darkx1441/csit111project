@@ -87,78 +87,82 @@ public class Player{
 	/*
 	 * PLAYER UPDATE METHOD
 	 */
-	public void update(Block[] b, EndGate endGate) {
+	public void update(Block[][] b, EndGate endGate) {
 
 		int iX = (int) x;
 		int iY = (int) y;
 		
 		for (int i = 0; i < b.length; i++) {
-
-			// right
-				//BlockCollision
-			for (int j = 0; j <= height; j++) {
-				if (Collision.playerBlock(new Point(iX + width + (int) State.xOffset+2, iY + (int) State.yOffset + j - 1),
-						b[i])) {
-					right = false;
-					// }else{
-					// if(!leftCollision && right)
-					// right=true;
-				}
-				//EndGate Collision
-				if(Collision.playerGate(new Point(iX + width + (int) State.xOffset, iY + (int) State.yOffset + j - 1), endGate)){
-					win=true;
-				}
-			}
-
-			// left
-				//Block Collision
-			for (int j = 0; j < height; j++) {
-				if (Collision.playerBlock(new Point(iX + (int) State.xOffset - 1, iY + (int) State.yOffset + j),b[i])) {
-					left = false;
-					// }else{
-					// if(!rightCollision && !left)
-					// left=true;
-
-				}
-				//EndGate Collision
-				if (Collision.playerGate(new Point(iX + (int) State.xOffset - 1, iY + (int) State.yOffset + j),endGate)) {
-					win=true;
-
-				}
-				
-			}
-
-			// top
-				//Block Collision
-			for (int j = 0; j < width; j++) {
-				if (Collision.playerBlock(new Point(iX + (int) State.xOffset + j, iY + (int) State.yOffset), b[i])) {
-					jumping = false;
-					currentJumpSpeed = maxJumpSpeed;
-					falling = true;
-				}
-				//EndGateCollision
-				if (Collision.playerGate(new Point(iX + (int) State.xOffset + j, iY + (int) State.yOffset), endGate)) {
-					win=true;
-				}
-			}
-
-			// bottom
-				//Block Collision
-			for (int j = 0; j < width; j++) {
-				if (Collision.playerBlock(
-						new Point(iX + (int) State.xOffset + j, iY + height + (int) State.yOffset + 1), b[i])) {
-					State.yOffset = b[i].getY() - height-y;
-					falling = false;
-					topCollision = true;
-				} else {
-					if (!topCollision && !jumping)
-						falling = true;
-				}
-				
-				//EndGate Collision
-				if (Collision.playerGate(
-						new Point(iX + (int) State.xOffset + j, iY + height + (int) State.yOffset + 1), endGate)) {
-					win=true;
+			for(int j = 0; j < b[0].length;j++){
+				if(b[i][j].getID()!=0){
+					// right
+						//BlockCollision
+					for (int k = 0; k <= height; k++) {
+						if (Collision.playerBlock(new Point(iX + width + (int) State.xOffset+4, iY + (int) State.yOffset + k - 1),
+								b[i][j])) {
+							right = false;
+							// }else{
+							// if(!leftCollision && right)
+							// right=true;
+						}
+						//EndGate Collision
+		//				if(Collision.playerGate(new Point(iX + width + (int) State.xOffset, iY + (int) State.yOffset + j - 1), endGate)){
+		//					win=true;
+		//				}
+					}
+		
+					// left
+						//Block Collision
+					for (int k = 0; k < height-1; k++) {
+						if (Collision.playerBlock(new Point(iX + (int) State.xOffset-2, iY + (int) State.yOffset + k),b[i][j])) {
+							left = false;
+							// }else{
+							// if(!rightCollision && !left)
+							// left=true;
+		
+						}
+						//EndGate Collision
+		//				if (Collision.playerGate(new Point(iX + (int) State.xOffset - 1, iY + (int) State.yOffset + j),endGate)) {
+		//					win=true;
+		//
+		//				}
+						
+					}
+		
+					// top
+						//Block Collision
+					for (int k = 0; k < width-2; k++) {
+						if (Collision.playerBlock(new Point(iX + (int) State.xOffset + k+2, iY + (int) State.yOffset), b[i][j])) {
+							jumping = false;
+							currentJumpSpeed = maxJumpSpeed;
+							falling = true;
+						}
+						//EndGateCollision
+		//				if (Collision.playerGate(new Point(iX + (int) State.xOffset + j, iY + (int) State.yOffset), endGate)) {
+		//					win=true;
+		//				}
+					}
+		
+					// bottom
+						//Block Collision
+					for (int k = 0; k < width-8; k++) {
+						if (Collision.playerBlock(
+								new Point(iX + (int) State.xOffset + k+4, iY + height + (int) State.yOffset + 1), b[i][j])) {
+							
+							State.yOffset = b[i][j].getY() - height-y;
+							falling = false;
+							topCollision = true;
+						} else {
+							if (!topCollision && !jumping)
+								falling = true;
+						}
+						
+						//EndGate Collision
+		//				if (Collision.playerGate(
+		//						new Point(iX + (int) State.xOffset + j, iY + height + (int) State.yOffset + 1), endGate)) {
+		//					win=true;
+		//				}
+					}
 				}
 			}
 		}
@@ -260,14 +264,14 @@ public class Player{
 		if (k == KeyEvent.VK_D || k == KeyEvent.VK_RIGHT){// go right released
 			right = false;
 			//state = 0;
-			FacingRight=true;
-			FacingLeft = false;
+//			FacingRight=true;
+//			FacingLeft = false;
 	}
 		if (k == KeyEvent.VK_A || k == KeyEvent.VK_LEFT){ // go left released
 			left = false;
 			//state = 1;
-			FacingRight=false;
-			FacingLeft = true;
+//			FacingRight=false;
+//			FacingLeft = true;
 	}
 	}
 }

@@ -9,17 +9,32 @@ import gamestate.State;
 public class Block extends Rectangle
 {
 	private static final long serialVersionUID = 1L;
+	public static final int blocksize = 32;
+	private int id;
 	
-	public Block(int x, int y, int w, int h)
+	public Block(int x, int y, int id)
 	{
-		setBounds(x, y, w, h);	
+		setBounds(x, y, blocksize, blocksize);	
+		this.id= id;
 	}
 	
 	public void update() {}
 	
-	public void draw(Graphics2D g)
+	public void render(Graphics2D g)
 	{
 		g.setColor(Color.blue);
-		g.fillRect(x - (int) State.xOffset, y - (int) State.yOffset, width, height);
+		if(id!=0){
+			g.fillRect(x - (int) State.xOffset, y - (int) State.yOffset, width, height);
+		}
+
 	}
+	
+	public void setID(int id){
+		this.id= id;
+	}
+	
+	public int getID(){
+		return id;
+	}
+	
 }
