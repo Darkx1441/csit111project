@@ -13,6 +13,7 @@ import csit111project.GamePanel;
 import gamestate.State;
 import objects.Block;
 import objects.EndGate;
+import objects.Key;
 import physics.Collision;
 
 public class Player {
@@ -37,6 +38,7 @@ public class Player {
 	private double maxFallSpeed = 5;
 	private double currentFallSpeed = 0.1;
 	public boolean win = false;
+	public boolean hasKey= false;
 
 	public boolean debugMonitor = false;
 
@@ -93,7 +95,7 @@ public class Player {
 	/*
 	 * PLAYER UPDATE METHOD
 	 */
-	public void update(Block[][] b, EndGate[][] endGate) {
+	public void update(Block[][] b, EndGate[][] endGate, Key[][] key) {
 
 		int iX = (int) x;
 		int iY = (int) y;
@@ -158,14 +160,16 @@ public class Player {
 					for (int k = 0; k <= height; k++) {
 						if (Collision.playerGate(
 								new Point(iX + width + (int) State.xOffset, iY + (int) State.yOffset + k - 1),endGate[i][j])) {
-							win = true;
+							if(hasKey)
+								win = true;
 						}
 					}
 					
 					//LEFT
 					for (int k = 0; k < height - 1; k++) {
 						if (Collision.playerGate(new Point(iX + (int) State.xOffset - 1, iY + (int) State.yOffset + k),endGate[i][j])) {
-							win = true;
+							if(hasKey)
+								win = true;
 
 						}
 					}
@@ -173,20 +177,65 @@ public class Player {
 					//TOP
 					for (int k = 0; k < width - 2; k++) {
 						if (Collision.playerGate(new Point(iX + (int) State.xOffset + k, iY + (int) State.yOffset),endGate[i][j])) {
-							win = true;
+							if(hasKey)
+								win = true;
 						}
 					}
 					for (int k = 0; k < width - 8; k++) {
 						if (Collision.playerGate(
 								new Point(iX + (int) State.xOffset + k, iY + height + (int) State.yOffset + 1),
 								endGate[i][j])) {
-							win = true;
+							if(hasKey)	
+								win = true;
 						}
 					}
 				}
 			}
 		}
 		
+		/*
+		 * KEY COLLISION
+		 */
+		for (int i = 0; i < b.length; i++) {
+			for (int j = 0; j < b[0].length; j++) {
+				if (key[i][j].getID()==3) {
+					
+					//RIGHT
+					for (int k = 0; k <= height; k++) {
+						if (Collision.playerKey(
+								new Point(iX + width + (int) State.xOffset, iY + (int) State.yOffset + k - 1),key[i][j])) {
+							key[i][j].setID(0);
+							hasKey=true;
+						}
+					}
+					
+					//LEFT
+					for (int k = 0; k < height - 1; k++) {
+						if (Collision.playerKey(new Point(iX + (int) State.xOffset - 1, iY + (int) State.yOffset + k),key[i][j])) {
+							key[i][j].setID(0);
+							hasKey=true;
+						}
+					}
+					
+					//TOP
+					for (int k = 0; k < width - 2; k++) {
+						if (Collision.playerKey(new Point(iX + (int) State.xOffset + k, iY + (int) State.yOffset),key[i][j])) {
+							key[i][j].setID(0);
+							hasKey=true;
+						}
+					}
+					//BOTTOM
+					for (int k = 0; k < width - 8; k++) {
+						if (Collision.playerKey(
+								new Point(iX + (int) State.xOffset + k, iY + height + (int) State.yOffset + 1),
+								key[i][j])) {
+							key[i][j].setID(0);
+							hasKey=true;
+						}
+					}
+				}
+			}
+		}
 		topCollision = false;
 
 		/*

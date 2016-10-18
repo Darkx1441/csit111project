@@ -8,10 +8,12 @@ import java.awt.event.MouseEvent;
 import csit111project.GamePanel;
 import entities.Player;
 import mapping.Map;
+import objects.Key;
 
 public class Level1 extends State {
 	private Player player;
 	private Map map;
+	private Key key;
 
 
 	public Level1(GameStateManager gsm) {
@@ -28,7 +30,7 @@ public class Level1 extends State {
 
 	public void update() {
 
-		player.update(map.getBlocks(),map.getEndGate());
+		player.update(map.getBlocks(),map.getEndGate(), map.getKey());
 		}
 
 	
@@ -55,6 +57,14 @@ public class Level1 extends State {
 
 		if (player.win == true) {
 			gsm.states.push(new MenuState(gsm));
+		}
+		
+		if(player.hasKey){
+			g.setColor(Color.GREEN);
+			g.drawString("Key Obtained, Go for Exit!", 0, 50);
+		}else{
+			g.setColor(Color.RED);
+			g.drawString("Key Missing, look for the key!", 0, 50);
 		}
 
 	}
