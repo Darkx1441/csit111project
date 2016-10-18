@@ -85,7 +85,7 @@ public class Player {
 		x = GamePanel.WIDTH / 2;
 		y = GamePanel.HEIGHT / 2;
 		this.width = width;
-		this.height = height;
+		this.height = height-1;
 		init();
 
 	}
@@ -98,46 +98,28 @@ public class Player {
 		int iX = (int) x;
 		int iY = (int) y;
 
+		/*
+		 * BLOCK COLLISION
+		 */
 		for (int i = 0; i < b.length; i++) {
 			for (int j = 0; j < b[0].length; j++) {
 				if (b[i][j].getID() ==1) {
 					// right
-					// BlockCollision
 					for (int k = 0; k <= height; k++) {
 						if (Collision.playerBlock(
 								new Point(iX + width + (int) State.xOffset + 4, iY + (int) State.yOffset + k - 1),b[i][j])) {
 							right = false;
-							// }else{
-							// if(!leftCollision && right)
-							// right=true;
 						}
-						// EndGate Collision
-//						if (Collision.playerGate(
-//								new Point(iX + width + (int) State.xOffset, iY + (int) State.yOffset + k - 1),endGate[i][j])) {
-//							win = true;
-//						}
 					}
 
 					// left
-					// Block Collision
 					for (int k = 0; k < height - 1; k++) {
 						if (Collision.playerBlock(new Point(iX + (int) State.xOffset - 2, iY + (int) State.yOffset + k),b[i][j])) {
 							left = false;
-							// }else{
-							// if(!rightCollision && !left)
-							// left=true;
-
 						}
-						// EndGate Collision
-//						if (Collision.playerGate(new Point(iX + (int) State.xOffset - 1, iY + (int) State.yOffset + k),endGate[i][j])) {
-//							win = true;
-//
-//						}
-
 					}
 
 					// top
-					// Block Collision
 					for (int k = 0; k < width - 2; k++) {
 						if (Collision.playerBlock(new Point(iX + (int) State.xOffset + k + 2, iY + (int) State.yOffset),
 								b[i][j])) {
@@ -145,15 +127,9 @@ public class Player {
 							currentJumpSpeed = maxJumpSpeed;
 							falling = true;
 						}
-						// EndGateCollision
-//						if (Collision.playerGate(new Point(iX + (int) State.xOffset + k, iY + (int) State.yOffset),
-//								endGate[i][j])) {
-//							win = true;
-//						}
 					}
 
 					// bottom
-					// Block Collision
 					for (int k = 0; k < width - 8; k++) {
 						if (Collision.playerBlock(
 								new Point(iX + (int) State.xOffset + k + 4, iY + height + (int) State.yOffset + 1),
@@ -166,37 +142,47 @@ public class Player {
 							if (!topCollision && !jumping)
 								falling = true;
 						}
-
-						// EndGate Collision
-//						if (Collision.playerGate(
-//								new Point(iX + (int) State.xOffset + k, iY + height + (int) State.yOffset + 1),
-//								endGate[i][j])) {
-//							win = true;
-//						}
 					}
 				}
 			}
 		}
 		
+		/*
+		 * ENDGATE COLLISION
+		 */
 		for (int i = 0; i < b.length; i++) {
 			for (int j = 0; j < b[0].length; j++) {
-				if (b[i][j].getID()==3) {
+				if (endGate[i][j].getID()==2) {
+					
+					//RIGHT
 					for (int k = 0; k <= height; k++) {
-						// right
 						if (Collision.playerGate(
 								new Point(iX + width + (int) State.xOffset, iY + (int) State.yOffset + k - 1),endGate[i][j])) {
 							win = true;
 						}
 					}
+					
+					//LEFT
 					for (int k = 0; k < height - 1; k++) {
-						// left
 						if (Collision.playerGate(new Point(iX + (int) State.xOffset - 1, iY + (int) State.yOffset + k),endGate[i][j])) {
 							win = true;
 
 						}
 					}
 					
-					
+					//TOP
+					for (int k = 0; k < width - 2; k++) {
+						if (Collision.playerGate(new Point(iX + (int) State.xOffset + k, iY + (int) State.yOffset),endGate[i][j])) {
+							win = true;
+						}
+					}
+					for (int k = 0; k < width - 8; k++) {
+						if (Collision.playerGate(
+								new Point(iX + (int) State.xOffset + k, iY + height + (int) State.yOffset + 1),
+								endGate[i][j])) {
+							win = true;
+						}
+					}
 				}
 			}
 		}
@@ -217,7 +203,7 @@ public class Player {
 		 */
 		if (jumping) {
 			State.yOffset -= currentJumpSpeed;
-			currentJumpSpeed -= .1;
+			currentJumpSpeed -= .15;
 			falling = false;
 
 			if (currentJumpSpeed <= 0) {
@@ -230,7 +216,7 @@ public class Player {
 		if (falling) {
 			State.yOffset += currentFallSpeed;
 			if (currentFallSpeed <= maxFallSpeed) {
-				currentFallSpeed += 0.1;
+				currentFallSpeed += 0.15;
 
 			}
 		}
