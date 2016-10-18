@@ -245,16 +245,16 @@ public class Player {
 	 */
 	public void render(Graphics2D g) {
 		// character graphics
-		if (FacingRight) {
+		if (FacingRight && !right && !jumping && !falling) {
 			g.drawImage(RightI, (int) x, (int) y, null);
 		}
-		if (FacingLeft) {
+		if (FacingLeft && !left && !jumping && !falling) {
 			g.drawImage(LeftI, (int) x, (int) y, null);
 		}
-		if (right) {
+		if (right && !jumping && !falling) {
 			g.drawImage(RightR, (int) x, (int) y, null);
 		}
-		if (left) {
+		if (left && !jumping && !falling) {
 			g.drawImage(LeftR, (int) x, (int) y, null);
 		}
 		if (jumping == true | falling == true) {
