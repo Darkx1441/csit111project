@@ -85,7 +85,7 @@ public class Player {
 		x = GamePanel.WIDTH / 2;
 		y = GamePanel.HEIGHT / 2;
 		this.width = width;
-		this.height = height;
+		this.height = height-1;
 		init();
 
 	}
@@ -203,7 +203,7 @@ public class Player {
 		 */
 		if (jumping) {
 			State.yOffset -= currentJumpSpeed;
-			currentJumpSpeed -= .1;
+			currentJumpSpeed -= .15;
 			falling = false;
 
 			if (currentJumpSpeed <= 0) {
@@ -216,7 +216,7 @@ public class Player {
 		if (falling) {
 			State.yOffset += currentFallSpeed;
 			if (currentFallSpeed <= maxFallSpeed) {
-				currentFallSpeed += 0.1;
+				currentFallSpeed += 0.15;
 
 			}
 		}
