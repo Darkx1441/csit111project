@@ -14,10 +14,12 @@ import entities.Player;
 import mapping.Map;
 
 public class Level1 extends State {
+	public int stateid= 2;
 	private Player player;
 	private Map map;
-	private int timerDelay=1000;
+	private int timerDelay=1000/5;
 	private Timer timer;
+	private int color=1;
 	
 	
 
@@ -29,7 +31,6 @@ public class Level1 extends State {
 	public void init() {
 		player = new Player(-290, -100);
 		map = new Map("/maps/map1.map");
-		
 //		xOffset=-200;
 //		yOffset=-400;
 	}
@@ -46,14 +47,9 @@ public class Level1 extends State {
 		 * DEBUG LINES
 		 */
 		if(player.debugMonitor==true){
-		g.setColor(Color.RED);
-		g.drawLine(GamePanel.WIDTH/2, 0, GamePanel.WIDTH/2, GamePanel.HEIGHT);
-		g.drawLine(0, GamePanel.HEIGHT/2, GamePanel.WIDTH, GamePanel.HEIGHT/2);
-		g.drawString("Level1 State", 0, 10);
-		g.drawString("POS: \t X= " + (int) State.xOffset + " Y= " + (int) State.yOffset, 0, 21);
-		g.drawString("\tJS " + player.getJumpSpeed() + " FS= " + player.getFallSpeed(), 0, 32);
-		
-		//g.drawString("FPS:" + , 0, 43);
+		drawDebug(g);
+		//g.drawString(""+GamePanel.getFPS(), 0, 43);
+
 		}
 		// render player
 		player.render(g);
@@ -62,16 +58,24 @@ public class Level1 extends State {
 		map.render(g);
 
 		if (player.win == true) {
-			gsm.states.push(new MenuState(gsm));
+			gsm.states.setElementAt(new MenuState(gsm), 0);
 		}
 		if(player.hasKey){
 			timer.start();
-			//g.setColor(Color.GREEN);
-			//g.drawString("Key Obtained, Go for Exit!", 0, 50);
+			if(color==1){
+				g.setColor(Color.GREEN);
+			}else if(color==2){
+				g.setColor(Color.BLUE);
+			}else if(color==3){
+				g.setColor(Color.WHITE);
+			}else if(color==4){color=1;}else{color++;}
+			g.drawString("Key Obtained, Go for Exit!", 0, 60);
+			
 		}else{
 			g.setColor(Color.RED);
-			g.drawString("Key Missing, look for the key!", 0, 50);
+			g.drawString("Key Missing, look for the key!", 0, 60);
 		}
+		
 
 	}
 
@@ -93,21 +97,23 @@ public class Level1 extends State {
 	public void mouseReleased(MouseEvent e) {
 	}
 	ActionListener colorCycle = new ActionListener(){
-		//int color=1;
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			System.out.println("TEST TRUE");
-//			if(color==1){
-//				g.setColor(Color.GREEN);
-//			}else if(color==2){
-//				g.setColor(Color.BLUE);
-//			}else if(color==3){
-//				g.setColor(Color.WHITE);
-//			}else if(color==4){color=1;}else{color++;}
-		}
+			System.out.println("TEST TRUE "+ color);
+			color++;
+			if(color>=4)color=1;}
 	};
+	
+	public void drawDebug(Graphics2D g){
+		g.setColor(Color.RED);
+		g.drawLine(GamePanel.WIDTH/2, 0, GamePanel.WIDTH/2, GamePanel.HEIGHT);
+		g.drawLine(0, GamePanel.HEIGHT/2, GamePanel.WIDTH, GamePanel.HEIGHT/2);
+		g.drawString("Level1 State", 0, 10);
+		g.drawString("POS: \t X= " + (int) State.xOffset + " Y= " + (int) State.yOffset, 0, 21);
+		g.drawString("\tJS " + player.getJumpSpeed() + " FS= " + player.getFallSpeed(), 0, 32);
+		g.setColor(Color.WHITE);
+	}
 }
-
 
 
 //chapter 9 use of timer

@@ -25,8 +25,8 @@ class FPSCounter extends Thread
         }
     }
     
-    public double fps()
+    public int fps()
     {
-        return fps;
+        return (int)fps;
     } 
 }

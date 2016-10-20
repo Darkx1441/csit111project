@@ -87,8 +87,6 @@ public class Player {
 	public Player(int px, int py) {
 		Level1.xOffset=px;
 		Level1.yOffset=py;
-//		this.width = width;
-//		this.height = height-1;
 		init();
 
 	}
@@ -301,7 +299,6 @@ public class Player {
 				g.drawImage(LeftJ, (int) x, (int) y, null);
 			}
 		}
-		// g.drawRect((int) x, (int) y, width, height);
 	}
 
 	/*
@@ -310,11 +307,8 @@ public class Player {
 	public void keyPressed(int k) {
 		if (k == KeyEvent.VK_D || k == KeyEvent.VK_RIGHT) { // go right pressed
 			right = true;
-			// state = 2;
 			FacingLeft = false;
 			FacingRight = true;
-			// ImageIcon RunR = new ImageIcon("Charidle02.png");
-			// character = RunR.getImage();
 		}
 
 		if (k == KeyEvent.VK_T) {
@@ -323,7 +317,6 @@ public class Player {
 
 		if (k == KeyEvent.VK_A || k == KeyEvent.VK_LEFT) { // go left pressed
 			left = true;
-			// state = 3;
 			FacingRight = false;
 			FacingLeft = true;
 		}
@@ -337,15 +330,9 @@ public class Player {
 	public void keyReleased(int k) {
 		if (k == KeyEvent.VK_D || k == KeyEvent.VK_RIGHT) {// go right released
 			right = false;
-			// state = 0;
-			// FacingRight=true;
-			// FacingLeft = false;
 		}
 		if (k == KeyEvent.VK_A || k == KeyEvent.VK_LEFT) { // go left released
 			left = false;
-			// state = 1;
-			// FacingRight=false;
-			// FacingLeft = true;
 		}
 	}
 }
