@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 import com.sun.glass.events.KeyEvent;
 
 import csit111project.GamePanel;
+import gamestate.Level1;
 import gamestate.State;
 import objects.Block;
 import objects.EndGate;
@@ -27,8 +28,8 @@ public class Player {
 	// private int state; //0 is idle right, 1 is idle left ,2 is running right,
 	// 3 is running left
 
-	private double x, y;
-	private int width, height;
+	private int width=64, height=64-1;
+	private double x = GamePanel.WIDTH/2-width/2, y=GamePanel.HEIGHT/2-height/2;
 
 	private double moveSpeed = 5;
 
@@ -83,11 +84,11 @@ public class Player {
 	/*
 	 * PLAYER METHOD
 	 */
-	public Player(int width, int height) {
-		x = GamePanel.WIDTH / 2;
-		y = GamePanel.HEIGHT / 2;
-		this.width = width;
-		this.height = height-1;
+	public Player(int px, int py) {
+		Level1.xOffset=px;
+		Level1.yOffset=py;
+//		this.width = width;
+//		this.height = height-1;
 		init();
 
 	}
@@ -203,15 +204,15 @@ public class Player {
 					//RIGHT
 					for (int k = 0; k <= height; k++) {
 						if (Collision.playerKey(
-								new Point(iX + width + (int) State.xOffset, iY + (int) State.yOffset + k - 1),key[i][j])) {
+								new Point(iX + width + (int) State.xOffset+5, iY + (int) State.yOffset + k - 1),key[i][j])) {
 							key[i][j].setID(0);
 							hasKey=true;
 						}
 					}
 					
 					//LEFT
-					for (int k = 0; k < height - 1; k++) {
-						if (Collision.playerKey(new Point(iX + (int) State.xOffset - 1, iY + (int) State.yOffset + k),key[i][j])) {
+					for (int k = 0; k < height ; k++) {
+						if (Collision.playerKey(new Point(iX + (int) State.xOffset-5, iY + (int) State.yOffset + k),key[i][j])) {
 							key[i][j].setID(0);
 							hasKey=true;
 						}

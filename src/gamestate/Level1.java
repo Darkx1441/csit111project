@@ -2,30 +2,36 @@ package gamestate;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+
+import javax.swing.Timer;
 
 import csit111project.GamePanel;
 import entities.Player;
 import mapping.Map;
-import objects.Key;
 
 public class Level1 extends State {
 	private Player player;
 	private Map map;
-	private Key key;
-
+	private int timerDelay=1000;
+	private Timer timer;
+	
+	
 
 	public Level1(GameStateManager gsm) {
 		super(gsm);
+		timer= new Timer(timerDelay, colorCycle);
 	}
 
 	public void init() {
-		player = new Player(64, 64);
+		player = new Player(-290, -100);
 		map = new Map("/maps/map1.map");
 		
-		xOffset=-200;
-		yOffset=-400;
+//		xOffset=-200;
+//		yOffset=-400;
 	}
 
 	public void update() {
@@ -58,10 +64,10 @@ public class Level1 extends State {
 		if (player.win == true) {
 			gsm.states.push(new MenuState(gsm));
 		}
-		
 		if(player.hasKey){
-			g.setColor(Color.GREEN);
-			g.drawString("Key Obtained, Go for Exit!", 0, 50);
+			timer.start();
+			//g.setColor(Color.GREEN);
+			//g.drawString("Key Obtained, Go for Exit!", 0, 50);
 		}else{
 			g.setColor(Color.RED);
 			g.drawString("Key Missing, look for the key!", 0, 50);
@@ -86,4 +92,22 @@ public class Level1 extends State {
 
 	public void mouseReleased(MouseEvent e) {
 	}
+	ActionListener colorCycle = new ActionListener(){
+		//int color=1;
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			System.out.println("TEST TRUE");
+//			if(color==1){
+//				g.setColor(Color.GREEN);
+//			}else if(color==2){
+//				g.setColor(Color.BLUE);
+//			}else if(color==3){
+//				g.setColor(Color.WHITE);
+//			}else if(color==4){color=1;}else{color++;}
+		}
+	};
 }
+
+
+
+//chapter 9 use of timer

@@ -20,7 +20,7 @@ public class Key extends Rectangle {
 	}
 	
 	public void render(Graphics2D g){
-		g.setColor(Color.red);
+		g.setColor(Color.yellow);
 		if(id==3){
 		g.fillRect(x - (int) State.xOffset, y - (int) State.yOffset, blocksize, blocksize);
 		}

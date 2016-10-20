@@ -20,7 +20,7 @@ public class EndGate extends Rectangle {
 	}
 	
 	public void render(Graphics2D g){
-		g.setColor(Color.yellow);
+		g.setColor(Color.red);
 		if(id==2){
 		g.fillRect(x - (int) State.xOffset, y - (int) State.yOffset, blocksize, blocksize);
 		}
