@@ -94,11 +94,14 @@ public class MenuState extends State {
 			{
 				// play
 				gsm.states.push(new Level1(gsm));
+				//gsm.states.remove(1);
+				//System.out.println("Current State Size: " + gsm.states.size());
 			} 
 			else if (currentSelect == 1)
 			{
 				// options
 				gsm.states.push(new OptionsMenu(gsm));
+				//System.out.println("Current State Size: " + gsm.states.size());
 			} 
 			else if (currentSelect == 2)
 			{

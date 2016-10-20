@@ -35,6 +35,8 @@ public class OptionsMenu extends State
 		if (k == KeyEvent.VK_ESCAPE) 
 		{
 			gsm.states.push(new MenuState(gsm));
+			gsm.states.remove(2);
+			gsm.states.remove(1);
 		}
 	}
 

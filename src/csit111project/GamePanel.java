@@ -94,10 +94,9 @@ public class GamePanel extends JPanel implements Runnable, ActionListener, KeyLi
 		Graphics2D g2 = (Graphics2D) g;
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-		gsm.render(g2);
 		g2.setColor(Color.WHITE);
 		g2.drawString("FPS:" + (int)fps.fps(), 0, 43);
-		
+		gsm.render(g2);
 	}
 
 	@Override
@@ -142,7 +141,8 @@ public class GamePanel extends JPanel implements Runnable, ActionListener, KeyLi
 	@Override
 	public void keyTyped(KeyEvent arg0) {}
 	
-	public int getFPS(){
+	public int getFPS()
+	{
 		return (int) fps.fps();
 	}
 }

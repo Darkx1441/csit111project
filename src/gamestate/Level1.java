@@ -57,14 +57,15 @@ public class Level1 extends State {
 		//render map
 		map.render(g);
 
-		if (player.win == true) {
-			gsm.states.setElementAt(new MenuState(gsm), 0);
-		}
-		if(player.hasKey){
+		if(player.hasKey)
+		{
 			timer.start();
-			if(color==1){
+			if(color==1)
+			{
 				g.setColor(Color.GREEN);
-			}else if(color==2){
+			}
+			else if(color==2)
+			{
 				g.setColor(Color.BLUE);
 			}else if(color==3){
 				g.setColor(Color.WHITE);
@@ -76,14 +77,26 @@ public class Level1 extends State {
 			g.drawString("Key Missing, look for the key!", 0, 60);
 		}
 		
+		if (player.win == true) {
+			gsm.states.push(new MenuState(gsm));
+			timer.stop();
+			gsm.states.remove(2);
+			gsm.states.remove(1);
+			
+		}
 
 	}
 
 	public void keyPressed(KeyEvent e, int k) {
 		player.keyPressed(k);
 
-		if (k == KeyEvent.VK_ESCAPE) {
+		if (k == KeyEvent.VK_ESCAPE) 
+		{
 			gsm.states.push(new MenuState(gsm));
+			timer.stop();
+			gsm.states.remove(2);
+			gsm.states.remove(1);
+
 		}
 	}
 
@@ -96,12 +109,14 @@ public class Level1 extends State {
 
 	public void mouseReleased(MouseEvent e) {
 	}
+	
 	ActionListener colorCycle = new ActionListener(){
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			System.out.println("TEST TRUE "+ color);
+			//System.out.println("TEST TRUE "+ color);
 			color++;
-			if(color>=4)color=1;}
+			if(color>=4)color=1;
+		}
 	};
 	
 	public void drawDebug(Graphics2D g){

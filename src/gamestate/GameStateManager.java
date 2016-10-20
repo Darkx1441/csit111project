@@ -15,6 +15,7 @@ public class GameStateManager
 	{
 		states = new Stack<State>();
 		states.push(new MenuState(this));
+		//System.out.println("Current State Size: " + states.size());
 	}
 
 	public void update() 

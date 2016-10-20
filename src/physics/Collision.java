@@ -1,7 +1,6 @@
 package physics;
 
 import java.awt.Point;
-
 import objects.Block;
 import objects.EndGate;
 import objects.Key;
