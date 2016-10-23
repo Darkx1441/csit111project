@@ -8,29 +8,36 @@ import java.awt.event.MouseEvent;
 
 import csit111project.GamePanel;
 
-public class MenuState extends State {
-
-	private String[] options = { "Play", "Options", "Quit" }; // LIST OF MENUS
-	private int currentSelect = 0;
-
-	public MenuState(GameStateManager gsm) 
-	{
+public class LevelSelectState extends State{
+	private String[] levels = {"Level1","Level2", "Main Menu"};
+	private int currentSelect=0;
+	
+	public LevelSelectState(GameStateManager gsm) {
 		super(gsm);
 	}
 
-	public void init() {}
+	public void init() {	
+		
+	}
 
-	public void update() {}
 
-	public void render(Graphics2D g) 
-	{
+	public void update() {
+		
+	}
+
+	
+	public void render(Graphics2D g) {
 		g.setColor(Color.WHITE);
-		g.drawString("MENUSTATE", 0, 10);
+		g.drawString("LEVEL SELECT STATE", 0, 10);
+		
+		g.setFont(new Font("Courier", Font.BOLD, 50));
+		g.setColor(Color.RED);
+		g.drawString("Select Level", GamePanel.WIDTH/2-130,GamePanel.HEIGHT/2-100);
 
 		/*
 		 * DRAW MENUS
 		 */
-		for (int i = 0; i < options.length; i++)
+		for (int i = 0; i < levels.length; i++)
 		{
 			g.setFont(new Font("Arial", Font.BOLD, 50));
 			if (i == currentSelect)
@@ -43,20 +50,19 @@ public class MenuState extends State {
 				g.setColor(Color.WHITE);
 			}
 			
-			g.drawString(options[i], GamePanel.WIDTH / 2 - 50, GamePanel.HEIGHT / 2 + i * 50);
+			g.drawString(levels[i], GamePanel.WIDTH / 2 - 50, GamePanel.HEIGHT / 2 + i * 50);
 			g.setFont(new Font("Arial", Font.BOLD, 12));
 		}
-
 	}
 
-	public void keyPressed(KeyEvent e, int k)
-	{
+	
+	public void keyPressed(KeyEvent e, int k) {
 		/*
 		 * LISTING THROUGH MENUS
 		 */
 		if (k == KeyEvent.VK_S || k == KeyEvent.VK_DOWN) 
 		{
-			if (currentSelect < options.length - 1)
+			if (currentSelect < levels.length - 1)
 			{
 				currentSelect += 1;
 			}
@@ -73,18 +79,10 @@ public class MenuState extends State {
 			} 
 			else 
 			{
-				currentSelect = options.length - 1;
+				currentSelect = levels.length - 1;
 			}
 		}
-
-		/*
-		 * QUICK EXIT
-		 */
-		if (k == KeyEvent.VK_ESCAPE)
-		{
-			System.exit(0);
-		}
-
+		
 		/*
 		 * SELECTING MENU
 		 */
@@ -92,34 +90,39 @@ public class MenuState extends State {
 		{
 			if (currentSelect == 0)
 			{
-				// play
-				gsm.states.push(new LevelSelectState(gsm));
+				// Level1
+				gsm.states.push(new Level1(gsm));
 				for(int i =gsm.states.size();i>1;i--){
 					gsm.states.remove(i);
 				}
-				//System.out.println("Current State Size: " + gsm.states.size());
 			} 
 			else if (currentSelect == 1)
 			{
-				// options
-				gsm.states.push(new OptionsMenu(gsm));
+				// Level2
+				//gsm.states.push(new Level2(gsm));
+			} 
+			else if(currentSelect==2){
+				gsm.states.push(new MenuState(gsm));
 				for(int i =gsm.states.size();i>1;i--){
 					gsm.states.remove(i);
 				}
-				//System.out.println("Current State Size: " + gsm.states.size());
-			} 
-			else if (currentSelect == 2)
-			{
-				// quit
-				System.exit(0);
 			}
 		}
-
 	}
 
-	public void keyReleased(KeyEvent e, int k) {}
+	
+	public void keyReleased(KeyEvent e, int k) {
+		
+	}
 
-	public void mousePressed(MouseEvent e) {}
+	
+	public void mousePressed(MouseEvent e) {
+		
+	}
 
-	public void mouseReleased(MouseEvent e) {}
+	
+	public void mouseReleased(MouseEvent e) {
+		
+	}
+
 }

@@ -78,11 +78,11 @@ public class Level1 extends State {
 		}
 		
 		if (player.win == true) {
-			gsm.states.push(new MenuState(gsm));
+			gsm.states.push(new LevelSelectState(gsm));
 			timer.stop();
-			gsm.states.remove(2);
-			gsm.states.remove(1);
-			
+			for(int i =gsm.states.size();i>1;i--){
+			gsm.states.remove(i);
+			}
 		}
 
 	}
@@ -94,9 +94,9 @@ public class Level1 extends State {
 		{
 			gsm.states.push(new MenuState(gsm));
 			timer.stop();
-			gsm.states.remove(2);
-			gsm.states.remove(1);
-
+			for(int i =gsm.states.size();i>1;i--){
+				gsm.states.remove(i);
+			}
 		}
 	}
 
