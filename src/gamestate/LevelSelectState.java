@@ -14,6 +14,7 @@ public class LevelSelectState extends State{
 	
 	public LevelSelectState(GameStateManager gsm) {
 		super(gsm);
+		init();
 	}
 
 	public void init() {	
@@ -92,9 +93,7 @@ public class LevelSelectState extends State{
 			{
 				// Level1
 				gsm.states.push(new Level1(gsm));
-				for(int i =gsm.states.size();i>1;i--){
-					gsm.states.remove(i);
-				}
+				System.out.println("Level1 created, #ofstates: "+gsm.states.size());
 			} 
 			else if (currentSelect == 1)
 			{
@@ -103,7 +102,7 @@ public class LevelSelectState extends State{
 			} 
 			else if(currentSelect==2){
 				gsm.states.push(new MenuState(gsm));
-				for(int i =gsm.states.size();i>1;i--){
+				for(int i =gsm.states.size()-1;i>0;i--){
 					gsm.states.remove(i);
 				}
 			}

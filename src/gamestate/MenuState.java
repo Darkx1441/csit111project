@@ -94,19 +94,13 @@ public class MenuState extends State {
 			{
 				// play
 				gsm.states.push(new LevelSelectState(gsm));
-				for(int i =gsm.states.size();i>1;i--){
-					gsm.states.remove(i);
-				}
-				//System.out.println("Current State Size: " + gsm.states.size());
+				System.out.println("LevelSelectState started, #ofstates: " + gsm.states.size());
 			} 
 			else if (currentSelect == 1)
 			{
 				// options
 				gsm.states.push(new OptionsMenu(gsm));
-				for(int i =gsm.states.size();i>1;i--){
-					gsm.states.remove(i);
-				}
-				//System.out.println("Current State Size: " + gsm.states.size());
+				System.out.println("OptionsState started, #ofstates: " + gsm.states.size());
 			} 
 			else if (currentSelect == 2)
 			{
