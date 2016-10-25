@@ -293,17 +293,30 @@ public class Player {
 			}
 		}
 		topCollision = false;
-
+		
 		/*
 		 * Movement Mechanics (temporary)
 		 */
 		if (right){
 			State.xOffset += moveSpeed;
-			maxFrames = RightRunning.size();
 		}
 		if (left){
 			State.xOffset -= moveSpeed;
 		}
+		
+		if (FacingRight && !right && !jumping && !falling) {
+			maxFrames = RightIdle.size()-1;
+		}
+
+		if (FacingLeft && !left && !jumping && !falling) {
+		}
+		if (right && !jumping && !falling) {
+			maxFrames =RightRunning.size()-1;
+		}
+		if (left && !jumping && !falling) {
+		}
+		
+		
 		/*
 		 * Jumping/Falling Mechanics
 		 */
@@ -331,25 +344,23 @@ public class Player {
 			currentFallSpeed = .1;
 		}
 	}
-
+	
 	/*
 	 * PLAYER RENDER
 	 */
 	public void render(Graphics2D g) {
 		// character graphics
-		g.drawString("frame: "+frameCount, (int)x, (int)y-200);
+		g.drawString("frame: "+frameCount + " maxFrames: "+maxFrames, (int)x, (int)y-200);
 		if (FacingRight && !right && !jumping && !falling) {
-			//for (int i =1; i > 0;)
-				//for (int count =0; count <7; count++)
-					maxFrames = RightIdle.size();
-					g.drawImage(RightIdle.get(frameCount), (int) x, (int) y, null);
-
-					}
+			//maxFrames = RightIdle.size();
+			g.drawImage(RightIdle.get(frameCount), (int) x, (int) y, null);
+		}
 		if (FacingLeft && !left && !jumping && !falling) {
 			g.drawImage(LeftI01, (int) x, (int) y, null);
 		}
 		if (right && !jumping && !falling) {
 			//g.drawImage(RightR01, (int) x, (int) y, null);
+			//maxFrames = RightRunning.size();
 			g.drawImage(RightRunning.get(frameCount), (int) x, (int) y, null);
 		}
 		if (left && !jumping && !falling) {
@@ -364,11 +375,13 @@ public class Player {
 			}
 		}
 	}
+
+
 	ActionListener AnimTimer = new ActionListener(){
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			if (frameCount == maxFrames){
-				frameCount -=maxFrames;
+			if (frameCount >= maxFrames){
+				frameCount =0;
 			}else{
 			frameCount++;
 			}
@@ -384,6 +397,7 @@ public class Player {
 			right = true;
 			FacingLeft = false;
 			FacingRight = true;
+			
 		}
 
 		if (k == KeyEvent.VK_T) { //debug monitor toggle
