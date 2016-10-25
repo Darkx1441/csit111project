@@ -59,6 +59,8 @@ public class Player {
 	public Player(int px, int py) {
 		Level1.xOffset=px;
 		Level1.yOffset=py;
+		Timedframes = new Timer(150, AnimTimer);
+		Timedframes.start();
 		init();
 		
 	}
@@ -104,7 +106,6 @@ public class Player {
 		RightIdle.add(RightI06);
 		RightIdle.add(RightI07);
 		
-		Timedframes.start();
 		
 	}
 
@@ -123,21 +124,6 @@ public class Player {
 	public int getJumpSpeed() {
 		return (int) currentJumpSpeed;
 	}
-
-<<<<<<< HEAD
-	/*
-	 * PLAYER METHOD
-	 */
-	public Player(int px, int py) {
-		Level1.xOffset=px;
-		Level1.yOffset=py;
-		Timedframes = new Timer(150, AnimTimer);
-		init();
-		
-		
-	}
-=======
->>>>>>> origin/master
 
 	/*
 	 * PLAYER UPDATE
@@ -355,7 +341,6 @@ public class Player {
 	ActionListener AnimTimer = new ActionListener(){
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			// TODO Auto-generated method stub
 			frameCount++;
 			if (frameCount == RightIdle.size())
 				frameCount=0;

@@ -44,7 +44,7 @@ public class GamePanel extends JPanel implements Runnable, ActionListener, KeyLi
 		setFocusable(true);
 		requestFocus();
 
-		gsm = new GameStateManager(GameStateManager.PLAYSTATE);
+		gsm = new GameStateManager(GameStateManager.MENUSTATE);
 		start();
 	}
 
