@@ -14,7 +14,12 @@ public class LevelSelectState extends State{
 	
 	public LevelSelectState(GameStateManager gsm) {
 		super(gsm);
+		System.out.println(gsm.states.toString());
 		init();
+		if(gsm.states.size()>2)
+			for(int i =gsm.states.size();i>0;i--){
+				gsm.states.remove(i);
+			}
 	}
 
 	public void init() {	

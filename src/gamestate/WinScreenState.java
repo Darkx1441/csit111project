@@ -11,6 +11,7 @@ public class WinScreenState extends State{
 
 	public WinScreenState(GameStateManager gsm) {
 		super(gsm);
+		System.out.println(gsm.states.toString());
 	}
 
 	
@@ -33,10 +34,8 @@ public class WinScreenState extends State{
 	public void keyPressed(KeyEvent e, int k) {
 		if (k == KeyEvent.VK_ENTER) {
 			gsm.states.push(new LevelSelectState(gsm));
-			for (int i = gsm.states.size() - 1; i > 1; i--) {
-				gsm.states.remove(i);
-			}
-			System.out.println("Escape pressed, #ofstates: " + gsm.states.size());
+			//gsm.states.remove(gsm.states.size()-1);
+			//System.out.println("Escape pressed, #ofstates: " + gsm.states.size());
 		}
 	}
 

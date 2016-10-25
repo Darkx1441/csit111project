@@ -7,7 +7,8 @@ import java.util.Stack;
 
 public class GameStateManager 
 {
-	public static final int PLAYSTATE = 0;
+	public static final int MENUSTATE = 0;
+	public static final int LEVELSELECTSTATE =1;
 
 	public Stack<State> states;
 

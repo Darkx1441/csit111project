@@ -23,6 +23,8 @@ public class Level1 extends State {
 
 	public Level1(GameStateManager gsm) {
 		super(gsm);
+		System.out.println(gsm.states.toString());
+
 		timer = new Timer(timerDelay, colorCycle);
 	}
 
