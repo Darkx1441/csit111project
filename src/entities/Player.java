@@ -44,7 +44,16 @@ public class Player {
 	public boolean debugMonitor = false;
 
 	/*
-	 * INITIALIZATION
+	 * PLAYER CONSTRUCTOR
+	 */
+	public Player(int px, int py) {
+		Level1.xOffset=px;
+		Level1.yOffset=py;
+		init();
+		
+	}
+	/*
+	 * PLAYER INITIALIZATION
 	 */
 	public void init() {
 		try {
@@ -81,18 +90,9 @@ public class Player {
 		return (int) currentJumpSpeed;
 	}
 
-	/*
-	 * PLAYER METHOD
-	 */
-	public Player(int px, int py) {
-		Level1.xOffset=px;
-		Level1.yOffset=py;
-		init();
-
-	}
 
 	/*
-	 * PLAYER UPDATE METHOD
+	 * PLAYER UPDATE
 	 */
 	public void update(Block[][] b, EndGate[][] endGate, Key[][] key) {
 
@@ -180,6 +180,7 @@ public class Player {
 								win = true;
 						}
 					}
+					//BOTTOM
 					for (int k = 0; k < width - 8; k++) {
 						if (Collision.playerGate(
 								new Point(iX + (int) State.xOffset + k, iY + height + (int) State.yOffset + 1),
@@ -275,7 +276,7 @@ public class Player {
 	}
 
 	/*
-	 * PLAYER RENDER METHOD
+	 * PLAYER RENDER
 	 */
 	public void render(Graphics2D g) {
 		// character graphics
@@ -311,7 +312,7 @@ public class Player {
 			FacingRight = true;
 		}
 
-		if (k == KeyEvent.VK_T) {
+		if (k == KeyEvent.VK_T) { //debug monitor toggle
 			debugMonitor = !debugMonitor;
 		}
 

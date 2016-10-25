@@ -16,6 +16,8 @@ public class MenuState extends State {
 	public MenuState(GameStateManager gsm) 
 	{
 		super(gsm);
+		System.out.println(gsm.states.toString());
+
 	}
 
 	public void init() {}
@@ -93,6 +95,8 @@ public class MenuState extends State {
 			if (currentSelect == 0)
 			{
 				// play
+				//gsm = new GameStateManager(GameStateManager.MENUSTATE);
+
 				gsm.states.push(new LevelSelectState(gsm));
 				System.out.println("LevelSelectState started, #ofstates: " + gsm.states.size());
 			} 
