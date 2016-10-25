@@ -71,7 +71,7 @@ public class Level1 extends State {
 		}
 
 		if (player.win == true) {
-			gsm.states.push(new LevelSelectState(gsm));
+			gsm.states.push(new WinScreenState(gsm));
 			timer.stop();
 			gsm.states.remove(2);
 			gsm.states.remove(1);
