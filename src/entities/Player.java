@@ -26,7 +26,7 @@ public class Player {
 	BufferedImage RightI01, RightI02, RightI03, RightI04, RightI05, RightI06, RightI07, LeftI01, RightR01, LeftR01, RightJ01, LeftJ01;
 	private boolean right = false, left = false, jumping = false, falling = false;
 	
-	private int frameCount = 0;
+	public int frameCount = 0;
 	
 	private Timer Timedframes;
 	
@@ -59,7 +59,7 @@ public class Player {
 	public Player(int px, int py) {
 		Level1.xOffset=px;
 		Level1.yOffset=py;
-		Timedframes = new Timer(150, AnimTimer);
+		Timedframes = new Timer(125, AnimTimer);
 		Timedframes.start();
 		init();
 		
@@ -341,9 +341,11 @@ public class Player {
 	ActionListener AnimTimer = new ActionListener(){
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			frameCount++;
-			if (frameCount == RightIdle.size())
+			if (frameCount == RightIdle.size()){
 				frameCount=0;
+			}else{
+			frameCount++;
+			}
 			
 		}
 	};
