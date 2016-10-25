@@ -17,7 +17,7 @@ public class LevelSelectState extends State{
 		System.out.println(gsm.states.toString());
 		init();
 		if(gsm.states.size()>2)
-			for(int i =gsm.states.size();i>0;i--){
+			for(int i =gsm.states.size()-1;i>0;i--){
 				gsm.states.remove(i);
 			}
 	}

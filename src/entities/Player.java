@@ -275,12 +275,12 @@ public class Player {
 		/*
 		 * Movement Mechanics (temporary)
 		 */
-		if (right)
+		if (right){
 			State.xOffset += moveSpeed;
-
-		if (left)
+		}
+		if (left){
 			State.xOffset -= moveSpeed;
-
+		}
 		/*
 		 * Jumping/Falling Mechanics
 		 */
@@ -314,6 +314,7 @@ public class Player {
 	 */
 	public void render(Graphics2D g) {
 		// character graphics
+		g.drawString("frame: "+frameCount, (int)x, (int)y-200);
 		if (FacingRight && !right && !jumping && !falling) {
 			//for (int i =1; i > 0;)
 				//for (int count =0; count <7; count++)
@@ -368,20 +369,28 @@ public class Player {
 			left = true;
 			FacingRight = false;
 			FacingLeft = true;
+
 		}
 
 		if ((k == KeyEvent.VK_W || k == KeyEvent.VK_UP) && !jumping && !falling) { // jump
 																					// pressed
 			jumping = true;
+
 		}
 	}
 
 	public void keyReleased(int k) {
 		if (k == KeyEvent.VK_D || k == KeyEvent.VK_RIGHT) {// go right released
 			right = false;
+			frameCount=0;
+
+
 		}
 		if (k == KeyEvent.VK_A || k == KeyEvent.VK_LEFT) { // go left released
 			left = false;
+			frameCount=0;
+
+
 		}
 	}
 }

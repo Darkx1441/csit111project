@@ -88,9 +88,9 @@ public class Level1 extends State {
 		if (k == KeyEvent.VK_ESCAPE) {
 			gsm.states.push(new MenuState(gsm));
 			timer.stop();
-			for (int i = gsm.states.size() - 1; i > 1; i--) {
-				gsm.states.remove(i);
-			}
+//			for (int i = gsm.states.size() - 1; i > 1; i--) {
+//				gsm.states.remove(i);
+//			}
 			System.out.println("Escape pressed, #ofstates: " + gsm.states.size());
 		}
 	}
