@@ -2,10 +2,14 @@ package entities;
 
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
+import javax.swing.Timer;
 
 import com.sun.glass.events.KeyEvent;
 
@@ -19,8 +23,14 @@ import physics.Collision;
 
 public class Player {
 
-	BufferedImage RightI, LeftI, RightR, LeftR, RightJ, LeftJ;
+	BufferedImage RightI01, RightI02, RightI03, RightI04, RightI05, RightI06, RightI07, LeftI01, RightR01, LeftR01, RightJ01, LeftJ01;
 	private boolean right = false, left = false, jumping = false, falling = false;
+	
+	private int frameCount = 0;
+	
+	private Timer Timedframes;
+	
+	ArrayList <BufferedImage> RightIdle  = new ArrayList<BufferedImage>();
 
 	private boolean topCollision = false;
 	private boolean FacingRight = true;
@@ -48,21 +58,45 @@ public class Player {
 	 */
 	public void init() {
 		try {
-			RightI = ImageIO
-					.read(getClass().getResourceAsStream("/images/Charassets/actions/idle/right/Charidle01.png"));
-			LeftI = ImageIO
-					.read(getClass().getResourceAsStream("/images/Charassets/actions/idle/left/CharidleL01.png"));
-			RightR = ImageIO
-					.read(getClass().getResourceAsStream("/images/Charassets/actions/idle/right/Charidle02.png"));
-			LeftR = ImageIO
-					.read(getClass().getResourceAsStream("/images/Charassets/actions/idle/left/CharidleL02.png"));
-			LeftJ = ImageIO
-					.read(getClass().getResourceAsStream("/images/Charassets/actions/idle/left/CharidleL03.png"));
-			RightJ = ImageIO
-					.read(getClass().getResourceAsStream("/images/Charassets/actions/idle/right/Charidle03.png"));
+			RightI01 = ImageIO
+					.read(getClass().getResourceAsStream("/images/Charassets/actions/idle/right/CharIdle01.png"));
+			RightI02 = ImageIO
+					.read(getClass().getResourceAsStream("/images/Charassets/actions/idle/right/CharIdle02.png"));
+			RightI03 = ImageIO
+					.read(getClass().getResourceAsStream("/images/Charassets/actions/idle/right/CharIdle03.png"));
+			RightI04 = ImageIO
+					.read(getClass().getResourceAsStream("/images/Charassets/actions/idle/right/CharIdle04.png"));
+			RightI05 = ImageIO
+					.read(getClass().getResourceAsStream("/images/Charassets/actions/idle/right/CharIdle05.png"));
+			RightI06 = ImageIO
+					.read(getClass().getResourceAsStream("/images/Charassets/actions/idle/right/CharIdle06.png"));
+			RightI07 = ImageIO
+					.read(getClass().getResourceAsStream("/images/Charassets/actions/idle/right/CharIdle07.png"));
+			
+			LeftI01 = ImageIO
+					.read(getClass().getResourceAsStream("/images/Charassets/actions/idle/left/CharLIdle01.png"));
+			RightR01 = ImageIO
+					.read(getClass().getResourceAsStream("/images/Charassets/actions/idle/right/CharRun01.png"));
+			LeftR01 = ImageIO
+					.read(getClass().getResourceAsStream("/images/Charassets/actions/idle/left/CharLRun01.png"));
+			LeftJ01 = ImageIO
+					.read(getClass().getResourceAsStream("/images/Charassets/actions/idle/left/CharLJump01.png"));
+			RightJ01 = ImageIO
+					.read(getClass().getResourceAsStream("/images/Charassets/actions/idle/right/CharJump01.png"));
 
 		} catch (IOException e) {
 		}
+		
+		RightIdle.add(RightI01);
+		RightIdle.add(RightI02);	
+		RightIdle.add(RightI03);
+		RightIdle.add(RightI04);
+		RightIdle.add(RightI05);
+		RightIdle.add(RightI06);
+		RightIdle.add(RightI07);
+		
+		Timedframes.start();
+		
 	}
 
 	public int getX() {
@@ -87,8 +121,10 @@ public class Player {
 	public Player(int px, int py) {
 		Level1.xOffset=px;
 		Level1.yOffset=py;
+		Timedframes = new Timer(150, AnimTimer);
 		init();
-
+		
+		
 	}
 
 	/*
@@ -280,26 +316,39 @@ public class Player {
 	public void render(Graphics2D g) {
 		// character graphics
 		if (FacingRight && !right && !jumping && !falling) {
-			g.drawImage(RightI, (int) x, (int) y, null);
-		}
+			//for (int i =1; i > 0;)
+				//for (int count =0; count <7; count++)
+					g.drawImage(RightIdle.get(frameCount), (int) x, (int) y, null);
+
+					}
 		if (FacingLeft && !left && !jumping && !falling) {
-			g.drawImage(LeftI, (int) x, (int) y, null);
+			g.drawImage(LeftI01, (int) x, (int) y, null);
 		}
 		if (right && !jumping && !falling) {
-			g.drawImage(RightR, (int) x, (int) y, null);
+			g.drawImage(RightR01, (int) x, (int) y, null);
 		}
 		if (left && !jumping && !falling) {
-			g.drawImage(LeftR, (int) x, (int) y, null);
+			g.drawImage(LeftR01, (int) x, (int) y, null);
 		}
 		if (jumping == true | falling == true) {
 			if (FacingRight) {
-				g.drawImage(RightJ, (int) x, (int) y, null);
+				g.drawImage(RightJ01, (int) x, (int) y, null);
 			}
 			if (FacingLeft) {
-				g.drawImage(LeftJ, (int) x, (int) y, null);
+				g.drawImage(LeftJ01, (int) x, (int) y, null);
 			}
 		}
 	}
+	ActionListener AnimTimer = new ActionListener(){
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Auto-generated method stub
+			frameCount++;
+			if (frameCount == RightIdle.size())
+				frameCount=0;
+			
+		}
+	};
 
 	/*
 	 * KEY EVENTS
