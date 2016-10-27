@@ -20,11 +20,11 @@ import objects.Block;
 import objects.EndGate;
 import objects.Key;
 import physics.Collision;
+import animation.PlayerAnim;
 
 public class Player {
 
-	BufferedImage RightI01, RightI02, RightI03, RightI04, RightI05, RightI06, RightI07, LeftI01, RightJ01, LeftJ01;
-	BufferedImage  RightR01, RightR02, RightR03, RightR04, RightR05, RightR06, LeftR01;
+	
  	private boolean right = false, left = false, jumping = false, falling = false;
 	
 	public int frameCount = 0;
@@ -32,8 +32,9 @@ public class Player {
 	
 	private Timer Timedframes;
 	
-	ArrayList <BufferedImage> RightIdle  = new ArrayList<BufferedImage>();
-	ArrayList <BufferedImage> RightRunning  = new ArrayList<BufferedImage>();
+	private PlayerAnim PlayerAnim;
+	
+
 
 	private boolean topCollision = false;
 	private boolean FacingRight = true;
@@ -70,65 +71,9 @@ public class Player {
 	/*
 	 * PLAYER INITIALIZATION
 	 */
+	
 	public void init() {
-		try {
-			RightI01 = ImageIO
-					.read(getClass().getResourceAsStream("/images/Charassets/actions/idle/right/CharIdle01.png"));
-			RightI02 = ImageIO
-					.read(getClass().getResourceAsStream("/images/Charassets/actions/idle/right/CharIdle02.png"));
-			RightI03 = ImageIO
-					.read(getClass().getResourceAsStream("/images/Charassets/actions/idle/right/CharIdle03.png"));
-			RightI04 = ImageIO
-					.read(getClass().getResourceAsStream("/images/Charassets/actions/idle/right/CharIdle04.png"));
-			RightI05 = ImageIO
-					.read(getClass().getResourceAsStream("/images/Charassets/actions/idle/right/CharIdle05.png"));
-			RightI06 = ImageIO
-					.read(getClass().getResourceAsStream("/images/Charassets/actions/idle/right/CharIdle06.png"));
-			RightI07 = ImageIO
-					.read(getClass().getResourceAsStream("/images/Charassets/actions/idle/right/CharIdle07.png"));
-			
-			RightR01 = ImageIO
-					.read(getClass().getResourceAsStream("/images/Charassets/actions/run/right/CharRun01.png"));
-			RightR02 = ImageIO
-					.read(getClass().getResourceAsStream("/images/Charassets/actions/run/right/CharRun02.png"));
-			RightR03 = ImageIO
-					.read(getClass().getResourceAsStream("/images/Charassets/actions/run/right/CharRun03.png"));
-			RightR04 = ImageIO
-					.read(getClass().getResourceAsStream("/images/Charassets/actions/run/right/CharRun04.png"));
-			RightR05 = ImageIO
-					.read(getClass().getResourceAsStream("/images/Charassets/actions/run/right/CharRun05.png"));
-			RightR06 = ImageIO
-					.read(getClass().getResourceAsStream("/images/Charassets/actions/run/right/CharRun06.png"));
-			
-			LeftI01 = ImageIO
-					.read(getClass().getResourceAsStream("/images/Charassets/actions/idle/left/CharLIdle01.png"));
-			RightR01 = ImageIO
-					.read(getClass().getResourceAsStream("/images/Charassets/actions/run/right/CharRun01.png"));
-			LeftR01 = ImageIO
-					.read(getClass().getResourceAsStream("/images/Charassets/actions/idle/left/CharLRun01.png"));
-			LeftJ01 = ImageIO
-					.read(getClass().getResourceAsStream("/images/Charassets/actions/idle/left/CharLJump01.png"));
-			RightJ01 = ImageIO
-					.read(getClass().getResourceAsStream("/images/Charassets/actions/idle/right/CharJump01.png"));
-
-		} catch (IOException e) {
-		}
-		
-		RightIdle.add(RightI01);
-		RightIdle.add(RightI02);	
-		RightIdle.add(RightI03);
-		RightIdle.add(RightI04);
-		RightIdle.add(RightI05);
-		RightIdle.add(RightI06);
-		RightIdle.add(RightI07);
-		
-		RightRunning.add(RightR01);
-		RightRunning.add(RightR02);
-		RightRunning.add(RightR03);
-		RightRunning.add(RightR04);
-		RightRunning.add(RightR05);
-		RightRunning.add(RightR06);
-		
+		PlayerAnim PlayerAnim= new PlayerAnim();
 	}
 
 	public int getX() {
@@ -305,13 +250,13 @@ public class Player {
 		}
 		
 		if (FacingRight && !right && !jumping && !falling) {
-			maxFrames = RightIdle.size()-1;
+			maxFrames = PlayerAnim.getRightIdleSize()-1;
 		}
 
 		if (FacingLeft && !left && !jumping && !falling) {
 		}
 		if (right && !jumping && !falling) {
-			maxFrames =RightRunning.size()-1;
+			maxFrames =PlayerAnim.getRightRunningSize()-1;
 		}
 		if (left && !jumping && !falling) {
 		}
@@ -353,25 +298,25 @@ public class Player {
 		g.drawString("frame: "+frameCount + " maxFrames: "+maxFrames, (int)x, (int)y-200);
 		if (FacingRight && !right && !jumping && !falling) {
 			//maxFrames = RightIdle.size();
-			g.drawImage(RightIdle.get(frameCount), (int) x, (int) y, null);
+			g.drawImage(PlayerAnim.getImage("RI", frameCount), (int) x, (int) y, null);
 		}
 		if (FacingLeft && !left && !jumping && !falling) {
-			g.drawImage(LeftI01, (int) x, (int) y, null);
+			g.drawImage(PlayerAnim.getImage("LI", frameCount), (int) x, (int) y, null);
 		}
 		if (right && !jumping && !falling && frameCount<6) {
 			//g.drawImage(RightR01, (int) x, (int) y, null);
 			//maxFrames = RightRunning.size();
-			g.drawImage(RightRunning.get(frameCount), (int) x, (int) y, null);
+			g.drawImage(PlayerAnim.getImage("RR", frameCount), (int) x, (int) y, null);
 		}
 		if (left && !jumping && !falling) {
-			g.drawImage(LeftR01, (int) x, (int) y, null);
+			g.drawImage(PlayerAnim.getImage("LR", frameCount), (int) x, (int) y, null);
 		}
 		if (jumping == true | falling == true) {
 			if (FacingRight) {
-				g.drawImage(RightJ01, (int) x, (int) y, null);
+				g.drawImage(PlayerAnim.getImage("RJ", frameCount), (int) x, (int) y, null);
 			}
 			if (FacingLeft) {
-				g.drawImage(LeftJ01, (int) x, (int) y, null);
+				g.drawImage(PlayerAnim.getImage("LJ", frameCount), (int) x, (int) y, null);
 			}
 		}
 	}

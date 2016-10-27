@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.Timer;
 
+import animation.PlayerAnim;
 import csit111project.GamePanel;
 import entities.Player;
 import mapping.Map;
