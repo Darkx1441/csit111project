@@ -39,13 +39,6 @@ public class Level1 extends State {
 	}
 
 	public void render(Graphics2D g) {
-		/*
-		 * DEBUG LINES
-		 */
-		if (player.debugMonitor == true) {
-			drawDebug(g);
-
-		}
 		// render player
 		player.render(g);
 
@@ -80,6 +73,13 @@ public class Level1 extends State {
 			System.out.println("player won, #ofstates: " + gsm.states.size());
 		}
 
+		/*
+		 * DEBUG LINES
+		 */
+		if (player.debugMonitor == true) {
+			drawDebug(g);
+			
+		}
 	}
 
 	public void keyPressed(KeyEvent e, int k) {
@@ -116,11 +116,11 @@ public class Level1 extends State {
 
 	public void drawDebug(Graphics2D g) {
 		g.setColor(Color.RED);
-		g.drawLine(GamePanel.WIDTH / 2, 0, GamePanel.WIDTH / 2, GamePanel.HEIGHT);
-		g.drawLine(0, GamePanel.HEIGHT / 2, GamePanel.WIDTH, GamePanel.HEIGHT / 2);
 		g.drawString("Level1 State", 0, 10);
 		g.drawString("POS: \t X= " + (int) State.xOffset + " Y= " + (int) State.yOffset, 0, 21);
 		g.drawString("\tJS " + player.getJumpSpeed() + " FS= " + player.getFallSpeed(), 0, 32);
+		g.drawLine(GamePanel.WIDTH / 2, 0, GamePanel.WIDTH / 2, GamePanel.HEIGHT);
+		g.drawLine(0, GamePanel.HEIGHT / 2, GamePanel.WIDTH, GamePanel.HEIGHT / 2);
 	}
 }
 
