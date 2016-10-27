@@ -358,7 +358,7 @@ public class Player {
 		if (FacingLeft && !left && !jumping && !falling) {
 			g.drawImage(LeftI01, (int) x, (int) y, null);
 		}
-		if (right && !jumping && !falling) {
+		if (right && !jumping && !falling && frameCount<6) {
 			//g.drawImage(RightR01, (int) x, (int) y, null);
 			//maxFrames = RightRunning.size();
 			g.drawImage(RightRunning.get(frameCount), (int) x, (int) y, null);
