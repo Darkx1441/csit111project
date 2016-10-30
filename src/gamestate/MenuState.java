@@ -16,6 +16,10 @@ public class MenuState extends State {
 	public MenuState(GameStateManager gsm) 
 	{
 		super(gsm);
+		if(gsm.states.size()>2)
+			for(int i =gsm.states.size()-1;i>0;i--){
+				gsm.states.remove(i);
+			}
 		System.out.println(gsm.states.toString());
 
 	}

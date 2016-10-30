@@ -103,7 +103,7 @@ public class LevelSelectState extends State{
 			else if (currentSelect == 1)
 			{
 				// Level2
-				//gsm.states.push(new Level2(gsm));
+				gsm.states.push(new Level2(gsm));
 			} 
 			else if(currentSelect==2){
 				gsm.states.push(new MenuState(gsm));

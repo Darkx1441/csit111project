@@ -24,7 +24,7 @@ public class GamePanel extends JPanel implements Runnable, ActionListener, KeyLi
 	// Frame will be x+6 y+29 bigger because it includes border
 	public static final int WIDTH = 800;
 	public static final int HEIGHT = 480;
-	public int SCALE=2;
+	private int SCALE=2;
 	FPSCounter fps = new FPSCounter();
 	
 
@@ -146,5 +146,8 @@ public class GamePanel extends JPanel implements Runnable, ActionListener, KeyLi
 	public int getFPS()
 	{
 		return (int) fps.fps();
+	}
+	public void setWindowScale(int n){
+		SCALE=n;
 	}
 }
