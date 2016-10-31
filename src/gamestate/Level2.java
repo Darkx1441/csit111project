@@ -84,6 +84,7 @@ public class Level2 extends State {
 
 	public void keyPressed(KeyEvent e, int k) {
 		player.keyPressed(k);
+		
 
 		if (k == KeyEvent.VK_ESCAPE) {
 			gsm.states.push(new MenuState(gsm));
@@ -121,6 +122,8 @@ public class Level2 extends State {
 		g.drawString("\tJS " + player.getJumpSpeed() + " FS= " + player.getFallSpeed(), 0, 32);
 		g.drawLine(GamePanel.WIDTH / 2, 0, GamePanel.WIDTH / 2, GamePanel.HEIGHT);
 		g.drawLine(0, GamePanel.HEIGHT / 2, GamePanel.WIDTH, GamePanel.HEIGHT / 2);
+		g.drawString("AnimFrame:"+ player.getAnimFrame()+" Max: "+player.getAnimFrameMax(), 0, 43);
+
 	}
 }
 

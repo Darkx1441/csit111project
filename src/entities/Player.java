@@ -27,8 +27,8 @@ public class Player {
 	BufferedImage  RightR01, RightR02, RightR03, RightR04, RightR05, RightR06, LeftR01;
  	private boolean right = false, left = false, jumping = false, falling = false;
 	
-	public int frameCount = 0;
-	public int maxFrames = 0;
+	private int frameCount = 0;
+	private int maxFrames = 0;
 	
 	private Timer Timedframes;
 	
@@ -147,6 +147,14 @@ public class Player {
 		return (int) currentJumpSpeed;
 	}
 
+	public int getAnimFrame(){
+		return frameCount;
+	}
+	public int getAnimFrameMax(){
+		return maxFrames;
+	}
+
+	
 	/*
 	 * PLAYER UPDATE
 	 */
@@ -349,28 +357,36 @@ public class Player {
 	 * PLAYER RENDER
 	 */
 	public void render(Graphics2D g) {
-		// character graphics
-		g.drawString("frame: "+frameCount + " maxFrames: "+maxFrames, (int)x, (int)y-200);
+		// character animations
+		
 		if (FacingRight && !right && !jumping && !falling) {
-			//maxFrames = RightIdle.size();
 			g.drawImage(RightIdle.get(frameCount), (int) x, (int) y, null);
 		}
 		if (FacingLeft && !left && !jumping && !falling) {
 			g.drawImage(LeftI01, (int) x, (int) y, null);
 		}
-		if (right && !jumping && !falling && frameCount<6) {
-			//g.drawImage(RightR01, (int) x, (int) y, null);
-			//maxFrames = RightRunning.size();
+		if (right && !jumping && !falling) {
+			if(frameCount>=6)
+				frameCount=RightRunning.size()-1;
 			g.drawImage(RightRunning.get(frameCount), (int) x, (int) y, null);
 		}
 		if (left && !jumping && !falling) {
+//			if(frameCount>=6)
+				//frameCount=LeftRunning.size()-1;
+			//g.drawImage(LeftRunning.get(frameCount), (int)x, (int)y, null);
 			g.drawImage(LeftR01, (int) x, (int) y, null);
 		}
 		if (jumping == true | falling == true) {
 			if (FacingRight) {
+//				if(frameCount>=6)
+					//frameCount=RightJumping.size()-1;
+				//g.drawImage(RightJumping.get(frameCount), (int) x, (int) y, null);
 				g.drawImage(RightJ01, (int) x, (int) y, null);
 			}
 			if (FacingLeft) {
+//				if(frameCount>=6)
+//					frameCount=LeftJumping.size()-1;
+//				g.drawImage(LeftJumping.get(frameCount), (int) x, (int) y, null);
 				g.drawImage(LeftJ01, (int) x, (int) y, null);
 			}
 		}
@@ -432,4 +448,5 @@ public class Player {
 
 		}
 	}
+	
 }
