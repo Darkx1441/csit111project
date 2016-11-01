@@ -10,6 +10,7 @@ public class EndGate extends Rectangle {
 	private static final long serialVersionUID = 1L;
 	public static final int blocksize = 32;
 	private int id;
+	private int xpos,ypos;
 	public EndGate(int px, int py, int id){
 		setBounds(px, py, blocksize, blocksize);
 		this.id=id;
@@ -20,9 +21,12 @@ public class EndGate extends Rectangle {
 	}
 	
 	public void render(Graphics2D g){
+		xpos=x - (int) State.xOffset;
+		ypos=y - (int) State.yOffset;
 		g.setColor(Color.red);
 		if(id==2){
-		g.fillRect(x - (int) State.xOffset, y - (int) State.yOffset, blocksize, blocksize);
+			g.drawString("EndGate", xpos, ypos);
+			g.fillRect(xpos, ypos, blocksize, blocksize);
 		}
 	}
 	public void setID(int id){

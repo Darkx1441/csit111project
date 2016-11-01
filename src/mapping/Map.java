@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import objects.Block;
 import objects.EndGate;
 import objects.Key;
+import objects.Turret;
 
 public class Map {
 
@@ -18,6 +19,7 @@ public class Map {
 	private Block[][] blocks;
 	private EndGate[][] endGate;
 	private Key[][] key;
+	private Turret[][] turret;
 	
 	public Map(String loadpath){
 		path= loadpath;
@@ -31,6 +33,7 @@ public class Map {
 				blocks[i][j].render(g);
 				endGate[i][j].render(g);
 				key[i][j].render(g);
+				turret[i][j].render(g);
 				
 			}
 		}
@@ -47,6 +50,7 @@ public class Map {
 			blocks= new Block[height][width];
 			endGate = new EndGate[height][width];
 			key= new Key[height][width];
+			turret= new Turret[height][width];
 			
 			for(int y=0;y<height;y++){
 				String line = br.readLine();
@@ -55,7 +59,7 @@ public class Map {
 					blocks[y][x] = new Block(x*Block.blocksize, y*Block.blocksize, Integer.parseInt(tokens[x]));
 					endGate[y][x] = new EndGate(x*EndGate.blocksize, y*EndGate.blocksize, Integer.parseInt(tokens[x]));
 					key[y][x] = new Key(x*Key.blocksize, y*Key.blocksize, Integer.parseInt(tokens[x]));
-
+					turret[y][x] = new Turret(x*Turret.blocksize, y*Turret.blocksize, Integer.parseInt(tokens[x]));
 				}
 			}
 			
@@ -65,7 +69,21 @@ public class Map {
 			e.printStackTrace();
 		}
 	}
-	
+	public void turretFire(){
+		for(int i =0;i<blocks.length;i++){
+			for(int j=0;j<blocks[0].length;j++){
+				turret[i][j].fire();
+				turret[i][j].update();
+			}
+		}
+	}
+	public void updateTurret(){
+		for(int i =0;i<blocks.length;i++){
+			for(int j=0;j<blocks[0].length;j++){
+				turret[i][j].update();
+			}
+		}
+	}
 	
 	public Block[][] getBlocks(){
 		return blocks;
@@ -75,6 +93,9 @@ public class Map {
 	}
 	public Key[][] getKey(){
 		return key;
+	}
+	public Turret[][] getTurret(){
+		return turret;
 	}
 	
 }
