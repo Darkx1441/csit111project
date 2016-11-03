@@ -12,8 +12,6 @@ import javax.swing.Timer;
 import csit111project.GamePanel;
 import entities.Player;
 import mapping.Map;
-import objects.Projectile;
-import objects.Turret;
 
 public class Level1 extends State {
 	public int stateid = 2;
@@ -22,9 +20,7 @@ public class Level1 extends State {
 	private int timerDelay = 1000 / 5;
 	private Timer timer;
 	private int color = 1;
-	Turret turret;
-	public boolean turretFire;
-	private boolean fireready=true;
+
 	public Level1(GameStateManager gsm) {
 		super(gsm);
 		System.out.println(gsm.states.toString());
@@ -35,23 +31,19 @@ public class Level1 extends State {
 	public void init() {
 		player = new Player(-290, -100);
 		map = new Map("/maps/map1.map");
-		
 	}
 
 	public void update() {
 
 		player.update(map.getBlocks(), map.getEndGate(), map.getKey());
-		map.updateTurret();
-		
 	}
 
 	public void render(Graphics2D g) {
-		// render map
-		map.render(g);
-		
 		// render player
 		player.render(g);
 
+		// render map
+		map.render(g);
 
 		if (player.hasKey) {
 			timer.start();
@@ -101,20 +93,10 @@ public class Level1 extends State {
 //			}
 			System.out.println("Escape pressed, #ofstates: " + gsm.states.size());
 		}
-		
-		if(k==KeyEvent.VK_F){
-			
-			if(fireready)
-				map.turretFire();
-			fireready=false;
-		}
 	}
 
 	public void keyReleased(KeyEvent e, int k) {
 		player.keyReleased(k);
-		if(k==KeyEvent.VK_F){
-			fireready=true;
-		}
 	}
 
 	public void mousePressed(MouseEvent e) {
@@ -142,3 +124,5 @@ public class Level1 extends State {
 		g.drawString("AnimFrame:"+ player.getAnimFrame()+" Max: "+player.getAnimFrameMax(), 0, 43);
 	}
 }
+
+// chapter 9 use of timer

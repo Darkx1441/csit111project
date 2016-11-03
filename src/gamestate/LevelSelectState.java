@@ -107,7 +107,7 @@ public class LevelSelectState extends State{
 			} 
 			else if(currentSelect==2){
 				gsm.states.push(new MenuState(gsm));
-				for(int i = gsm.states.size()-1; i > 0; i--){
+				for(int i =gsm.states.size()-1;i>0;i--){
 					gsm.states.remove(i);
 				}
 			}
