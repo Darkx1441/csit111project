@@ -42,14 +42,14 @@ public class MenuState extends State {
 			if (i == currentSelect)
 			{
 				g.setColor(Color.GREEN);
-				g.drawString(">", GamePanel.WIDTH / 2 - 50 - 30, GamePanel.HEIGHT / 2 + i * 50);
+				g.drawString(">", GamePanel.getScreenWidth() / 2 - 50 - 30, GamePanel.getScreenHeight() / 2 + i * 50);
 			} 
 			else 
 			{
 				g.setColor(Color.WHITE);
 			}
 			
-			g.drawString(options[i], GamePanel.WIDTH / 2 - 50, GamePanel.HEIGHT / 2 + i * 50);
+			g.drawString(options[i], GamePanel.getScreenWidth() / 2 - 50, GamePanel.getScreenHeight() / 2 + i * 50);
 			g.setFont(new Font("Arial", Font.BOLD, 12));
 		}
 

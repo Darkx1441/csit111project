@@ -27,7 +27,7 @@ public class WinScreenState extends State{
 	
 	public void render(Graphics2D g) {
 		g.setColor(Color.RED);
-		g.drawString("YOU WON, nice.", GamePanel.WIDTH/2, GamePanel.HEIGHT/2);
+		g.drawString("YOU WON, nice.", GamePanel.getScreenWidth()/2, GamePanel.getScreenHeight()/2);
 	}
 
 	

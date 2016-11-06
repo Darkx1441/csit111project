@@ -16,7 +16,7 @@ public class GameApplet extends JApplet
 		pane.setLayout(new BorderLayout());
 		gamePanel = new GamePanel();
 		pane.add(gamePanel);
-		this.setSize(GamePanel.WIDTH, GamePanel.HEIGHT);
+		this.setSize(GamePanel.getScreenWidth(), GamePanel.getScreenHeight());
 	}
 
 }

@@ -10,7 +10,7 @@ import csit111project.GamePanel;
 
 public class OptionsMenu extends State
 {
-	private String[] options = { "Window Scale:", "Back" }; // LIST OF MENUS
+	private String[] options = { "Window Scale:","1","2", "Back" }; // LIST OF MENUS
 	private int currentSelect=0;
 	public OptionsMenu(GameStateManager gsm) 
 	{
@@ -44,14 +44,14 @@ public class OptionsMenu extends State
 			if (i == currentSelect)
 			{
 				g.setColor(Color.GREEN);
-				g.drawString(">", GamePanel.WIDTH / 2 - 50 - 30, GamePanel.HEIGHT / 2 + i * 50);
+				g.drawString(">", GamePanel.getScreenWidth() / 2 - 50 - 30, GamePanel.getScreenHeight() / 2 + i * 50);
 			} 
 			else 
 			{
 				g.setColor(Color.WHITE);
 			}
 			
-			g.drawString(options[i], GamePanel.WIDTH / 2 - 50, GamePanel.HEIGHT / 2 + i * 50);
+			g.drawString(options[i], GamePanel.getScreenWidth() / 2 - 50, GamePanel.getScreenHeight() / 2 + i * 50);
 			g.setFont(new Font("Arial", Font.BOLD, 12));
 		}
 
@@ -97,10 +97,17 @@ public class OptionsMenu extends State
 				// WindowScale
 				
 
-			} 
-			else if (currentSelect == 1)
+			}else if (currentSelect == 1)
 			{
-				// options
+				GamePanel.setSCALE(1);
+				System.out.println("SCALE set to 1");
+			} else if( currentSelect ==2){
+				GamePanel.setSCALE(2);
+				System.out.println("SCALE set to 2");
+			}
+			else if (currentSelect == options.length-1)
+			{
+				// back to Main Menu
 				gsm.states.push(new MenuState(gsm));
 				System.out.println("OptionsState started, #ofstates: " + gsm.states.size());
 			} 

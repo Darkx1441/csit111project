@@ -9,6 +9,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -16,17 +17,16 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class GamePanel extends JPanel implements Runnable, ActionListener, KeyListener, MouseListener 
-{
+public class GamePanel extends JPanel implements Runnable, ActionListener, KeyListener{
 	private static final long serialVersionUID = 1L;
 
 	// dimensions
 	// Frame will be x+6 y+29 bigger because it includes border
-	public static final int WIDTH = 800;
-	public static final int HEIGHT = 480;
-	private int SCALE=2;
+	static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+	private final static double WIDTH = 800;
+	private final static double HEIGHT = 480;
+	private static int SCALE = 2;
 	FPSCounter fps = new FPSCounter();
-	
 
 	private Thread thread;
 	private int FPS = 60;
@@ -34,11 +34,15 @@ public class GamePanel extends JPanel implements Runnable, ActionListener, KeyLi
 	boolean running = false;
 	private GameStateManager gsm;
 
-	public GamePanel() 
-	{
+	public GamePanel() {
 		super();
-		setPreferredSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
-		addMouseListener(this);
+		
+		if (screenSize.getWidth() > 1920) {  	
+			SCALE = 2;							
+		} else {								
+			SCALE = 1;							
+		}
+		setPreferredSize(new Dimension((int) WIDTH * SCALE, (int) HEIGHT * SCALE));
 		addKeyListener(this);
 		setBackground(Color.black);
 		setFocusable(true);
@@ -48,25 +52,21 @@ public class GamePanel extends JPanel implements Runnable, ActionListener, KeyLi
 		start();
 	}
 
-	private void start() 
-	{
+	private void start() {
 		running = true;
 		thread = new Thread(this);
 		thread.start();
 		fps.start();
 	}
 
-	private void update() 
-	{
+	private void update() {
 		gsm.update();
 	}
 
-	public void run() 
-	{
+	public void run() {
 		long start, elapsed, wait;
-		
-		while (running) 
-		{
+
+		while (running) {
 			start = System.nanoTime();
 			update();
 			repaint();
@@ -74,80 +74,65 @@ public class GamePanel extends JPanel implements Runnable, ActionListener, KeyLi
 			elapsed = System.nanoTime() - start;
 			wait = targetTime - elapsed / 1000000;
 
-			if (wait <= 0) 
-			{
+			if (wait <= 0) {
 				wait = 5;
 			}
-			try 
-			{
+			try {
 				Thread.sleep(wait);
-			} 
-			catch (Exception e) 
-			{
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 	}
 
-	public void paintComponent(Graphics g) 
-	{
+	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 		g2.scale(SCALE, SCALE);
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		g2.setColor(Color.WHITE);
-		g2.drawString("FPS:" + (int)fps.fps(), 0, 43);
+		g2.drawString("FPS:" + (int) fps.fps(), 0, 43);
 		gsm.render(g2);
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0)
-	{
+	public void actionPerformed(ActionEvent arg0) {
 		update();
-		repaint();	
+		repaint();
 	}
 
 	@Override
-	public void mousePressed(MouseEvent e)
-	{
-		gsm.mousePressed(e);
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) 
-	{
-		gsm.mouseReleased(e);
-	}
-	
-	@Override
-	public void mouseClicked(MouseEvent arg0) {}
-	
-	@Override
-	public void mouseEntered(MouseEvent arg0) {}
-
-	@Override
-	public void mouseExited(MouseEvent arg0) {}
-
-	@Override
-	public void keyPressed(KeyEvent e) 
-	{
+	public void keyPressed(KeyEvent e) {
 		gsm.keyPressed(e, e.getKeyCode());
 	}
 
 	@Override
-	public void keyReleased(KeyEvent e) 
-	{
+	public void keyReleased(KeyEvent e) {
 		gsm.keyReleased(e, e.getKeyCode());
 	}
+
 	@Override
-	public void keyTyped(KeyEvent arg0) {}
-	
-	public int getFPS()
-	{
+	public void keyTyped(KeyEvent arg0) {
+	}
+
+	public int getFPS() {
 		return (int) fps.fps();
 	}
-	public void setWindowScale(int n){
-		SCALE=n;
+	
+	public static void setSCALE(int s){
+		SCALE=s;
+	}
+	
+	public int getSCALE(){
+		return SCALE;
+	}
+
+	public static int getScreenWidth() {
+		return (int) WIDTH;
+	}
+
+	public static int getScreenHeight() {
+		return (int) HEIGHT;
 	}
 }
