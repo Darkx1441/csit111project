@@ -13,9 +13,6 @@ public abstract class State
 	{
 		this.gsm = gsm;
 		
-		xOffset = 0;
-		yOffset = 0;
-		
 		init();
 	}
 

@@ -33,8 +33,6 @@ public class Player {
 	private boolean topCollision = false;
 	private boolean FacingRight = true;
 	private boolean FacingLeft = false;
-	// private int state; //0 is idle right, 1 is idle left ,2 is running right,
-	// 3 is running left
 
 	private int width=64, height=64-1;
 	private double x = GamePanel.WIDTH/2-width/2, y=GamePanel.HEIGHT/2-height/2;
