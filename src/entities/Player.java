@@ -331,6 +331,7 @@ public class Player {
 	 */
 	public void keyPressed(int k) {
 		if (k == KeyEvent.VK_D || k == KeyEvent.VK_RIGHT) { // go right pressed
+			left=false;
 			right = true;
 			FacingLeft = false;
 			FacingRight = true;
@@ -342,6 +343,7 @@ public class Player {
 		}
 
 		if (k == KeyEvent.VK_A || k == KeyEvent.VK_LEFT) { // go left pressed
+			right=false;
 			left = true;
 			FacingRight = false;
 			FacingLeft = true;
