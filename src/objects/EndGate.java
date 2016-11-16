@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
+import animation.LevelAnimation;
 import gamestate.State;
 
 public class EndGate extends Rectangle {
@@ -19,10 +20,9 @@ public class EndGate extends Rectangle {
 		
 	}
 	
-	public void render(Graphics2D g){
-		g.setColor(Color.red);
+	public void render(Graphics2D g, int currentFrame, LevelAnimation animation){
 		if(id==2){
-		g.fillRect(x - (int) State.xOffset, y - (int) State.yOffset, blocksize, blocksize);
+		g.drawImage(animation.getEndGate(currentFrame), x - (int) State.xOffset, y - (int) State.yOffset, null);
 		}
 	}
 	public void setID(int id){
@@ -31,6 +31,13 @@ public class EndGate extends Rectangle {
 	
 	public int getID(){
 		return id;
+	}
+
+	public void renderHitbox(Graphics2D g) {
+		g.setColor(Color.red);
+		if(id==2){
+			g.fillRect(x - (int) State.xOffset, y - (int) State.yOffset, blocksize, blocksize);
+		}
 	}
 
 }

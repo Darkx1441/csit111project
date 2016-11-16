@@ -1,11 +1,16 @@
 package mapping;
 
 import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import javax.swing.Timer;
+
+import animation.LevelAnimation;
 import objects.Block;
 import objects.EndGate;
 import objects.Key;
@@ -13,24 +18,39 @@ import objects.Key;
 public class Map {
 
 	private String path;
+	private Timer timer;
+	private int currentFrame=0;
+	private int maxFrames;
 	private int width, height;
 	
 	private Block[][] blocks;
 	private EndGate[][] endGate;
 	private Key[][] key;
 	
-	public Map(String loadpath){
+	public Map(String loadpath, Timer ntimer){
+		setTimer(ntimer);
 		path= loadpath;
 
 		loadMap();
 	}
 	
-	public void render(Graphics2D g){
+	public void render(Graphics2D g, LevelAnimation animation){
 		for(int i =0;i<blocks.length;i++){
 			for(int j=0;j<blocks[0].length;j++){
-				blocks[i][j].render(g);
-				endGate[i][j].render(g);
-				key[i][j].render(g);
+				blocks[i][j].render(g,currentFrame, animation);
+				endGate[i][j].render(g, currentFrame, animation);
+				key[i][j].render(g, currentFrame, animation);
+				
+			}
+		}
+	}
+	
+	public void renderHitbox(Graphics2D g){
+		for(int i =0;i<blocks.length;i++){
+			for(int j=0;j<blocks[0].length;j++){
+				blocks[i][j].renderHitbox(g);
+				endGate[i][j].renderHitbox(g);
+				key[i][j].renderHitbox(g);
 				
 			}
 		}
@@ -66,6 +86,18 @@ public class Map {
 		}
 	}
 	
+	ActionListener timerAction = new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (currentFrame >= maxFrames){
+				currentFrame=0;
+			}else{
+				currentFrame++;
+			}
+			
+		}
+	};
+	
 	
 	public Block[][] getBlocks(){
 		return blocks;
@@ -75,6 +107,14 @@ public class Map {
 	}
 	public Key[][] getKey(){
 		return key;
+	}
+
+	public Timer getTimer() {
+		return timer;
+	}
+
+	public void setTimer(Timer timer) {
+		this.timer = timer;
 	}
 	
 }

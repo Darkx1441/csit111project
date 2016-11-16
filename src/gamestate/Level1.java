@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.Timer;
 
+import animation.LevelAnimation;
 import csit111project.GamePanel;
 import entities.Player;
 import mapping.Map;
@@ -20,17 +21,19 @@ public class Level1 extends State {
 	private int timerDelay = 1000 / 5;
 	private Timer timer;
 	private int color = 1;
+	private LevelAnimation levelAnimation= new LevelAnimation();
 
 	public Level1(GameStateManager gsm) {
 		super(gsm);
 		System.out.println(gsm.states.toString());
+		levelAnimation.init();
 
-		timer = new Timer(timerDelay, colorCycle);
+		timer = new Timer(timerDelay, timerAction);
 	}
 
 	public void init() {
-		player = new Player(-290, -100);
-		map = new Map("/maps/map1.map");
+		player = new Player(0, 0);
+		map = new Map("/maps/map1.map", timer);
 	}
 
 	public void update() {
@@ -39,11 +42,19 @@ public class Level1 extends State {
 	}
 
 	public void render(Graphics2D g) {
+		/*
+		 * DEBUG Hitboxes
+		 */
+		if (player.debugMonitor == true) {
+			map.renderHitbox(g);
+			player.renderHitbox(g);
+			
+		}
 		// render player
 		player.render(g);
 
 		// render map
-		map.render(g);
+		map.render(g, levelAnimation);
 
 		if (player.hasKey) {
 			timer.start();
@@ -72,14 +83,11 @@ public class Level1 extends State {
 			gsm.states.remove(1);
 			System.out.println("player won, #ofstates: " + gsm.states.size());
 		}
-
-		/*
-		 * DEBUG LINES
-		 */
-		if (player.debugMonitor == true) {
+		
+		if(player.debugMonitor==true){
 			drawDebug(g);
-			
 		}
+
 	}
 
 	public void keyPressed(KeyEvent e, int k) {
@@ -88,6 +96,7 @@ public class Level1 extends State {
 		if (k == KeyEvent.VK_ESCAPE) {
 			gsm.states.push(new MenuState(gsm));
 			timer.stop();
+			player.getTimer().stop();
 //			for (int i = gsm.states.size() - 1; i > 1; i--) {
 //				gsm.states.remove(i);
 //			}
@@ -105,12 +114,13 @@ public class Level1 extends State {
 	public void mouseReleased(MouseEvent e) {
 	}
 
-	ActionListener colorCycle = new ActionListener() {
+	ActionListener timerAction = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			color++;
 			if (color >= 4)
 				color = 1;
+			
 		}
 	};
 
@@ -123,6 +133,7 @@ public class Level1 extends State {
 		g.drawLine(0, GamePanel.HEIGHT / 2, GamePanel.WIDTH, GamePanel.HEIGHT / 2);
 		g.drawString("AnimFrame:"+ player.getAnimFrame()+" Max: "+player.getAnimFrameMax(), 0, 43);
 	}
+
 }
 
 // chapter 9 use of timer

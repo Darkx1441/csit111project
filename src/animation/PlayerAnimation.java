@@ -26,10 +26,12 @@ public class PlayerAnimation {
 	static ArrayList <BufferedImage> LeftIdle  = new ArrayList<BufferedImage>();
 	static ArrayList <BufferedImage> LeftRunning  = new ArrayList<BufferedImage>();
 
-	
-	public void initAnimation(){
+	public PlayerAnimation(){
+		init();
+	}
+	public void init(){
 		try {
-			System.out.println("Importing Images...");
+			System.out.println("Importing Player Images...");
 			RightI01 = ImageIO
 					.read(Player.class.getResourceAsStream("/images/Charassets/actions/idle/right/CharIdle01.png"));
 			RightI02 = ImageIO
@@ -90,10 +92,10 @@ public class PlayerAnimation {
 					.read(Player.class.getResourceAsStream("/images/Charassets/actions/idle/left/CharLJump01.png"));
 			RightJ01 = ImageIO
 					.read(Player.class.getResourceAsStream("/images/Charassets/actions/idle/right/CharJump01.png"));
-			System.out.println("Images Imported");
+			System.out.println("Player Images Imported");
 		} catch (IOException e) {
 		}
-		System.out.println("Loading Images...");
+		System.out.println("Loading Player Images...");
 		RightIdle.add(RightI01);
 		RightIdle.add(RightI02);	
 		RightIdle.add(RightI03);
@@ -123,7 +125,7 @@ public class PlayerAnimation {
 		LeftIdle.add(LeftI05);
 		LeftIdle.add(LeftI06);
 		LeftIdle.add(LeftI07);
-		System.out.println("Images Loaded");
+		System.out.println("Player Images Loaded");
 	}
 	
 	public BufferedImage getPlayerRightIdle(int i){
