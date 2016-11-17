@@ -52,14 +52,20 @@ public class Level1 extends State {
 	}
 
 	public void render(Graphics2D g) {
-			g.drawImage(levelAnimation.getBackGround(1), (int) (0 - (State.xOffset*BGParraX)), (int) (0 - State.yOffset), null);
-			g.drawImage(levelAnimation.getBackGround(1), (int) ((levelAnimation.getBackGround(1).getTileWidth()) - (State.xOffset*BGParraX)), (int) (0 - State.yOffset), null);
-			g.drawImage(levelAnimation.getBackGround(1), (int) ((levelAnimation.getBackGround(1).getTileWidth()*2) - (State.xOffset*BGParraX)), (int) (0 - State.yOffset), null);
-			g.drawImage(levelAnimation.getBackGround(1), (int) (0 - (State.xOffset*BGParraX)), (int) ((levelAnimation.getBackGround(1).getTileHeight()) - State.yOffset), null);
-			g.drawImage(levelAnimation.getBackGround(1), (int) ((levelAnimation.getBackGround(1).getTileWidth()) - (State.xOffset*BGParraX)), (int) ((levelAnimation.getBackGround(1).getTileHeight()) - State.yOffset), null);
-			g.drawImage(levelAnimation.getBackGround(1), (int) ((levelAnimation.getBackGround(1).getTileWidth()*2) - (State.xOffset*BGParraX)), (int) ((levelAnimation.getBackGround(1).getTileHeight()) - State.yOffset), null);
+//			g.drawImage(levelAnimation.getBackGround(1), (int) (0 - (State.xOffset*BGParraX)), (int) (0 - State.yOffset), null);
+//			g.drawImage(levelAnimation.getBackGround(1), (int) ((levelAnimation.getBackGround(1).getTileWidth()) - (State.xOffset*BGParraX)), (int) (0 - State.yOffset), null);
+//			g.drawImage(levelAnimation.getBackGround(1), (int) ((levelAnimation.getBackGround(1).getTileWidth()*2) - (State.xOffset*BGParraX)), (int) (0 - State.yOffset), null);
+//			g.drawImage(levelAnimation.getBackGround(1), (int) (0 - (State.xOffset*BGParraX)), (int) ((levelAnimation.getBackGround(1).getTileHeight()) - State.yOffset), null);
+//			g.drawImage(levelAnimation.getBackGround(1), (int) ((levelAnimation.getBackGround(1).getTileWidth()) - (State.xOffset*BGParraX)), (int) ((levelAnimation.getBackGround(1).getTileHeight()) - State.yOffset), null);
+//			g.drawImage(levelAnimation.getBackGround(1), (int) ((levelAnimation.getBackGround(1).getTileWidth()*2) - (State.xOffset*BGParraX)), (int) ((levelAnimation.getBackGround(1).getTileHeight()) - State.yOffset), null);
 			
+	
+			for (int i= (levelAnimation.getWidthFactor(levelAnimation.getBackGround(1).getTileWidth()));i>-1; i--)
+					 for (int j= (levelAnimation.getHeightFactor(levelAnimation.getBackGround(1).getTileHeight()));j>-1; j--)
+						g.drawImage(levelAnimation.getBackGround(1), (int) ((levelAnimation.getBackGround(1).getTileWidth()*i) - (State.xOffset*BGParraX)), (int) ((levelAnimation.getBackGround(1).getTileHeight() *j) - (State.yOffset)), null);
+				
 			
+				
 		/*
 		 * DEBUG Hitboxes
 		 */

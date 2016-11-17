@@ -31,6 +31,9 @@ public class LevelAnimation {
 		mapWidth = map.getMapWidth();
 	}
 	
+	int Wfactor = 1;
+	int Hfactor = 1;
+	
 	public void init(){
 		try {
 			System.out.println("Importing Level Images...");
@@ -79,6 +82,17 @@ public class LevelAnimation {
 	
 	public BufferedImage getForeGround(int i){
 		return ForeGround1;
+	}
+	
+	public int getWidthFactor(int w){
+		return (mapWidth*32)/w;
+		
+	}
+	
+	public int getHeightFactor(int h){
+		//System.out.println((mapHeight*32)/h);
+		return ((mapHeight*32)/h)-1;
+		
 	}
 	
 	public int getSize(String s){
