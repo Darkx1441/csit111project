@@ -22,6 +22,15 @@ public class Level1 extends State {
 	private Timer timer;
 	private int color = 1;
 	private LevelAnimation levelAnimation= new LevelAnimation();
+	
+	double BGParraX = .90;
+	double FGParra = 1.35;
+
+	
+	
+	
+	
+	
 
 	public Level1(GameStateManager gsm) {
 		super(gsm);
@@ -42,9 +51,15 @@ public class Level1 extends State {
 	}
 
 	public void render(Graphics2D g) {
-			g.drawImage(levelAnimation.getBackGround(1), (int) (0 - (State.xOffset*.95)), (int) (0 - State.yOffset), null);
-			g.drawImage(levelAnimation.getBackGround(1), (int) ((levelAnimation.getBackGround(1).getTileWidth()) - (State.xOffset*.95)), (int) (0 - State.yOffset), null);
-		 /*
+			g.drawImage(levelAnimation.getBackGround(1), (int) (0 - (State.xOffset*BGParraX)), (int) (0 - State.yOffset), null);
+			g.drawImage(levelAnimation.getBackGround(1), (int) ((levelAnimation.getBackGround(1).getTileWidth()) - (State.xOffset*BGParraX)), (int) (0 - State.yOffset), null);
+			g.drawImage(levelAnimation.getBackGround(1), (int) ((levelAnimation.getBackGround(1).getTileWidth()*2) - (State.xOffset*BGParraX)), (int) (0 - State.yOffset), null);
+			g.drawImage(levelAnimation.getBackGround(1), (int) (0 - (State.xOffset*BGParraX)), (int) ((levelAnimation.getBackGround(1).getTileHeight()) - State.yOffset), null);
+			g.drawImage(levelAnimation.getBackGround(1), (int) ((levelAnimation.getBackGround(1).getTileWidth()) - (State.xOffset*BGParraX)), (int) ((levelAnimation.getBackGround(1).getTileHeight()) - State.yOffset), null);
+			g.drawImage(levelAnimation.getBackGround(1), (int) ((levelAnimation.getBackGround(1).getTileWidth()*2) - (State.xOffset*BGParraX)), (int) ((levelAnimation.getBackGround(1).getTileHeight()) - State.yOffset), null);
+			
+			
+		/*
 		 * DEBUG Hitboxes
 		 */
 		if (player.debugMonitor == true) {
@@ -57,7 +72,9 @@ public class Level1 extends State {
 
 		// render map
 		map.render(g, levelAnimation);
-	
+		
+		g.drawImage(levelAnimation.getForeGround(1), (int) (0 - (State.xOffset*FGParra)), (int) (0 - State.yOffset*FGParra), null);
+		
 
 		if (player.hasKey) {
 			timer.start();

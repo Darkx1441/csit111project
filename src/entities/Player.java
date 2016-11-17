@@ -39,7 +39,7 @@ public class Player {
 
 	private double moveSpeed = 5;
 
-	private double maxJumpSpeed = 5;
+	private double maxJumpSpeed = 6;
 	private double currentJumpSpeed = maxJumpSpeed;
 
 	private double maxFallSpeed = 5;

@@ -14,13 +14,15 @@ public class LevelAnimation {
 	static BufferedImage Key1;
 	static BufferedImage EndGate1;
 	static BufferedImage BackGround1;
+	static BufferedImage ForeGround1;
 	
 	
 	static ArrayList <BufferedImage> Ground  = new ArrayList<BufferedImage>();
 	static ArrayList <BufferedImage> Key = new ArrayList<BufferedImage>();
 	static ArrayList <BufferedImage> EndGate  = new ArrayList<BufferedImage>();
 	static ArrayList <BufferedImage> BackGround  = new ArrayList<BufferedImage>();
-
+	static ArrayList <BufferedImage> ForeGround  = new ArrayList<BufferedImage>();
+	
 	
 	public void init(){
 		try {
@@ -33,6 +35,8 @@ public class LevelAnimation {
 					.read(Player.class.getResourceAsStream("/images/Levelassets/endgate/endgate1.png"));
 			BackGround1 = ImageIO
 					.read(Player.class.getResourceAsStream("/images/BGTEST.png"));
+			ForeGround1 = ImageIO
+					.read(Player.class.getResourceAsStream("/images/FGTEST.png"));
 			System.out.println("Level Images Imported");
 		} catch (IOException e) {
 		}
@@ -45,6 +49,8 @@ public class LevelAnimation {
 		EndGate.add(EndGate1);
 		
 		BackGround.add(BackGround1);
+		
+		ForeGround.add(ForeGround1);
 		
 		System.out.println("Level Images Loaded");
 	}
@@ -61,6 +67,10 @@ public class LevelAnimation {
 	
 	public BufferedImage getBackGround(int i){
 		return BackGround1;
+	}
+	
+	public BufferedImage getForeGround(int i){
+		return ForeGround1;
 	}
 	
 	public int getSize(String s){
