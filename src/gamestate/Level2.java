@@ -21,7 +21,7 @@ public class Level2 extends State {
 	private int timerDelay = 1000 / 5;
 	private Timer timer;
 	private int color = 1;
-	private LevelAnimation levelAnimation = new LevelAnimation();
+	private LevelAnimation levelAnimation = new LevelAnimation(map);
 
 	public Level2(GameStateManager gsm) {
 		super(gsm);

@@ -21,7 +21,7 @@ public class Level1 extends State {
 	private int timerDelay = 1000 / 5;
 	private Timer timer;
 	private int color = 1;
-	private LevelAnimation levelAnimation= new LevelAnimation();
+	private LevelAnimation levelAnimation;
 	
 	double BGParraX = .90;
 	double FGParra = 1.35;
@@ -35,7 +35,6 @@ public class Level1 extends State {
 	public Level1(GameStateManager gsm) {
 		super(gsm);
 		System.out.println(gsm.states.toString());
-		levelAnimation.init();
 
 		timer = new Timer(timerDelay, timerAction);
 	}
@@ -43,6 +42,8 @@ public class Level1 extends State {
 	public void init() {
 		player = new Player(-290, -100);
 		map = new Map("/maps/map1.map", timer);
+		levelAnimation = new LevelAnimation(map);
+		levelAnimation.init();
 	}
 
 	public void update() {
@@ -159,7 +160,5 @@ public class Level1 extends State {
 		g.drawLine(0, GamePanel.HEIGHT / 2, GamePanel.WIDTH, GamePanel.HEIGHT / 2);
 		g.drawString("AnimFrame:"+ player.getAnimFrame()+" Max: "+player.getAnimFrameMax(), 0, 52);
 	}
-
 }
-
 // chapter 9 use of timer

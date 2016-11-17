@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 import entities.Player;
+import mapping.Map;
 
 public class LevelAnimation {
 	
@@ -23,6 +24,12 @@ public class LevelAnimation {
 	static ArrayList <BufferedImage> BackGround  = new ArrayList<BufferedImage>();
 	static ArrayList <BufferedImage> ForeGround  = new ArrayList<BufferedImage>();
 	
+	private int mapHeight;
+	private int mapWidth;
+	public LevelAnimation(Map map){
+		mapHeight= map.getMapHeight();
+		mapWidth = map.getMapWidth();
+	}
 	
 	public void init(){
 		try {
@@ -53,6 +60,7 @@ public class LevelAnimation {
 		ForeGround.add(ForeGround1);
 		
 		System.out.println("Level Images Loaded");
+		System.out.println("Map height= "+mapHeight+" width= "+mapWidth);
 	}
 	
 	public BufferedImage getGround(int i){

@@ -102,6 +102,13 @@ public class Map {
 	public Block[][] getBlocks(){
 		return blocks;
 	}
+	public int getMapWidth(){
+		return blocks[0].length;
+	}
+	public int getMapHeight(){
+		return blocks.length;
+	}
+	
 	public EndGate[][] getEndGate(){
 		return endGate;
 	}
