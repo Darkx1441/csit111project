@@ -42,7 +42,9 @@ public class Level1 extends State {
 	}
 
 	public void render(Graphics2D g) {
-		/*
+			g.drawImage(levelAnimation.getBackGround(1), (int) (0 - (State.xOffset*.95)), (int) (0 - State.yOffset), null);
+			g.drawImage(levelAnimation.getBackGround(1), (int) ((levelAnimation.getBackGround(1).getTileWidth()) - (State.xOffset*.95)), (int) (0 - State.yOffset), null);
+		 /*
 		 * DEBUG Hitboxes
 		 */
 		if (player.debugMonitor == true) {
@@ -55,6 +57,7 @@ public class Level1 extends State {
 
 		// render map
 		map.render(g, levelAnimation);
+	
 
 		if (player.hasKey) {
 			timer.start();
