@@ -40,10 +40,10 @@ public class Level1 extends State {
 	}
 
 	public void init() {
-		player = new Player(-290, -100);
 		map = new Map("/maps/map1.map", timer);
 		levelAnimation = new LevelAnimation(map);
 		levelAnimation.init();
+		player = new Player(-290, -100);
 	}
 
 	public void update() {

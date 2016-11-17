@@ -37,10 +37,10 @@ public class Player {
 
 	private double moveSpeed = 5;
 
-	private double maxJumpSpeed = 6;
+	private double maxJumpSpeed = 7.5;
 	private double currentJumpSpeed = maxJumpSpeed;
 
-	private double maxFallSpeed = 5;
+	private double maxFallSpeed = 8;
 	private double currentFallSpeed = 0.1;
 	public boolean win = false;
 	public boolean hasKey = false;
@@ -381,7 +381,7 @@ public class Player {
 	public void jump() {
 		if (jumping) {
 			State.yOffset -= currentJumpSpeed;
-			currentJumpSpeed -= .15;
+			currentJumpSpeed -= .25;
 			falling = false;
 
 			if (currentJumpSpeed <= 0) {
@@ -396,7 +396,7 @@ public class Player {
 		if (falling) {
 			State.yOffset += currentFallSpeed;
 			if (currentFallSpeed <= maxFallSpeed) {
-				currentFallSpeed += 0.15;
+				currentFallSpeed += 0.25;
 
 			}
 		}

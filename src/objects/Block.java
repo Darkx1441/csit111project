@@ -12,10 +12,12 @@ public class Block extends Rectangle
 	private static final long serialVersionUID = 1L;
 	public static final int blocksize = 32;
 	private int id;
+	private int px, py;
 	
 	public Block(int x, int y, int id)
 	{
-		
+		px=x;
+		py=y;
 		setBounds(x, y, blocksize, blocksize);	
 		this.id= id;
 	}
@@ -42,6 +44,12 @@ public class Block extends Rectangle
 	
 	public int getID(){
 		return id;
+	}
+	public double getX(){
+		return px;
+	}
+	public double getY(){
+		return py;
 	}
 	
 }
