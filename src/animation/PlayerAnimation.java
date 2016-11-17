@@ -25,6 +25,9 @@ public class PlayerAnimation {
 	static ArrayList <BufferedImage> RightRunning  = new ArrayList<BufferedImage>();
 	static ArrayList <BufferedImage> LeftIdle  = new ArrayList<BufferedImage>();
 	static ArrayList <BufferedImage> LeftRunning  = new ArrayList<BufferedImage>();
+	
+	static ArrayList <BufferedImage> LeftJumping = new ArrayList<BufferedImage>();
+	static ArrayList <BufferedImage> RightJumping= new ArrayList<BufferedImage>();
 
 	public PlayerAnimation(){
 		init();
@@ -158,6 +161,17 @@ public class PlayerAnimation {
 			return LeftRunning.size();
 		else
 			return 0;
+	}
+	
+	
+	public void clearAnim(){
+		RightIdle.clear();
+		RightRunning.clear();
+		RightJumping.clear();
+		LeftIdle.clear();
+		LeftRunning.clear();
+		LeftJumping.clear();
+		
 	}
 	
 	

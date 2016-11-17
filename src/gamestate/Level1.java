@@ -32,7 +32,7 @@ public class Level1 extends State {
 	}
 
 	public void init() {
-		player = new Player(0, 0);
+		player = new Player(-290, -100);
 		map = new Map("/maps/map1.map", timer);
 	}
 
@@ -79,8 +79,12 @@ public class Level1 extends State {
 		if (player.win == true) {
 			gsm.states.push(new WinScreenState(gsm));
 			timer.stop();
+			player.getTimer().stop();
 			gsm.states.remove(2);
 			gsm.states.remove(1);
+			map=null;
+			player.getPlayerAnim().clearAnim();
+			levelAnimation.clearAnim();
 			System.out.println("player won, #ofstates: " + gsm.states.size());
 		}
 		
@@ -97,6 +101,8 @@ public class Level1 extends State {
 			gsm.states.push(new MenuState(gsm));
 			timer.stop();
 			player.getTimer().stop();
+			map=null;
+
 //			for (int i = gsm.states.size() - 1; i > 1; i--) {
 //				gsm.states.remove(i);
 //			}
@@ -131,7 +137,7 @@ public class Level1 extends State {
 		g.drawString("\tJS " + player.getJumpSpeed() + " FS= " + player.getFallSpeed(), 0, 32);
 		g.drawLine(GamePanel.WIDTH / 2, 0, GamePanel.WIDTH / 2, GamePanel.HEIGHT);
 		g.drawLine(0, GamePanel.HEIGHT / 2, GamePanel.WIDTH, GamePanel.HEIGHT / 2);
-		g.drawString("AnimFrame:"+ player.getAnimFrame()+" Max: "+player.getAnimFrameMax(), 0, 43);
+		g.drawString("AnimFrame:"+ player.getAnimFrame()+" Max: "+player.getAnimFrameMax(), 0, 52);
 	}
 
 }

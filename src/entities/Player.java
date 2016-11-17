@@ -27,7 +27,7 @@ public class Player {
 	
 	private Timer timer;
 	
-	private PlayerAnimation playerAnimation = new PlayerAnimation();
+	private PlayerAnimation playerAnimation;
 	
 	
 	private boolean topCollision = false;
@@ -66,29 +66,7 @@ public class Player {
 	 * PLAYER INITIALIZATION
 	 */
 	public void init() {
-	}
-
-	public int getX() {
-		return (int) x;
-	}
-
-	public int getY() {
-		return (int) y;
-	}
-
-	public int getFallSpeed() {
-		return (int) currentFallSpeed;
-	}
-
-	public int getJumpSpeed() {
-		return (int) currentJumpSpeed;
-	}
-
-	public int getAnimFrame(){
-		return frameCount;
-	}
-	public int getAnimFrameMax(){
-		return maxFrames;
+		playerAnimation = new PlayerAnimation();
 	}
 
 	
@@ -427,12 +405,39 @@ public class Player {
 		}
 	}
 	public void renderHitbox(Graphics2D g) {
-		g.fillRect((int)x, (int)y, width, height);
-		
+		g.fillRect((int)x, (int)y, width, height);	
 	}
 	
+	
+	public int getX() {
+		return (int) x;
+	}
+
+	public int getY() {
+		return (int) y;
+	}
+
+	public int getFallSpeed() {
+		return (int) currentFallSpeed;
+	}
+
+	public int getJumpSpeed() {
+		return (int) currentJumpSpeed;
+	}
+
+	public int getAnimFrame(){
+		return frameCount;
+	}
+	public int getAnimFrameMax(){
+		return maxFrames;
+	}
+
 	public Timer getTimer(){
 		return timer;
+	}
+	
+	public PlayerAnimation getPlayerAnim(){
+		return playerAnimation;
 	}
 	
 }

@@ -64,5 +64,11 @@ public class LevelAnimation {
 		else
 			return 0;
 	}	
+	
+	public void clearAnim(){
+		Ground.clear();
+		Key.clear();
+		EndGate.clear();
+	}
 
 }
