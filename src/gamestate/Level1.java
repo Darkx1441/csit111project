@@ -26,16 +26,8 @@ public class Level1 extends State {
 	double BGParraX = .90;
 	double FGParra = 1.35;
 
-	
-	
-	
-	
-	
-
 	public Level1(GameStateManager gsm) {
 		super(gsm);
-		System.out.println(gsm.states.toString());
-
 		timer = new Timer(timerDelay, timerAction);
 	}
 
@@ -60,10 +52,13 @@ public class Level1 extends State {
 //			g.drawImage(levelAnimation.getBackGround(1), (int) ((levelAnimation.getBackGround(1).getTileWidth()*2) - (State.xOffset*BGParraX)), (int) ((levelAnimation.getBackGround(1).getTileHeight()) - State.yOffset), null);
 			
 	
-			for (int i= (levelAnimation.getWidthFactor(levelAnimation.getBackGround(1).getTileWidth()));i>-1; i--)
-					 for (int j= (levelAnimation.getHeightFactor(levelAnimation.getBackGround(1).getTileHeight()));j>-1; j--)
-						g.drawImage(levelAnimation.getBackGround(1), (int) ((levelAnimation.getBackGround(1).getTileWidth()*i) - (State.xOffset*BGParraX)), (int) ((levelAnimation.getBackGround(1).getTileHeight() *j) - (State.yOffset)), null);
-				
+//			for (int i= (levelAnimation.getWidthFactor(levelAnimation.getBackGround(1).getTileWidth()));i>-1; i--)
+//					 for (int j= (levelAnimation.getHeightFactor(levelAnimation.getBackGround(1).getTileHeight()));j>-1; j--)
+//						g.drawImage(levelAnimation.getBackGround(1),
+//								(int) ((levelAnimation.getBackGround(1).getTileWidth()*i) - (State.xOffset*BGParraX)),
+//								(int) ((levelAnimation.getBackGround(1).getTileHeight() *j) - (State.yOffset)), null);
+		
+			//g.drawImage(levelAnimation.getBackGround(1), 0-(int)State.xOffset, 0-(int)State.yOffset, null);
 			
 				
 		/*
@@ -79,7 +74,6 @@ public class Level1 extends State {
 
 		// render map
 		map.render(g, levelAnimation);
-		
 		g.drawImage(levelAnimation.getForeGround(1), (int) (0 - (State.xOffset*FGParra)), (int) (0 - State.yOffset*FGParra), null);
 		
 
@@ -110,8 +104,8 @@ public class Level1 extends State {
 			gsm.states.remove(2);
 			gsm.states.remove(1);
 			map=null;
-			player.getPlayerAnim().clearAnim();
 			levelAnimation.clearAnim();
+			player.getPlayerAnim().clearAnim();
 			System.out.println("player won, #ofstates: " + gsm.states.size());
 		}
 		
@@ -129,6 +123,8 @@ public class Level1 extends State {
 			timer.stop();
 			player.getTimer().stop();
 			map=null;
+			levelAnimation.clearAnim();
+			player.getPlayerAnim().clearAnim();
 
 //			for (int i = gsm.states.size() - 1; i > 1; i--) {
 //				gsm.states.remove(i);

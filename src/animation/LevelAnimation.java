@@ -48,6 +48,7 @@ public class LevelAnimation {
 			ForeGround1 = ImageIO
 					.read(Player.class.getResourceAsStream("/images/FGTEST.png"));
 			System.out.println("Level Images Imported");
+
 		} catch (IOException e) {
 		}
 		System.out.println("Loading Level Images...");

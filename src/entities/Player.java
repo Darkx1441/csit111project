@@ -88,7 +88,8 @@ public class Player {
 							if (Collision.playerBlock(
 									new Point(iX + width + (int) State.xOffset + 4, iY + (int) State.yOffset + k - 1),
 									b[i][j])) {
-								right = false;
+								//right = false;
+								State.xOffset-=moveSpeed;
 							}
 						}
 
@@ -96,14 +97,15 @@ public class Player {
 						for (int k = 0; k < height - 1; k++) {
 							if (Collision.playerBlock(
 									new Point(iX + (int) State.xOffset - 2, iY + (int) State.yOffset + k), b[i][j])) {
-								left = false;
+								State.xOffset+=moveSpeed;
+								//left = false;
 							}
 						}
 
 						// top
 						for (int k = 0; k < width - 2; k++) {
 							if (Collision.playerBlock(
-									new Point(iX + (int) State.xOffset + k + 2, iY + (int) State.yOffset), b[i][j])) {
+									new Point(iX + (int) State.xOffset + k + 2, iY + (int) State.yOffset-5), b[i][j])) {
 								jumping = false;
 								currentJumpSpeed = maxJumpSpeed;
 								falling = true;
@@ -363,6 +365,7 @@ public class Player {
 			jumping = false;
 			noclip = !noclip;
 		}
+
 	}
 
 	public void keyReleased(int k) {

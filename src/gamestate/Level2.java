@@ -72,6 +72,8 @@ public class Level2 extends State {
 			timer.stop();
 			gsm.states.remove(2);
 			gsm.states.remove(1);
+			levelAnimation.clearAnim();
+			player.getPlayerAnim().clearAnim();
 			System.out.println("player won, #ofstates: " + gsm.states.size());
 		}
 
@@ -91,9 +93,8 @@ public class Level2 extends State {
 		if (k == KeyEvent.VK_ESCAPE) {
 			gsm.states.push(new MenuState(gsm));
 			timer.stop();
-//			for (int i = gsm.states.size() - 1; i > 1; i--) {
-//				gsm.states.remove(i);
-//			}
+			levelAnimation.clearAnim();
+			player.getPlayerAnim().clearAnim();
 			System.out.println("Escape pressed, #ofstates: " + gsm.states.size());
 		}
 	}
