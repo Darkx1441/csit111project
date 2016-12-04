@@ -97,11 +97,11 @@ public class Level1 extends State {
 			} else {
 				color++;
 			}
-			g.drawString("Key Obtained, Go for Exit!", 0, 60);
+			g.drawString("You have the Artifact! Go to the Portal", 0, 60);
 
 		} else {
 			g.setColor(Color.RED);
-			g.drawString("Key Missing, look for the key!", 0, 60);
+			g.drawString("Artifact Missing.. Search for the artifact.", 0, 60);
 		}
 
 		if (player.win == true) {

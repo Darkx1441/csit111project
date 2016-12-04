@@ -15,44 +15,21 @@ public class WinScreenState extends State{
 	}
 
 	
-	public void init() {
+	public void init() {}
+	public void update() {}
 
-	}
-
-	
-	public void update() {
-
-	}
-
-	
 	public void render(Graphics2D g) {
 		g.setColor(Color.RED);
-		g.drawString("YOU WON, nice.", GamePanel.getScreenWidth()/2, GamePanel.getScreenHeight()/2);
+		g.drawString("Congratulations! You got the Artifact!", GamePanel.getScreenWidth()/2-70, GamePanel.getScreenHeight()/2);
+		g.drawString("Press SPACE or ENTER to proced to next level", GamePanel.getScreenWidth()/2-100, GamePanel.getScreenHeight()/2 + 200);
 	}
-
 	
 	public void keyPressed(KeyEvent e, int k) {
-		if (k == KeyEvent.VK_ENTER) {
+		if (k == KeyEvent.VK_ENTER || k==KeyEvent.VK_SPACE) {
 			gsm.states.push(new LevelSelectState(gsm));
-			//gsm.states.remove(gsm.states.size()-1);
-			//System.out.println("Escape pressed, #ofstates: " + gsm.states.size());
 		}
 	}
-
-	
-	public void keyReleased(KeyEvent e, int k) {
-		
-	}
-
-	
-	public void mousePressed(MouseEvent e) {
-	
-	}
-
-	
-	public void mouseReleased(MouseEvent e) {
-
-		
-	}
-
+	public void keyReleased(KeyEvent e, int k) {}
+	public void mousePressed(MouseEvent e) {}
+	public void mouseReleased(MouseEvent e) {}
 }
