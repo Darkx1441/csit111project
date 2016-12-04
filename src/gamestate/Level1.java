@@ -35,7 +35,7 @@ public class Level1 extends State {
 		map = new Map("/maps/map1.map", timer);
 		levelAnimation = new LevelAnimation(map);
 		levelAnimation.init();
-		player = new Player(-290, -100);
+		player = new Player(20, -20);
 	}
 
 	public void update() {
@@ -52,12 +52,18 @@ public class Level1 extends State {
 //			g.drawImage(levelAnimation.getBackGround(1), (int) ((levelAnimation.getBackGround(1).getTileWidth()*2) - (State.xOffset*BGParraX)), (int) ((levelAnimation.getBackGround(1).getTileHeight()) - State.yOffset), null);
 			
 	
-//			for (int i= (levelAnimation.getWidthFactor(levelAnimation.getBackGround(1).getTileWidth()));i>-1; i--)
-//					 for (int j= (levelAnimation.getHeightFactor(levelAnimation.getBackGround(1).getTileHeight()));j>-1; j--)
-//						g.drawImage(levelAnimation.getBackGround(1),
-//								(int) ((levelAnimation.getBackGround(1).getTileWidth()*i) - (State.xOffset*BGParraX)),
-//								(int) ((levelAnimation.getBackGround(1).getTileHeight() *j) - (State.yOffset)), null);
-		
+		for (int i= (levelAnimation.getWidthFactor(levelAnimation.getBackGround(0).getTileWidth()));i>=0; i--)
+					 for (int j= (levelAnimation.getHeightFactor(levelAnimation.getBackGround(0).getTileHeight()));j>-1; j--){
+						g.drawImage(levelAnimation.getBackGround(0),
+								(int) ((levelAnimation.getBackGround(0).getTileWidth()*i-1) - (State.xOffset*BGParraX)),
+								(int) ((levelAnimation.getBackGround(0).getTileHeight() *j) - (State.yOffset)), null);
+					 }
+		for (int i= (levelAnimation.getWidthFactor(levelAnimation.getBackGround(1).getTileWidth()));i>=0; i--)
+			 for (int j= (levelAnimation.getHeightFactor(levelAnimation.getBackGround(1).getTileHeight()));j>-1; j--){
+						g.drawImage(levelAnimation.getBackGround(1),
+								(int) ((levelAnimation.getBackGround(1).getTileWidth()*i) - (State.xOffset)),
+								(int) ((levelAnimation.getBackGround(1).getTileHeight() *j) - (State.yOffset)), null);
+					 }
 			//g.drawImage(levelAnimation.getBackGround(1), 0-(int)State.xOffset, 0-(int)State.yOffset, null);
 			
 				
@@ -73,8 +79,8 @@ public class Level1 extends State {
 		player.render(g);
 
 		// render map
-		map.render(g, levelAnimation);
-		g.drawImage(levelAnimation.getForeGround(1), (int) (0 - (State.xOffset*FGParra)), (int) (0 - State.yOffset*FGParra), null);
+		//map.render(g, levelAnimation);
+		//g.drawImage(levelAnimation.getForeGround(1), (int) (0 - (State.xOffset*FGParra)), (int) (0 - State.yOffset*FGParra), null);
 		
 
 		if (player.hasKey) {

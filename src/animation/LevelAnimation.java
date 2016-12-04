@@ -16,6 +16,7 @@ public class LevelAnimation {
 	static BufferedImage EndGate1;
 	static BufferedImage BackGround1;
 	static BufferedImage ForeGround1;
+	static BufferedImage MidGround1;
 	
 	
 	static ArrayList <BufferedImage> Ground  = new ArrayList<BufferedImage>();
@@ -44,7 +45,9 @@ public class LevelAnimation {
 			EndGate1 = ImageIO
 					.read(Player.class.getResourceAsStream("/images/Levelassets/endgate/endgate1.png"));
 			BackGround1 = ImageIO
-					.read(Player.class.getResourceAsStream("/images/BGTEST.png"));
+					.read(Player.class.getResourceAsStream("/images/BackgroundBG.png"));
+			MidGround1 = ImageIO
+					.read(Player.class.getResourceAsStream("/images/MidgroundBG.png"));
 			ForeGround1 = ImageIO
 					.read(Player.class.getResourceAsStream("/images/FGTEST.png"));
 			System.out.println("Level Images Imported");
@@ -60,6 +63,7 @@ public class LevelAnimation {
 		EndGate.add(EndGate1);
 		
 		BackGround.add(BackGround1);
+		BackGround.add(MidGround1);
 		
 		ForeGround.add(ForeGround1);
 		
@@ -78,7 +82,7 @@ public class LevelAnimation {
 	}
 	
 	public BufferedImage getBackGround(int i){
-		return BackGround1;
+		return BackGround.get(i);
 	}
 	
 	public BufferedImage getForeGround(int i){
@@ -86,7 +90,7 @@ public class LevelAnimation {
 	}
 	
 	public int getWidthFactor(int w){
-		return (mapWidth*32)/w;
+		return ((mapWidth*32)/w)-1;
 		
 	}
 	
