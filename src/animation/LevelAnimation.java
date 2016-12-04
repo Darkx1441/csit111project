@@ -41,7 +41,7 @@ public class LevelAnimation {
 			Ground1 = ImageIO
 					.read(Player.class.getResourceAsStream("/images/Levelassets/ground/ground1.png"));
 			Key1 = ImageIO
-					.read(Player.class.getResourceAsStream("/images/Levelassets/key/key1.png"));
+					.read(Player.class.getResourceAsStream("/images/Levelassets/key/Key.png"));
 			EndGate1 = ImageIO
 					.read(Player.class.getResourceAsStream("/images/Levelassets/endgate/endgate1.png"));
 			BackGround1 = ImageIO

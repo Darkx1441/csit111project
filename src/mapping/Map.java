@@ -37,8 +37,8 @@ public class Map {
 	public void render(Graphics2D g, LevelAnimation animation){
 		for(int i =0;i<blocks.length;i++){
 			for(int j=0;j<blocks[0].length;j++){
-				blocks[i][j].render(g,currentFrame, animation);
-				endGate[i][j].render(g, currentFrame, animation);
+				//blocks[i][j].render(g,currentFrame, animation);
+				//endGate[i][j].render(g, currentFrame, animation);
 				key[i][j].render(g, currentFrame, animation);
 				
 			}

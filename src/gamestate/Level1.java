@@ -80,8 +80,8 @@ public class Level1 extends State {
 		player.render(g);
 
 		// render map
-		//map.render(g, levelAnimation);
-		//g.drawImage(levelAnimation.getForeGround(1), (int) (0 - (State.xOffset*FGParra)), (int) (0 - State.yOffset*FGParra), null);
+		map.render(g, levelAnimation);
+		
 		
 
 		if (player.hasKey) {
