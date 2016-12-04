@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.Timer;
 
+import animation.LevelAnimation;
 import csit111project.GamePanel;
 import entities.Player;
 import mapping.Map;
@@ -20,6 +21,7 @@ public class Level2 extends State {
 	private int timerDelay = 1000 / 5;
 	private Timer timer;
 	private int color = 1;
+	private LevelAnimation levelAnimation = new LevelAnimation(map);
 
 	public Level2(GameStateManager gsm) {
 		super(gsm);
@@ -30,7 +32,7 @@ public class Level2 extends State {
 
 	public void init() {
 		player = new Player(-290, -200);
-		map = new Map("/maps/map2.map");
+		map = new Map("/maps/map2.map", timer);
 	}
 
 	public void update() {
@@ -43,7 +45,7 @@ public class Level2 extends State {
 		player.render(g);
 
 		// render map
-		map.render(g);
+		map.render(g, levelAnimation);
 
 		if (player.hasKey) {
 			timer.start();
@@ -70,6 +72,8 @@ public class Level2 extends State {
 			timer.stop();
 			gsm.states.remove(2);
 			gsm.states.remove(1);
+			levelAnimation.clearAnim();
+			player.getPlayerAnim().clearAnim();
 			System.out.println("player won, #ofstates: " + gsm.states.size());
 		}
 
@@ -89,9 +93,8 @@ public class Level2 extends State {
 		if (k == KeyEvent.VK_ESCAPE) {
 			gsm.states.push(new MenuState(gsm));
 			timer.stop();
-//			for (int i = gsm.states.size() - 1; i > 1; i--) {
-//				gsm.states.remove(i);
-//			}
+			levelAnimation.clearAnim();
+			player.getPlayerAnim().clearAnim();
 			System.out.println("Escape pressed, #ofstates: " + gsm.states.size());
 		}
 	}

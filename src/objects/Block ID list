@@ -1,0 +1,22 @@
+#########################
+###   Game Block ID   ###
+#########################
+# id	block-name	 	#
+# 0	  Empty Block/Air 	#
+# 1	  Ground Block	 	#
+# 2	  EndBlock Block	#
+# 3	  Key Block		 	#
+# 4	  Turret Block		#
+# 5						#
+# 6						#
+# 7						#
+# 8						#
+# 9						#
+#						#
+#						#
+#						#
+#						#
+#						#
+#						#
+#						#
+#########################

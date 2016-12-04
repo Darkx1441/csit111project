@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.Timer;
 
+import animation.LevelAnimation;
 import csit111project.GamePanel;
 import entities.Player;
 import mapping.Map;
@@ -20,17 +21,26 @@ public class Level1 extends State {
 	private int timerDelay = 1000 / 5;
 	private Timer timer;
 	private int color = 1;
+	private LevelAnimation levelAnimation;
+	
+	double BGParraX = .90;
+	double FGParra = 1.35;
 
 	public Level1(GameStateManager gsm) {
 		super(gsm);
-		System.out.println(gsm.states.toString());
-
-		timer = new Timer(timerDelay, colorCycle);
+		timer = new Timer(timerDelay, timerAction);
 	}
 
 	public void init() {
+<<<<<<< HEAD
 		player = new Player(-290, -500);
 		map = new Map("/maps/map1.map");
+=======
+		map = new Map("/maps/map1.map", timer);
+		levelAnimation = new LevelAnimation(map);
+		levelAnimation.init();
+		player = new Player(20, -20);
+>>>>>>> origin/master
 	}
 
 	public void update() {
@@ -39,11 +49,44 @@ public class Level1 extends State {
 	}
 
 	public void render(Graphics2D g) {
+//			g.drawImage(levelAnimation.getBackGround(1), (int) (0 - (State.xOffset*BGParraX)), (int) (0 - State.yOffset), null);
+//			g.drawImage(levelAnimation.getBackGround(1), (int) ((levelAnimation.getBackGround(1).getTileWidth()) - (State.xOffset*BGParraX)), (int) (0 - State.yOffset), null);
+//			g.drawImage(levelAnimation.getBackGround(1), (int) ((levelAnimation.getBackGround(1).getTileWidth()*2) - (State.xOffset*BGParraX)), (int) (0 - State.yOffset), null);
+//			g.drawImage(levelAnimation.getBackGround(1), (int) (0 - (State.xOffset*BGParraX)), (int) ((levelAnimation.getBackGround(1).getTileHeight()) - State.yOffset), null);
+//			g.drawImage(levelAnimation.getBackGround(1), (int) ((levelAnimation.getBackGround(1).getTileWidth()) - (State.xOffset*BGParraX)), (int) ((levelAnimation.getBackGround(1).getTileHeight()) - State.yOffset), null);
+//			g.drawImage(levelAnimation.getBackGround(1), (int) ((levelAnimation.getBackGround(1).getTileWidth()*2) - (State.xOffset*BGParraX)), (int) ((levelAnimation.getBackGround(1).getTileHeight()) - State.yOffset), null);
+			
+	
+		for (int i= (levelAnimation.getWidthFactor(levelAnimation.getBackGround(0).getTileWidth()));i>=0; i--)
+					 for (int j= (levelAnimation.getHeightFactor(levelAnimation.getBackGround(0).getTileHeight()));j>-1; j--){
+						g.drawImage(levelAnimation.getBackGround(0),
+								(int) ((levelAnimation.getBackGround(0).getTileWidth()*i-1) - (State.xOffset*BGParraX)),
+								(int) ((levelAnimation.getBackGround(0).getTileHeight() *j) - (State.yOffset)), null);
+					 }
+		for (int i= (levelAnimation.getWidthFactor(levelAnimation.getBackGround(1).getTileWidth()));i>=0; i--)
+			 for (int j= (levelAnimation.getHeightFactor(levelAnimation.getBackGround(1).getTileHeight()));j>-1; j--){
+						g.drawImage(levelAnimation.getBackGround(1),
+								(int) ((levelAnimation.getBackGround(1).getTileWidth()*i) - (State.xOffset)),
+								(int) ((levelAnimation.getBackGround(1).getTileHeight() *j) - (State.yOffset)), null);
+					 }
+			//g.drawImage(levelAnimation.getBackGround(1), 0-(int)State.xOffset, 0-(int)State.yOffset, null);
+			
+				
+		/*
+		 * DEBUG Hitboxes
+		 */
+		if (player.debugMonitor == true) {
+			map.renderHitbox(g);
+			player.renderHitbox(g);
+			
+		}
 		// render player
 		player.render(g);
 
 		// render map
-		map.render(g);
+		//map.render(g, levelAnimation);
+		//g.drawImage(levelAnimation.getForeGround(1), (int) (0 - (State.xOffset*FGParra)), (int) (0 - State.yOffset*FGParra), null);
+		
 
 		if (player.hasKey) {
 			timer.start();
@@ -68,18 +111,19 @@ public class Level1 extends State {
 		if (player.win == true) {
 			gsm.states.push(new WinScreenState(gsm));
 			timer.stop();
+			player.getTimer().stop();
 			gsm.states.remove(2);
 			gsm.states.remove(1);
+			map=null;
+			levelAnimation.clearAnim();
+			player.getPlayerAnim().clearAnim();
 			System.out.println("player won, #ofstates: " + gsm.states.size());
 		}
-
-		/*
-		 * DEBUG LINES
-		 */
-		if (player.debugMonitor == true) {
+		
+		if(player.debugMonitor==true){
 			drawDebug(g);
-			
 		}
+
 	}
 
 	public void keyPressed(KeyEvent e, int k) {
@@ -88,6 +132,11 @@ public class Level1 extends State {
 		if (k == KeyEvent.VK_ESCAPE) {
 			gsm.states.push(new MenuState(gsm));
 			timer.stop();
+			player.getTimer().stop();
+			map=null;
+			levelAnimation.clearAnim();
+			player.getPlayerAnim().clearAnim();
+
 //			for (int i = gsm.states.size() - 1; i > 1; i--) {
 //				gsm.states.remove(i);
 //			}
@@ -105,12 +154,13 @@ public class Level1 extends State {
 	public void mouseReleased(MouseEvent e) {
 	}
 
-	ActionListener colorCycle = new ActionListener() {
+	ActionListener timerAction = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			color++;
 			if (color >= 4)
 				color = 1;
+			
 		}
 	};
 
@@ -119,10 +169,15 @@ public class Level1 extends State {
 		g.drawString("Level1 State", 0, 10);
 		g.drawString("POS: \t X= " + (int) State.xOffset + " Y= " + (int) State.yOffset, 0, 21);
 		g.drawString("\tJS " + player.getJumpSpeed() + " FS= " + player.getFallSpeed(), 0, 32);
+<<<<<<< HEAD
 		g.drawLine(GamePanel.getScreenWidth() / 2, 0, GamePanel.getScreenWidth() / 2, GamePanel.getScreenHeight());
 		g.drawLine(0, GamePanel.getScreenHeight() / 2, GamePanel.getScreenWidth(), GamePanel.getScreenHeight() / 2);
 		g.drawString("AnimFrame:"+ player.getAnimFrame()+" Max: "+player.getAnimFrameMax(), 0, 43);
+=======
+		g.drawLine(GamePanel.WIDTH / 2, 0, GamePanel.WIDTH / 2, GamePanel.HEIGHT);
+		g.drawLine(0, GamePanel.HEIGHT / 2, GamePanel.WIDTH, GamePanel.HEIGHT / 2);
+		g.drawString("AnimFrame:"+ player.getAnimFrame()+" Max: "+player.getAnimFrameMax(), 0, 52);
+>>>>>>> origin/master
 	}
 }
-
 // chapter 9 use of timer

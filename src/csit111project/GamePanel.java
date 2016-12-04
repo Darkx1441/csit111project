@@ -22,10 +22,16 @@ public class GamePanel extends JPanel implements Runnable, ActionListener, KeyLi
 
 	// dimensions
 	// Frame will be x+6 y+29 bigger because it includes border
+<<<<<<< HEAD
 	static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	private final static double WIDTH = 800;
 	private final static double HEIGHT = 480;
 	private static int SCALE = 2;
+=======
+	public static final int WIDTH = 800;
+	public static final int HEIGHT = 480;
+	private int SCALE=1;
+>>>>>>> origin/master
 	FPSCounter fps = new FPSCounter();
 
 	private Thread thread;
