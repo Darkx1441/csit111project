@@ -32,13 +32,9 @@ public class Player {
 	private boolean FacingRight = true;
 	private boolean FacingLeft = false;
 
-<<<<<<< HEAD
-	private int width=64, height=64-1;
-	private double x = GamePanel.getScreenWidth()/2-width/2, y=GamePanel.getScreenHeight()/2-height/2;
-=======
+
 	private int width = 64, height = 64 - 1;
 	private double x = GamePanel.WIDTH / 2 - width / 2, y = GamePanel.HEIGHT / 2 - height / 2;
->>>>>>> origin/master
 
 	private double moveSpeed = 5;
 
@@ -325,7 +321,7 @@ public class Player {
 		if(k==KeyEvent.VK_Y){						//WAS TRYING TO TEST
 				System.out.println("Scale is 2");	//IF I CAN RESIZE+RESCALE JFRAME
 		}else if(k == KeyEvent.VK_U){				//WITHIN THE GAME
-				GamePanel.setSCALE(1);				//...SCALES BUT DONT KNOW HOW TO
+													//...SCALES BUT DONT KNOW HOW TO
 				System.out.println("Scale is 1");	//RESIZE JFARME
 		}
 		

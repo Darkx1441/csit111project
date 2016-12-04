@@ -32,15 +32,11 @@ public class Level1 extends State {
 	}
 
 	public void init() {
-<<<<<<< HEAD
-		player = new Player(-290, -500);
-		map = new Map("/maps/map1.map");
-=======
+
 		map = new Map("/maps/map1.map", timer);
 		levelAnimation = new LevelAnimation(map);
 		levelAnimation.init();
 		player = new Player(20, -20);
->>>>>>> origin/master
 	}
 
 	public void update() {
@@ -169,15 +165,9 @@ public class Level1 extends State {
 		g.drawString("Level1 State", 0, 10);
 		g.drawString("POS: \t X= " + (int) State.xOffset + " Y= " + (int) State.yOffset, 0, 21);
 		g.drawString("\tJS " + player.getJumpSpeed() + " FS= " + player.getFallSpeed(), 0, 32);
-<<<<<<< HEAD
-		g.drawLine(GamePanel.getScreenWidth() / 2, 0, GamePanel.getScreenWidth() / 2, GamePanel.getScreenHeight());
-		g.drawLine(0, GamePanel.getScreenHeight() / 2, GamePanel.getScreenWidth(), GamePanel.getScreenHeight() / 2);
-		g.drawString("AnimFrame:"+ player.getAnimFrame()+" Max: "+player.getAnimFrameMax(), 0, 43);
-=======
 		g.drawLine(GamePanel.WIDTH / 2, 0, GamePanel.WIDTH / 2, GamePanel.HEIGHT);
 		g.drawLine(0, GamePanel.HEIGHT / 2, GamePanel.WIDTH, GamePanel.HEIGHT / 2);
 		g.drawString("AnimFrame:"+ player.getAnimFrame()+" Max: "+player.getAnimFrameMax(), 0, 52);
->>>>>>> origin/master
 	}
 }
 // chapter 9 use of timer

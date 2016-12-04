@@ -99,10 +99,8 @@ public class OptionsMenu extends State
 
 			}else if (currentSelect == 1)
 			{
-				GamePanel.setSCALE(1);
 				System.out.println("SCALE set to 1");
 			} else if( currentSelect ==2){
-				GamePanel.setSCALE(2);
 				System.out.println("SCALE set to 2");
 			}
 			else if (currentSelect == options.length-1)
