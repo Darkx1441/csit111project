@@ -15,6 +15,7 @@ public class LevelAnimation {
 	static BufferedImage Key1;
 	static BufferedImage EndGate1;
 	static BufferedImage BackGround1;
+	static BufferedImage BackGround2;
 	static BufferedImage ForeGround1;
 	static BufferedImage MidGround1;
 	
@@ -43,6 +44,8 @@ public class LevelAnimation {
 					.read(Player.class.getResourceAsStream("/images/Levelassets/endgate/endgate1.png"));
 			BackGround1 = ImageIO
 					.read(Player.class.getResourceAsStream("/images/BackgroundBG.png"));
+			BackGround2 = ImageIO
+					.read(Player.class.getResourceAsStream("/images/ScaledCORRECTLY.png"));
 			MidGround1 = ImageIO
 					.read(Player.class.getResourceAsStream("/images/MidgroundBG.png"));
 			ForeGround1 = ImageIO
@@ -61,6 +64,7 @@ public class LevelAnimation {
 		
 		BackGround.add(BackGround1);
 		BackGround.add(MidGround1);
+		BackGround.add(BackGround2);
 		
 		ForeGround.add(ForeGround1);
 		

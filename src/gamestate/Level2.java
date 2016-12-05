@@ -21,8 +21,11 @@ public class Level2 extends State {
 	private int timerDelay = 1000 / 5;
 	private Timer timer;
 	private int color = 1;
-	private LevelAnimation levelAnimation = new LevelAnimation(map);
-
+	private LevelAnimation levelAnimation;
+	
+	double BGParraX = .90;
+	double FGParra = 1.35;
+	
 	public Level2(GameStateManager gsm) {
 		super(gsm);
 		System.out.println(gsm.states.toString());
@@ -31,8 +34,10 @@ public class Level2 extends State {
 	}
 
 	public void init() {
-		player = new Player(-290, -200);
 		map = new Map("/maps/map2.map", timer);
+		player = new Player(20, -20);
+		levelAnimation = new LevelAnimation(map);
+		levelAnimation.init();
 	}
 
 	public void update() {
@@ -41,6 +46,23 @@ public class Level2 extends State {
 	}
 
 	public void render(Graphics2D g) {
+		
+//		for (int i= (levelAnimation.getWidthFactor(levelAnimation.getBackGround(2).getTileWidth()));i>=0; i--)
+//			 for (int j= (levelAnimation.getHeightFactor(levelAnimation.getBackGround(2).getTileHeight()));j>-1; j--){
+//				g.drawImage(levelAnimation.getBackGround(2),
+//						(int) ((levelAnimation.getBackGround(2).getTileWidth()*i-1) - (State.xOffset*BGParraX)),
+//						(int) ((levelAnimation.getBackGround(2).getTileHeight() *j) - (State.yOffset*BGParraX)), null);
+//			 }
+//		
+		
+	g.drawImage(levelAnimation.getBackGround(2), (int) (0 - (State.xOffset)), (int) (0 - State.yOffset), null);
+		
+	if (player.debugMonitor == true) {
+		map.renderHitbox(g);
+		player.renderHitbox(g);
+		
+	}
+	
 		// render player
 		player.render(g);
 
