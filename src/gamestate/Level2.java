@@ -35,14 +35,20 @@ public class Level2 extends State {
 
 	public void init() {
 		map = new Map("/maps/map2.map", timer);
-		player = new Player(20, -20);
+		player = new Player(3500, 100);
 		levelAnimation = new LevelAnimation(map);
 		levelAnimation.init();
+		player.setMaxJumpSpeed(7.5);
 	}
 
 	public void update() {
 
 		player.update(map.getBlocks(), map.getEndGate(), map.getKey());
+		if(State.xOffset>3700 && State.xOffset <5050 && State.yOffset < 500 && State.yOffset>-50){
+			player.setMaxJumpSpeed(15);
+		}else{
+			player.setMaxJumpSpeed(7.5);
+		}
 	}
 
 	public void render(Graphics2D g) {

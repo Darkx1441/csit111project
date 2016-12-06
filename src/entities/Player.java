@@ -34,11 +34,11 @@ public class Player {
 
 
 	private int width = 64, height = 64 - 1;
-	private double x = GamePanel.WIDTH / 2 - width / 2, y = GamePanel.HEIGHT / 2 - height / 2;
+	private double x = GamePanel.WIDTH / 2 - width / 2, y = GamePanel.HEIGHT / 2 - height / 2 + 100;
 
 	private double moveSpeed = 5;
 
-	private double maxJumpSpeed = 7.5;
+	private double maxJumpSpeed = 2;
 	private double currentJumpSpeed = maxJumpSpeed;
 
 	private double maxFallSpeed = 8;
@@ -97,7 +97,7 @@ public class Player {
 						// left
 						for (int k = 0; k < height - 1; k++) {
 							if (Collision.playerBlock(
-									new Point(iX + (int) State.xOffset - 2, iY + (int) State.yOffset + k), b[i][j])) {
+									new Point(iX + (int) State.xOffset + 2, iY + (int) State.yOffset-2 + k), b[i][j])) {
 								State.xOffset+=moveSpeed;
 								//left = false;
 							}
@@ -106,7 +106,7 @@ public class Player {
 						// top
 						for (int k = 0; k < width - 2; k++) {
 							if (Collision.playerBlock(
-									new Point(iX + (int) State.xOffset + k + 2, iY + (int) State.yOffset-5), b[i][j])) {
+									new Point(iX + (int) State.xOffset + k + 3, iY + (int) State.yOffset-5), b[i][j])) {
 								jumping = false;
 								currentJumpSpeed = maxJumpSpeed;
 								falling = true;
@@ -452,6 +452,10 @@ public class Player {
 
 	public PlayerAnimation getPlayerAnim() {
 		return playerAnimation;
+	}
+	
+	public void setMaxJumpSpeed(double i){
+		maxJumpSpeed = i;
 	}
 
 }
