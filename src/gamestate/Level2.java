@@ -35,7 +35,7 @@ public class Level2 extends State {
 
 	public void init() {
 		map = new Map("/maps/map2.map", timer);
-		player = new Player(3500, 100);
+		player = new Player(-212, 357);
 		levelAnimation = new LevelAnimation(map);
 		levelAnimation.init();
 		player.setMaxJumpSpeed(7.5);
@@ -53,13 +53,6 @@ public class Level2 extends State {
 
 	public void render(Graphics2D g) {
 		
-//		for (int i= (levelAnimation.getWidthFactor(levelAnimation.getBackGround(2).getTileWidth()));i>=0; i--)
-//			 for (int j= (levelAnimation.getHeightFactor(levelAnimation.getBackGround(2).getTileHeight()));j>-1; j--){
-//				g.drawImage(levelAnimation.getBackGround(2),
-//						(int) ((levelAnimation.getBackGround(2).getTileWidth()*i-1) - (State.xOffset*BGParraX)),
-//						(int) ((levelAnimation.getBackGround(2).getTileHeight() *j) - (State.yOffset*BGParraX)), null);
-//			 }
-//		
 		
 	g.drawImage(levelAnimation.getBackGround(2), (int) (0 - (State.xOffset)), (int) (0 - State.yOffset), null);
 		
@@ -88,11 +81,11 @@ public class Level2 extends State {
 			} else {
 				color++;
 			}
-			g.drawString("Key Obtained, Go for Exit!", 0, 60);
+			g.drawString("You have the Artifact! Go to the Portal", 0, 60);
 
 		} else {
 			g.setColor(Color.RED);
-			g.drawString("Key Missing, look for the key!", 0, 60);
+			g.drawString("Artifact Missing.. Search for the artifact.", 0, 60);
 		}
 
 		if (player.win == true) {
@@ -157,5 +150,3 @@ public class Level2 extends State {
 
 	}
 }
-
-// chapter 9 use of timer

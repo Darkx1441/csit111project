@@ -38,7 +38,7 @@ public class Player {
 
 	private double moveSpeed = 5;
 
-	private double maxJumpSpeed = 2;
+	private double maxJumpSpeed = 7.5;
 	private double currentJumpSpeed = maxJumpSpeed;
 
 	private double maxFallSpeed = 8;
@@ -89,7 +89,6 @@ public class Player {
 							if (Collision.playerBlock(
 									new Point(iX + width + (int) State.xOffset + 4, iY + (int) State.yOffset + k - 1),
 									b[i][j])) {
-								//right = false;
 								State.xOffset-=moveSpeed;
 							}
 						}
@@ -99,7 +98,6 @@ public class Player {
 							if (Collision.playerBlock(
 									new Point(iX + (int) State.xOffset + 2, iY + (int) State.yOffset-2 + k), b[i][j])) {
 								State.xOffset+=moveSpeed;
-								//left = false;
 							}
 						}
 
@@ -287,15 +285,9 @@ public class Player {
 		}
 		if (jumping == true | falling == true) {
 			if (FacingRight) {
-				// if(frameCount>=6)
-				// frameCount=RightJumping.size()-1;
-				// g.drawImage(RightJumping.get(frameCount), (int) x, (int) y,
-				// null);
 				g.drawImage(playerAnimation.getPlayerRightJumping(frameCount), (int) x, (int) y, null);
 			}
 			if (FacingLeft) {
-				// if(frameCount>=6)
-				// frameCount=LeftJumping.size()-1;
 				g.drawImage(playerAnimation.getPlayerLeftJumping(frameCount), (int) x, (int) y, null);
 			}
 		}

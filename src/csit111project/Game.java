@@ -1,3 +1,16 @@
+/*
+ * Planrun
+ * Written by Cristian Novac and Sammy Samcough
+ * Art by Ryan Hoyt and Greg Ursitti
+ * 
+ * Key Layout:
+ * 		Movement: W(Jump) A(Left) D(Right)
+ *  	Menu selection: ArrowKeys or W/S,  Space/Enter
+ *  	Other: 	Escape = menu/quit
+ *  			N = toggle noclip
+ *  			T = toggle show hitboxes
+ */
+
 package csit111project;
 import javax.swing.JFrame;
 

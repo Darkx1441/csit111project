@@ -124,4 +124,7 @@ public class Map {
 		this.timer = timer;
 	}
 	
+	//Thank you for looking the code :) If you saw this and have any tips for my future projects please let me know! -Cristian Novac
+	//git repository with stats on the project can be found at https://github.com/no-vac/csit111project
+	
 }

@@ -18,16 +18,10 @@ public class OptionsMenu extends State
 	}
 
 	@Override
-	public void init()
-	{
-		
-	}
+	public void init(){}
 
 	@Override
-	public void update()
-	{
-		
-	}
+	public void update(){}
 
 	@Override
 	public void render(Graphics2D g)
@@ -120,20 +114,9 @@ public class OptionsMenu extends State
 	}
 
 	@Override
-	public void keyReleased(KeyEvent e, int k)
-	{
-		
-	}
-
+	public void keyReleased(KeyEvent e, int k){}
 	@Override
-	public void mousePressed(MouseEvent e)
-	{
-		
-	}
-
+	public void mousePressed(MouseEvent e){}
 	@Override
-	public void mouseReleased(MouseEvent e)
-	{
-		
-	}
+	public void mouseReleased(MouseEvent e){}
 }
