@@ -14,7 +14,7 @@ import csit111project.GamePanel;
 import entities.Player;
 import mapping.Map;
 
-public class Level1 extends State {
+public class Level1 extends Level {
 	public int stateid = 2;
 	private Player player;
 	private Map map;
