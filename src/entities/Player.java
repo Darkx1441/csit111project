@@ -9,7 +9,7 @@ import javax.swing.Timer;
 import com.sun.glass.events.KeyEvent;
 
 import animation.PlayerAnimation;
-import csit111project.GamePanel;
+import main.GamePanel;
 import gamestate.Level1;
 import gamestate.State;
 import objects.Block;

@@ -10,7 +10,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.Timer;
 
 import animation.LevelAnimation;
-import csit111project.GamePanel;
+import main.GamePanel;
 import entities.Player;
 import mapping.Map;
 

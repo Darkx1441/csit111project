@@ -5,7 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
-import csit111project.GamePanel;
+import main.GamePanel;
 
 public class WinScreenState extends State{
 

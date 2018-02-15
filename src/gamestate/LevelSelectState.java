@@ -6,7 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
-import csit111project.GamePanel;
+import main.GamePanel;
 
 public class LevelSelectState extends State{
 	private String[] levels = {"Level1","Level2", "Main Menu"};

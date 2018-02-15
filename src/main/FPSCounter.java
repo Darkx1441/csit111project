@@ -1,4 +1,4 @@
-package csit111project;
+package main;
 
 class FPSCounter extends Thread
 {

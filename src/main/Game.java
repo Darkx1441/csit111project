@@ -11,7 +11,7 @@
  *  			T = toggle show hitboxes
  */
 
-package csit111project;
+package main;
 import javax.swing.JFrame;
 
 public class Game
